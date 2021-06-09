@@ -235,7 +235,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
         }}
       >
         <FPModalLarge>
-          <PropertyEditor control={controlListData[selectedControlIndex]} onChange={onControlPropertyUpdated} onClose={() => { setEditorOpened(false) }} />
+          <PropertyEditor controls={controlListData} index={selectedControlIndex} onChange={onControlPropertyUpdated} onClose={() => { setEditorOpened(false) }} />
         </FPModalLarge>
       </FPEModal>
     </React.Fragment>

@@ -16,6 +16,7 @@ export const FPPaper = styled(Paper)`
 export const FPTabWrapper = styled.div`
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
 `
 
 export const FPTabs = styled(Tabs)`
@@ -254,10 +255,15 @@ export const FPDividerField = styled.hr`
   }
 `
 
-export const FPFormWrapper = styled.div``
+export const FPFormWrapper = styled.div`
+width: 100%;
+`
 export const FPFormRow = styled.div`
   padding: 4px;
   margin: 4px;
+  border-right: 4px solid transparent;
+  width: 95%;
+  ${(props) => props.selected && BoxSelected}
 `
 
 export const FPNoContentAvailable = styled.div`

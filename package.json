@@ -1,6 +1,6 @@
 {
   "name": "react-form-planner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A form builder/planner for react",
   "author": "koustov",
   "license": "MIT",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
-    "eslint": "^7.28.0",
+    "eslint": "6.6.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-config-standard-react": "^9.2.0",
@@ -70,6 +70,7 @@
     "@types/uuid": "^8.3.0",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
+    "html-to-image": "^1.6.2",
     "lodash": "^4.17.21",
     "material-ui-dropzone": "^3.5.0",
     "react-beautiful-dnd": "^13.1.0",

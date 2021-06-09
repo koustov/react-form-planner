@@ -9,7 +9,6 @@ const FPDropzoneDialog = ({ field, filefilter, onChange }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useState(() => {
-    console.error(`XXXXXXXXX > ${JSON.stringify(field)}`)
   }, [field, filefilter])
 
   const onValueChanged = (files) => {
@@ -43,8 +42,8 @@ const FPDropzoneDialog = ({ field, filefilter, onChange }) => {
 
   return (
     <div>
-      <Button onClick={onAddClicEvent}>
-        Add
+      <Button onClick={onAddClicEvent} variant="contained">
+        Upload file
       </Button>
       <DropzoneDialog
         open={isDialogOpen}

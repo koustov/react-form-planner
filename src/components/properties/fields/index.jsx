@@ -17,7 +17,9 @@ const getStyleObject = (style) => {
   }
   return res;
 }
-export const getFinalField = (field, onValueChange, invalue, label, fieldname) => {
+export const getFinalField = (infield, onValueChange, invalue, label, fieldname) => {
+  let resComponent = {};
+  const field = Object.assign({}, infield);
   const strFieldName = fieldname ? fieldname : field.datafield;
   if (!field.custom) {
     field.custom = {
@@ -33,7 +35,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
     ...field.custom.props
   }
   switch (field.type) {
-    case "text": return <FPTextField id={`text-field-${strFieldName}`}
+    case "text": resComponent = <FPTextField id={`text-field-${strFieldName}`}
 
       label={`${label || field.label}`}
       value={value}
@@ -48,13 +50,13 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
       variant="outlined"
       {...localprops} />
       break;
-    case "divider": return <hr className="MuiDivider-root" {...localprops} />
+    case "divider": resComponent = <hr className="MuiDivider-root" {...localprops} />
       break;
-    case "header": return <FPHeaderField {...localprops} >{label || field.label}</FPHeaderField>
+    case "header": resComponent = <FPHeaderField {...localprops} >{label || field.label}</FPHeaderField>
       break;
-    case "label": return <FPLabelField {...localprops}>{label || field.label}</FPLabelField>
+    case "label": resComponent = <FPLabelField {...localprops}>{label || field.label}</FPLabelField>
       break;
-    case "checkbox": return (
+    case "checkbox": resComponent = (
       <div><FPFormControlLabel control={
         <FPCheckbox
           checked={value}
@@ -71,7 +73,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
         label={`${label || field.label}`}></FPFormControlLabel>
       </div>
     )
-    case "textarea": return <FPTextField label={`${label || field.label}`}
+    case "textarea": resComponent = <FPTextField label={`${label || field.label}`}
       multiline
       value={value}
       onChange={(e) => {
@@ -85,7 +87,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
       {...localprops}
     />
       break;
-    case "grid": return (
+    case "grid": resComponent = (
       <FPDataGrid
         onChange={(fld, val, fielddata) => {
           if (onValueChange) {
@@ -101,7 +103,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
         {...localprops}
       />)
       break;
-    case "fileupload": return (
+    case "fileupload": resComponent = (
       <FPDropzoneDialog
         onChange={(fld, val, fielddata) => {
           if (onValueChange) {
@@ -112,7 +114,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
         {...localprops}
       />)
       break;
-    case "image": return (
+    case "image": resComponent = (
       <React.Fragment>
         {value && value.length ? (<React.Fragment>
           {value.map((f, fi) => {
@@ -129,7 +131,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
       </React.Fragment>
     )
       break;
-    case "video": return (
+    case "video": resComponent = (
       <React.Fragment>
         {value ? (<ReactPlayer url={`${value}`} />) : (
           <FPNoContentAvailable>
@@ -140,7 +142,7 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
       </React.Fragment>
     )
       break;
-    case "pdf": return (
+    case "pdf": resComponent = (
       <React.Fragment>
         {value ? (<FPPdfViewer value={value} />) : (
           <FPNoContentAvailable>
@@ -153,6 +155,8 @@ export const getFinalField = (field, onValueChange, invalue, label, fieldname) =
     )
       break;
 
-    default: return <React.Fragment></React.Fragment>
+    default: resComponent = <React.Fragment></React.Fragment>
+
   }
+  return resComponent;
 }

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
 import { FPTextField } from '../../styled';
+import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import { FaTimes, FaPlus } from 'react-icons/fa';
 
@@ -77,9 +78,9 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
               return <TableRow key={gri}>
                 <TableCell>
                   {gri < gridRows.length ? (
-                    <Fab size="small" color="secondary" variant="extended" aria-label="save" onClick={() => onRemove(gri)}>
+                    <Button size="small" color="secondary" aria-label="save" onClick={() => onRemove(gri)}>
                       <FaTimes />
-                    </Fab>
+                    </Button>
                   ) : (null)}
                 </TableCell>
                 <React.Fragment>{gridColumns.map((gc, gci) => {
@@ -96,9 +97,9 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
             })
           }</React.Fragment>
           <TableRow>
-            <TableCell><Fab size="small" color="primary" variant="extended" aria-label="save" onClick={() => onAdd()}>
-              <FaPlus />
-            </Fab></TableCell>
+            <TableCell><Button size="small" color="primary" aria-label="add" onClick={() => onAdd()}>
+              <FaPlus style={{ marginRight: '8px' }} /> Add
+            </Button></TableCell>
           </TableRow>
 
 

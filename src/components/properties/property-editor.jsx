@@ -10,7 +10,7 @@ import {
   FPTabs,
   SmallHeader
 } from '../styled'
-import { FaSave, FaTimes } from 'react-icons/fa'
+import { FaSave, FaTimes, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 
 import Box from '@material-ui/core/Box'
@@ -35,25 +35,30 @@ function TabPanel(props) {
   )
 }
 
-export const PropertyEditor = ({ control, onChange, onClose }) => {
-  const [controlState, setControlState] = useState(control)
+export const PropertyEditor = ({ controls, template, index, onChange, onClose }) => {
+  const [controlState, setControlState] = useState({})
   const [editContainerGroups, setEditContainerGroups] = useState({})
-  const [selectedTabIndex, setSelectedTabIndex] = React.useState(0)
+  const [readOnlyTemplate, setReadOnlyTemplate] = useState(undefined)
+  const [selectedTabIndex, setSelectedTabIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(index);
 
   useEffect(() => {
-    if (control) {
+    if (controls && controls.length) {
+      const control = Object.assign({}, controls[index]);
       const res = {}
       control.editableFields.forEach((ed) => {
         const groupName = ed.group ? ed.group : 'Default'
         if (!res[groupName]) {
           res[groupName] = [ed]
         } else {
-          res[groupName].push(ed)
+          res[groupName].push(template);
         }
       })
+      setReadOnlyTemplate(controls);
+      setControlState(Object.assign({}, controls[index]));
       setEditContainerGroups(res)
     }
-  }, [control])
+  }, [])
 
   const handleTabSelectionChange = (_event, newValue) => {
     setSelectedTabIndex(newValue)
@@ -67,6 +72,7 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
       controlState[field.targetField] = value
     }
     setControlState({ ...controlState })
+    return controlState;
   }
 
   const onSave = () => {
@@ -93,7 +99,24 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
   }
 
   const onControlValueChanged = (key, value, field) => {
-    onValueChanged(key, value, field)
+    const res = onValueChanged(key, value, field)
+    readOnlyTemplate[selectedIndex] = res;
+    setReadOnlyTemplate(readOnlyTemplate);
+  }
+  const onNextClicked = () => {
+    if (onChange) {
+      onChange(controlState)
+    }
+    setSelectedIndex(selectedIndex + 1);
+    setControlState(Object.assign({}, controls[selectedIndex + 1]));
+  }
+
+  const onPreviousClicked = () => {
+    if (onChange) {
+      onChange(controlState)
+    }
+    setSelectedIndex(selectedIndex - 1);
+    setControlState(Object.assign({}, controls[selectedIndex - 1]));
   }
 
   return (
@@ -101,9 +124,29 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
       <div>
         <FPMediumHeaderBar>
           <div className='header-title'>
-            <FPMediumHeader>Type: {control.typeDisplay}</FPMediumHeader>
+            <FPMediumHeader>Type: {controlState.typeDisplay}</FPMediumHeader>
           </div>
           <div className='header-tool-bar'>
+            <Fab
+              size='small'
+              color='default'
+              variant='extended'
+              aria-label='previous'
+              disabled={selectedIndex === 0}
+              onClick={() => onPreviousClicked()}
+            >
+              <FaChevronLeft />
+            </Fab>
+            <Fab
+              size='small'
+              color='default'
+              variant='extended'
+              aria-label='next'
+              disabled={selectedIndex === controls.length - 1}
+              onClick={() => onNextClicked()}
+            >
+              <FaChevronRight />
+            </Fab>
             <Fab
               size='small'
               variant='extended'
@@ -117,7 +160,7 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
               size='small'
               color='default'
               variant='extended'
-              aria-label='save'
+              aria-label='cancel'
               onClick={() => onCancel()}
             >
               <FaTimes />
@@ -131,15 +174,20 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
             style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
           >
             <FPHeaderBar>
-              <SmallHeader>Controlled Preview</SmallHeader>
+              <SmallHeader>Preview</SmallHeader>
             </FPHeaderBar>
             <div
               style={{
                 display: 'flex',
-                flex: 1
+                flex: 1,
+                zoom: '50%'
               }}
             >
-              {getFinalField(controlState)}
+              <FormViewer
+                templates={readOnlyTemplate}
+                controlMarker={selectedIndex}
+              />
+              {/* {getFinalField(controlState)} */}
             </div>
           </FPPaper>
         </div>
@@ -159,13 +207,11 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
               >
                 {Object.keys(editContainerGroups).map((group, groupi) => {
                   return (
-                    <Tab label={`${group}`} key={groupi}>
-                      XXXXX {groupi}
-                    </Tab>
+                    <Tab label={`${group}`} key={groupi} />
                   )
                 })}
               </FPTabs>
-              {/* <div style={{ overflow: 'auto', flex: 1 }}>
+              <div style={{ overflow: 'auto', flex: 1 }}>
                 {Object.keys(editContainerGroups).map((group, groupi) => {
                   return (
                     <TabPanel
@@ -179,16 +225,11 @@ export const PropertyEditor = ({ control, onChange, onClose }) => {
                           templates={editContainerGroups[group]}
                           onControlValueChanged={onControlValueChanged}
                         />
-                        // editContainerGroups[group].map((control_filed, control_filed_index) => {
-                        //   return <div key={`group_control_${control_filed_index}`}>
-                        //     {getFieldControl(control_filed)}
-                        //   </div>
-                        // })
                       }
                     </TabPanel>
                   )
                 })}
-              </div> */}
+              </div>
             </FPTabWrapper>
           </FPPaper>
         </div>
