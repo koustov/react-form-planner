@@ -11,8 +11,9 @@ import {
   FPEditorPaper,
   SmallHeader
 } from '../styled'
-import { FaSave, FaTimes, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
+import { faSave, faTimes, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
 
 import Box from '@material-ui/core/Box'
 import Fab from '@material-ui/core/Fab'
@@ -147,7 +148,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               disabled={selectedIndex === 0}
               onClick={() => onPreviousClicked()}
             >
-              <FaChevronLeft />
+              <FontAwesomeIcon icon={faChevronLeft} />
             </Fab>
             <Fab
               size='small'
@@ -157,7 +158,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               disabled={selectedIndex === controls.length - 1}
               onClick={() => onNextClicked()}
             >
-              <FaChevronRight />
+              <FontAwesomeIcon icon={faChevronRight} />
             </Fab>
             <Fab
               size='small'
@@ -166,7 +167,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               aria-label='save'
               onClick={() => onSave()}
             >
-              <FaSave />
+              <FontAwesomeIcon icon={faSave} />
             </Fab>
             <Fab
               size='small'
@@ -175,7 +176,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               aria-label='cancel'
               onClick={() => onCancel()}
             >
-              <FaTimes />
+              <FontAwesomeIcon icon={faTimes} />
             </Fab>
           </div>
         </FPMediumHeaderBar>

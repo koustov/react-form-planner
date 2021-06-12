@@ -2,7 +2,8 @@ import * as React from 'react'
 import { useState, useEffect } from 'react';
 import { FPTextField, FPFieldSet, FPGridHeaderRow, FPGridRow, FPGridCell, FPGridActionCell, SmallHeader } from '../../styled';
 import Button from '@material-ui/core/Button';
-import { FaTimes, FaPlus } from 'react-icons/fa';
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const FPDataGrid = ({ rows, field, onChange }) => {
   const [gridRows, setGridRows] = useState([]);
@@ -66,7 +67,7 @@ const FPDataGrid = ({ rows, field, onChange }) => {
             <FPGridActionCell>
               {gri < gridRows.length ? (
                 <Button size="small" color="secondary" aria-label="save" onClick={() => onRemove(gri)}>
-                  <FaTimes />
+                  <FontAwesomeIcon icon={faTimes} />
                 </Button>
               ) : (null)}
             </FPGridActionCell>
@@ -85,7 +86,7 @@ const FPDataGrid = ({ rows, field, onChange }) => {
       }</React.Fragment>
       <FPGridRow>
         <FPGridActionCell><Button size="small" color="primary" aria-label="add" onClick={() => onAdd()}>
-          <FaPlus style={{ marginRight: '8px' }} /> Add
+          <FontAwesomeIcon icon={faPlus} style={{ marginRight: '8px' }} />Add
             </Button></FPGridActionCell>
       </FPGridRow>
     </FPFieldSet>
