@@ -4,7 +4,7 @@ import { FPTextField, FPFieldSet, FPGridHeaderRow, FPGridRow, FPGridCell, FPGrid
 import Button from '@material-ui/core/Button';
 import { FaTimes, FaPlus } from 'react-icons/fa';
 
-const FPDataGrid = ({ rows, columns, field, onChange }) => {
+const FPDataGrid = ({ rows, field, onChange }) => {
   const [gridRows, setGridRows] = useState([]);
   const [gridColumns, setGridColumns] = useState([]);
 
@@ -22,8 +22,8 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
       setGridRows(rows);
     }
 
-    if (columns && columns.length) {
-      setGridColumns(columns);
+    if (field.columns && field.columns.length) {
+      setGridColumns(field.columns);
     } else {
       setGridColumns([
         { field: 'name', headerName: 'Property Name' },
@@ -51,7 +51,7 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
   return (
     <FPFieldSet bordered>
       <legend>{field.label}</legend>
-      <FPGridHeaderRow>
+      {/* <FPGridHeaderRow>
         <FPGridActionCell></FPGridActionCell>
         <React.Fragment>
           {gridColumns.map((gc, gci) => {
@@ -59,7 +59,7 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
           })
           }
         </React.Fragment>
-      </FPGridHeaderRow>
+      </FPGridHeaderRow> */}
       <React.Fragment>{
         gridRows.map((_gr, gri) => {
           return <FPGridRow key={gri}>
@@ -72,11 +72,11 @@ const FPDataGrid = ({ rows, columns, field, onChange }) => {
             </FPGridActionCell>
             <React.Fragment>{gridColumns.map((gc, gci) => {
               return <FPGridCell key={gci}>
-                <FPTextField variant='outlined'
+                <FPTextField
                   size="small"
                   value={gridRows[gri][gc["field"]]}
-                  required
-                  onChange={(e) => onValueChanged(gri, gc["field"], e.target.value)} placeholder={`${gc["headerName"]}`} />
+                  label={`${gc["headerName"]}`}
+                  onChange={(e) => onValueChanged(gri, gc["field"], e.target.value)} />
               </FPGridCell>
             })}
             </React.Fragment>

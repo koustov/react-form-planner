@@ -3,14 +3,19 @@ import { useState, useEffect } from 'react';
 import { FPRadio, FPFormControlLabel, FPHeaderField, FPLabelField, FPTextField, FPNoContentAvailable, FPFormLabel, FPRichTextEditor, FPFieldSet } from "../../styled";
 import FormControl from '@material-ui/core/FormControl';
 
-const FPRadioControl = ({ rows, columns, field, onChange, ...props }) => {
+const FPRadioControl = ({ field, onChange, ...props }) => {
   const [localValue, setLocalvalue] = useState(field.value);
 
 
   const onValueChanged = (e) => {
-    setLocalvalue(e.target.checked)
+    setLocalvalue(e.target.value)
     if (onChange) {
-      onChange(field, localValue, field);
+      const retValue = field.data.filter((f) => { return f.value.toString() === e.target.value.toString() });
+      if (retValue && retValue.length && retValue[0].returnvalue) {
+        onChange(field, retValue[0].returnvalue, field);
+      } else {
+        onChange(field, e.target.value, field);
+      }
     }
   }
 

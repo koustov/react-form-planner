@@ -6,13 +6,6 @@ import FPDropzoneDialog from "./FPDropzoneDialog";
 import FPPdfViewer from "./FPPdfViewer";
 import { FaImage, FaVideo, FaFilePdf } from 'react-icons/fa';
 import ReactPlayer from 'react-player'
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-
-
 
 
 const getStyleObject = (style) => {
@@ -87,7 +80,7 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
       break;
     case "header": resComponent = <FPHeaderField {...localprops} >{label || field.label}</FPHeaderField>
       break;
-    case "label": resComponent = <FPLabelField {...localprops}>{label || field.label}</FPLabelField>
+    case "label": resComponent = <FPLabelField dangerouslySetInnerHTML={{ __html: label || field.label }} {...localprops}></FPLabelField >
       break;
     case "radio": resComponent = <FPRadioControl onChange={(fld, val, fielddata) => {
       if (onValueChange) {

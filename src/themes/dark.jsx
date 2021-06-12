@@ -20,6 +20,7 @@ export const dark = {
       primaryButton: "#0D7452",
       primaryText: "#a3a9b7",
       secondaryText: "#454545",
+      ternaryText: "#7bc5ee",
       listPrimary: "#7bc5ee",
       listSecondary: "#5b98ba",
       card: {

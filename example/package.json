@@ -10,6 +10,7 @@
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "chokidar": "^3.5.1",
     "form-planner": "link:..",
     "react": "link:../node_modules/react",

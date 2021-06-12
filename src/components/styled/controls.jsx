@@ -37,7 +37,7 @@ export const FPRadio = styled(Radio)`
 `;
 
 export const FPTextField = styled(TextField)`
-margin: 8px;
+
 .MuiOutlinedInput-notchedOutline {
     border-color: ${({ theme }) => theme.rfp.colors.input.border} !important;
   }
@@ -54,7 +54,7 @@ margin: 8px;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.rfp.colors.input.placeholder} !important;
+    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
   }
 
 `;
@@ -170,16 +170,25 @@ export const FPFieldSet = styled.fieldset`
   flex: 1;
   width: 100%;
   border-radius: 4px;
-  >legend {
+  margin-inline-start: 0px;
+    width: 100%;
+    margin: 0px !important;
+    margin-inline-end: 0px;
+    min-inline-size: 0px;
+    padding-block-start: 0px;
+    padding-block-end: 0px;
+    padding-inline: 0px;
+  legend {
     padding: 0px 4px;
-    margin-left: 30px;
+    margin-left: 10px;
+    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
   }
   `;
 
 
 export const FPGridRow = styled.div`
-border-bottom: 1px solid;
-border-color: ${({ theme }) => theme.rfp.colors.input.border} !important;
+/* border-bottom: 1px solid; */
+/* border-color: ${({ theme }) => theme.rfp.colors.input.border} !important; */
 display: flex;
 height: 50px;
 `;
@@ -198,7 +207,7 @@ padding: 2px 4px;
 `;
 export const FPGridActionCell = styled(FPGridCell)`
 flex: 0;
-min-width: 100px;
+width: 50px;
 `;
 
 

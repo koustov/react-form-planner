@@ -43,6 +43,13 @@ const EditorFieldMap = {
     subtype: 'text',
 
   },
+  textarea: {
+    name: 'textarea',
+    label: "Label",
+    datafield: "",
+    type: 'textarea',
+    targetField: 'label',
+  },
   richeditor: {
     name: 'richeditor',
     label: "Label",
@@ -138,10 +145,11 @@ const getEditorFields = (type, customdefinition) => {
       getEditorField("text", "label"),
       getEditorField("grid", "data", {
         columns: [
-          { field: 'name', headerName: 'Display Name' },
+          { field: 'name', headerName: 'Display' },
           { field: 'value', headerName: 'Value' },
         ],
         label: 'Options',
+        group: 'Options',
         is_custom: true,
         targetField: 'style',
         dataField: 'justify-content'
@@ -152,37 +160,46 @@ const getEditorFields = (type, customdefinition) => {
       break;
     case 'header': res = [
       getEditorField("text", "label"),
-      getEditorField("radio", "justifyContent", {
+      getEditorField("radio", "style", {
         data: [{
           name: 'Left',
-          value: 'flex-start'
+          value: 1,
+          returnvalue: { name: 'justify-content', value: 'flex-start' }
         }, {
           name: 'Middle',
-          value: 'Center'
+          value: 2,
+          returnvalue: { name: 'justify-content', value: 'center' }
         }, {
           name: 'Right',
-          value: 'flex-end'
-        }]
+          value: 3,
+          returnvalue: { name: 'justify-content', value: 'flex-end' }
+        }],
+        is_custom: true,
+        isappend: true,
       }),
       customStyles,
       customProps
     ];
       break;
     case 'label': res = [
-      getEditorField("richeditor", "label"),
-      getEditorField("radio", "justifyContent", {
+      getEditorField("textarea", "label"),
+      getEditorField("radio", "style", {
         data: [{
           name: 'Left',
-          value: 'flex-start'
+          value: 1,
+          returnvalue: { name: 'justify-content', value: 'flex-start' }
         }, {
           name: 'Middle',
-          value: 'Center'
+          value: 2,
+          returnvalue: { name: 'justify-content', value: 'center' }
         }, {
           name: 'Right',
-          value: 'flex-end'
-        }]
+          value: 3,
+          returnvalue: { name: 'justify-content', value: 'flex-end' }
+        }],
+        is_custom: true,
+        isappend: true,
       }),
-      getEditorField("checkbox", "required"),
       customStyles,
       customProps
     ];

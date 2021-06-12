@@ -71,8 +71,11 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
   const onValueChanged = (_key, value, field) => {
     if (field.is_custom) {
       controlState.custom = controlState.custom || {}
-      if (field.datafield) {
-        controlState.custom[field.targetField] = Object.assign(controlState.custom[field.targetField], { [field.datafield]: value });
+      controlState.custom[field.targetField] = controlState.custom[field.targetField] || [];
+
+      if (field.isappend) {
+        controlState.custom[field.targetField].push(value)
+        // controlState.custom[field.targetField] = Object.assign(controlState.custom[field.targetField], { [field.datafield]: value });
       } else {
         controlState.custom[field.targetField] = value
       }
