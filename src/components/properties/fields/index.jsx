@@ -1,10 +1,17 @@
 import * as React from "react";
-import { FPCheckbox, FPFormControlLabel, FPHeaderField, FPLabelField, FPTextField, FPNoContentAvailable } from "../../styled";
+import { FPCheckbox, FPFormControlLabel, FPHeaderField, FPLabelField, FPTextField, FPNoContentAvailable, FPFormLabel, FPRichTextEditor, FPFieldSet } from "../../styled";
 import FPDataGrid from "./FPDataGrid";
+import FPRadioControl from "./FPRadio";
 import FPDropzoneDialog from "./FPDropzoneDialog";
 import FPPdfViewer from "./FPPdfViewer";
 import { FaImage, FaVideo, FaFilePdf } from 'react-icons/fa';
 import ReactPlayer from 'react-player'
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 
 
@@ -35,6 +42,32 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
     ...field.custom.props
   }
   switch (field.type) {
+    case "richeditor":
+      const modules = {
+        toolbar: [
+          [{ 'header': [1, 2, false] }],
+          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+          ['clean']
+        ],
+      }
+      const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+      ]
+      resComponent = <FPRichTextEditor value={value}
+        theme={'snow'}
+        placeholder={field.placeholder}
+        modules={modules}
+        formats={formats}
+        bounds={'.app'}
+        onChange={(e) => {
+          if (onValueChange) {
+            onValueChange(strFieldName, e, field)
+          }
+        }} />;
+      break;
     case "text": resComponent = <FPTextField id={`text-field-${strFieldName}`}
 
       label={`${label || field.label}`}
@@ -55,6 +88,17 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
     case "header": resComponent = <FPHeaderField {...localprops} >{label || field.label}</FPHeaderField>
       break;
     case "label": resComponent = <FPLabelField {...localprops}>{label || field.label}</FPLabelField>
+      break;
+    case "radio": resComponent = <FPRadioControl onChange={(fld, val, fielddata) => {
+      if (onValueChange) {
+        onValueChange(fld, val, fielddata)
+      }
+    }}
+      field={field}
+      rows={value && value.length ? value : []}
+      {...localprops}>
+
+    </FPRadioControl >
       break;
     case "checkbox": resComponent = (
       <div><FPFormControlLabel control={
@@ -95,7 +139,7 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
           }
         }}
         field={field}
-        columns={[
+        columns={field.columns | [
           { field: 'name', headerName: 'Property Name', width: 180, editable: true },
           { field: 'value', headerName: 'Value', width: 180, editable: true },
         ]}

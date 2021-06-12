@@ -1,59 +1,81 @@
 import * as React from 'react';
-import { FaTextHeight, FaTextWidth, FaSquare, FaCircle, FaGripLines, FaImage, FaVideo, FaFilePdf } from 'react-icons/fa';
+import {
+  faTextHeight,
+  faTextWidth,
+  faHeading,
+  faFont,
+  faGripLines,
+  faImage,
+  faVideo,
+  faFilePdf,
+  faBold,
+  faICursor
+} from '@fortawesome/free-solid-svg-icons';
+
+import {
+  faCheckSquare,
+  faCircle,
+} from '@fortawesome/free-regular-svg-icons';
+
 
 const AllControls = [{
   type: "header",
-  icon: <FaTextWidth />,
+  icon: faHeading,
   display: "Header",
   group: 1
 }, {
   type: "label",
-  icon: <FaTextWidth />,
+  icon: faFont,
   display: "Label",
   group: 1
 }, {
   type: "text",
-  icon: <FaTextWidth />,
+  icon: faICursor,
   display: "Text Box",
   group: 1
 }, {
   type: "number",
-  icon: <FaTextWidth />,
+  icon: faTextWidth,
   display: "Number",
   group: 1
 }, {
   type: "textarea",
-  icon: <FaTextHeight />,
+  icon: faTextHeight,
   display: "Multiline Text",
   group: 1
 }, {
+  type: "richeditor",
+  icon: faBold,
+  display: "Rich Text Editor",
+  group: 1
+}, {
   type: "checkbox",
-  icon: <FaSquare />,
+  icon: faCheckSquare,
   display: "Checkbox",
   group: 1
 }, {
   type: "radio",
-  icon: <FaCircle />,
+  icon: faCircle,
   display: "Radio Button",
   group: 1
 }, {
   type: "divider",
-  icon: <FaGripLines />,
+  icon: faGripLines,
   display: "Divider",
   group: 1
 }, {
   type: "image",
-  icon: <FaImage />,
+  icon: faImage,
   display: "Image",
   group: 1
 }, {
   type: "video",
-  icon: <FaVideo />,
+  icon: faVideo,
   display: "Video",
   group: 1
 }, {
   type: "pdf",
-  icon: <FaFilePdf />,
+  icon: faFilePdf,
   display: "PDF",
   group: 1
 }]

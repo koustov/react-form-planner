@@ -10,8 +10,13 @@ const BoxSelected = css`
 `
 
 export const FPPaper = styled(Paper)`
+background: ${props => props.theme.rfp.colors.background} !important;
   padding: 8px;
 `
+
+export const FPEditorPaper = styled(FPPaper)`
+background-image: linear-gradient(${props => props.theme.rfp.colors.card.start}, ${props => props.theme.rfp.colors.card.end}) !important;
+`;
 
 export const FPTabWrapper = styled.div`
   flex-grow: 1;
@@ -26,10 +31,12 @@ export const FPTabs = styled(Tabs)`
 export const FPPlannerWrapper = styled(Grid)`
   height: 100%;
   padding: 4px;
+  background: ${props => props.theme.rfp.colors.background};
 `
 
 export const FPSideBar = styled(FPPaper)`
   height: 100%;
+  background-image: linear-gradient(${props => props.theme.rfp.colors.card.start}, ${props => props.theme.rfp.colors.card.end});
   .fp-side-bar {
     height: 100%;
     display: flex;
@@ -57,7 +64,7 @@ export const FPSideBar = styled(FPPaper)`
 export const FPPlanner = styled(FPPaper)`
   height: 100%;
   padding: 4px;
-
+  background-image: linear-gradient(${props => props.theme.rfp.colors.card.start}, ${props => props.theme.rfp.colors.card.end});
   > * {
     margin: 8px;
   }
@@ -78,7 +85,6 @@ export const FPPlanner = styled(FPPaper)`
     }
   }
 `
-
 export const FPPreviewBox = styled.div`
   height: 100px;
   padding: 8px;
@@ -90,9 +96,10 @@ export const FPControlEditBox = styled.div`
   flex: 1;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #787878;
+  border: 1px solid;
   display: flex;
   flex-direction: column;
+  border-color: ${props => props.theme.rfp.colors.border};
 `
 export const FPEModal = styled(Modal)`
   display: flex;
@@ -106,6 +113,7 @@ export const FPModalLarge = styled.div`
 `
 
 export const FPPaperVerticalPadding = styled(FPPaper)`
+
   display: flex;
   flex-direction: column;
   > div {
@@ -120,6 +128,7 @@ export const FPPaperPadding = styled(FPPaper)`
 `
 
 export const FPEditorModal = styled(FPPaper)`
+
   display: flex;
   margin: 8px;
   flex-direction: column;
@@ -205,7 +214,8 @@ export const SmallHeader = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.5);
+  color: ${props => props.theme.rfp.colors.secondaryText};
+
 `
 
 export const FPMediumHeader = styled(SmallHeader)`
@@ -242,6 +252,7 @@ export const FPDividerField = styled.hr`
   border: 0;
   border-top: solid 3px;
   text-align: center;
+  border-color: ${props => props.theme.rfp.colors.border};
 
   &:after {
     content: '\f0e7';

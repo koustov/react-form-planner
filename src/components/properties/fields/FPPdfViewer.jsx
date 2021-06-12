@@ -18,7 +18,7 @@ const FPPdfViewer = ({ value }) => {
         file={`${value}`}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        {/* <Page pageNumber={pageNumber} /> */}
+        <Page pageNumber={pageNumber} />
       </Document>
       <p>Page {pageNumber} of {numPages}</p>
     </div>

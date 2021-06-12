@@ -8,6 +8,7 @@ import {
   FPPaperVerticalPadding,
   FPTabWrapper,
   FPTabs,
+  FPEditorPaper,
   SmallHeader
 } from '../styled'
 import { FaSave, FaTimes, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
@@ -48,15 +49,18 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
       const res = {}
       control.editableFields.forEach((ed) => {
         const groupName = ed.group ? ed.group : 'Default'
+        ed.value = controls[index][ed.targetField];
         if (!res[groupName]) {
           res[groupName] = [ed]
         } else {
-          res[groupName].push(template);
+          res[groupName].push(ed);
         }
+
       })
       setReadOnlyTemplate(controls);
       setControlState(Object.assign({}, controls[index]));
       setEditContainerGroups(res)
+      console.error(JSON.stringify(controls[index]));
     }
   }, [])
 
@@ -67,7 +71,12 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
   const onValueChanged = (_key, value, field) => {
     if (field.is_custom) {
       controlState.custom = controlState.custom || {}
-      controlState.custom[field.targetField] = value
+      if (field.datafield) {
+        controlState.custom[field.targetField] = Object.assign(controlState.custom[field.targetField], { [field.datafield]: value });
+      } else {
+        controlState.custom[field.targetField] = value
+      }
+
     } else {
       controlState[field.targetField] = value
     }
@@ -170,7 +179,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
       </div>
       <div style={{ display: 'flex', flex: 1 }}>
         <div style={{ width: '30%', padding: '8px' }}>
-          <FPPaper
+          <FPEditorPaper
             style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
           >
             <FPHeaderBar>
@@ -189,10 +198,10 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               />
               {/* {getFinalField(controlState)} */}
             </div>
-          </FPPaper>
+          </FPEditorPaper>
         </div>
         <div style={{ flex: 1, padding: '8px' }}>
-          <FPPaper style={{ height: '100%' }}>
+          <FPEditorPaper style={{ height: '100%' }}>
             <FPHeaderBar>
               <SmallHeader>Update Properties</SmallHeader>
             </FPHeaderBar>
@@ -223,6 +232,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
                       {
                         <FormViewer
                           templates={editContainerGroups[group]}
+                          data={controlState}
                           onControlValueChanged={onControlValueChanged}
                         />
                       }
@@ -231,7 +241,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
                 })}
               </div>
             </FPTabWrapper>
-          </FPPaper>
+          </FPEditorPaper>
         </div>
       </div>
     </FPPaperVerticalPadding>

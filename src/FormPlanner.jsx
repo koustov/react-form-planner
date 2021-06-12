@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { ThemeProvider } from "styled-components";
 import { useState, useEffect } from 'react';
 import { getControls, getControlTemplate } from './services';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { FPControlEdit, SmallHeader, FPSideBar, FPPlanner, FPPlannerWrapper, FPModalLarge, FPEModal, FPListItem, FPListIcon, FPListItemText } from './components/styled';
 
@@ -19,6 +21,7 @@ import Grid from '@material-ui/core/Grid';
 import * as _ from 'lodash';
 
 import './styles.scss';
+import { dark } from './themes/dark';
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export const FormPlanner = ({ controls, onFormValueChanged }) => {
+export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, theme = 'dark' }) => {
   const [finalControls, setFinalControls] = useState([]);
   const [controlListData, setControlListData] = useState([]);
   const [selectedControlIndex, setSelectedControlIndex] = useState(-1);
@@ -44,7 +47,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
 
   // Event Handlers
   const onAdd = (value) => {
-    const selectedTemplate = Object.assign(getControlTemplate(value.type), {});
+    const selectedTemplate = Object.assign(getControlTemplate(value.type, fieldDefinitions), {});
 
     if (selectedTemplate) {
       selectedTemplate.id = uuidv4();
@@ -70,12 +73,16 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
     }
   }
 
-  const onMoveUp = (index) => {
+  const onMoveUp = (index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setControlListData(moveItem(index, index - 1, controlListData));
   }
 
-  const onMoveDown = (index) => {
-    setControlListData(moveItem(index, index - 1, controlListData));
+  const onMoveDown = (index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setControlListData(moveItem(index, index + 1, controlListData));
   }
 
   const onPreviewClicked = () => {
@@ -107,7 +114,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
 
   // Rendering
   return (
-    <React.Fragment>
+    <ThemeProvider theme={theme == 'dark' ? dark : ''}>
       <FPPlannerWrapper container spacing={1} className="w-auto m-0">
         <Grid item xs={4} md={3} lg={2}>
           <FPSideBar elevation={3} className="flex-1">
@@ -123,7 +130,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
                           onClick={() => onAdd(con)}
                         >
                           <FPListIcon>
-                            {con.icon}
+                            <FontAwesomeIcon icon={con.icon} />
                           </FPListIcon>
                           <FPListItemText primary={`${con.display}`} />
                         </FPListItem>
@@ -172,7 +179,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
                       size="small"
                       aria-label="move up"
                       onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
-                      onClick={() => onMoveUp(control_index)}
+                      onClick={(e) => onMoveUp(control_index, e)}
                       disabled={control_index === controlListData.length - 1}
                     >
                       <FaChevronDown />
@@ -181,7 +188,7 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
                       size="small"
                       aria-label="move down"
                       onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
-                      onClick={() => onMoveDown(control_index)}
+                      onClick={(e) => onMoveDown(control_index, e)}
                       disabled={control_index === 0}>
                       <FaChevronUp />
                     </Fab>
@@ -238,6 +245,6 @@ export const FormPlanner = ({ controls, onFormValueChanged }) => {
           <PropertyEditor controls={controlListData} index={selectedControlIndex} onChange={onControlPropertyUpdated} onClose={() => { setEditorOpened(false) }} />
         </FPModalLarge>
       </FPEModal>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }

@@ -20,13 +20,21 @@ Key features
 
 ## Screen shots
 <img src="./docs/images/1.JPG" height="200">
-<img src="./docs/images/2.JPG" height="200">
-<img src="./docs/images/3.JPG" height="200">
-<img src="./docs/images/4.JPG" height="200">
+<img src="./docs/images/2.jpg" height="200">
+<img src="./docs/images/3.jpg" height="200">
+<img src="./docs/images/4.jpg" height="200">
 
- ## Core characteristics
+ # Core characteristics
 
-## Collaborators 🤝
+# 🏷️ License
+Copyright © 2021 by [Koustov](https://github.com/koustov)
 
-- Koustov [@koustov](https://twitter.com/IAmTrySound)
-- And waiting
+This project is licensed under MIT license.
+
+# ⭐ Show your support
+If you liked the work, please show your support by giving a Star!
+
+
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+

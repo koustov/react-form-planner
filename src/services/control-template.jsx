@@ -8,14 +8,11 @@ const BaseEditorFiled = {
   datafield: ""
 }
 const EditorFieldMap = {
-  customstyle: {
-    name: 'customStyles',
-    label: "Custom Styles",
+  grid: {
+    name: 'grid',
+    label: "",
     type: 'grid',
-    datafield: "",
-    targetField: 'style',
-    is_custom: true,
-    group: "Styles",
+    datafield: ""
   },
   customprops: {
     name: 'customProperties',
@@ -28,6 +25,12 @@ const EditorFieldMap = {
     group: "Properties",
     is_custom: true
   },
+  radio: {
+    name: 'alignment',
+    label: "Alignment",
+    type: 'radio',
+    group: "Default"
+  },
   text: {
     name: 'title',
     label: "Label",
@@ -39,6 +42,14 @@ const EditorFieldMap = {
 
     subtype: 'text',
 
+  },
+  richeditor: {
+    name: 'richeditor',
+    label: "Label",
+    datafield: "",
+    type: 'richeditor',
+    required: true,
+    targetField: 'label'
   },
   checkbox: {
     name: 'required',
@@ -74,61 +85,21 @@ const EditorFieldMap = {
   }
 }
 
-const IsRequiredField = {
-  name: 'required',
-  label: "Is Required",
-  type: 'checkbox',
+const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
+  label: "Custom Styles",
   datafield: "",
-  required: true,
-  targetField: 'required',
-  multivalue: false,
+  targetField: 'style',
+  is_custom: true,
+  group: "Styles",
+});
 
-
-}
-const LabelField = {
-  name: 'title',
-  label: "Label",
+const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
+  label: "Custom Properties",
   datafield: "",
-  type: 'text',
-  required: true,
-  targetField: 'label',
-  multivalue: true,
-
-
-}
-const TextEditorField = {
-  name: 'text-field',
-  label: "",
-  datafield: "",
-  type: 'text',
-  required: true,
-  targetField: '',
-  multivalue: true,
-
-
-}
-const ImageField = {
-  name: 'title',
-  label: "Label",
-  datafield: "",
-  type: 'fileupload',
-  required: true,
-  targetField: 'value',
-  multivalue: true,
-
-
-}
-const FileField = {
-  name: 'title',
-  label: "Label",
-  datafield: "",
-  type: 'fileupload',
-  required: true,
-  targetField: 'value',
-  multivalue: true,
-
-
-}
+  targetField: 'props',
+  is_custom: true,
+  group: "Props",
+});
 
 
 const getEditorField = (type, targetfield, overritevalue) => {
@@ -136,7 +107,117 @@ const getEditorField = (type, targetfield, overritevalue) => {
   if (targetfield) {
     res.targetField = targetfield
   }
+  return res;
+}
 
+const getEditorFields = (type, customdefinition) => {
+  let res = [];
+  switch (type) {
+    case "text": res = [
+      getEditorField("text", "label"),
+      getEditorField("checkbox", "required"),
+      customStyles,
+      customProps
+    ];
+      break
+    case 'richeditor': res = [
+      getEditorField("text", "label"),
+      getEditorField("checkbox", "required"),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'textarea': [
+      getEditorField("text", "label"),
+      getEditorField("checkbox", "required"),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'radio': res = [
+      getEditorField("text", "label"),
+      getEditorField("grid", "data", {
+        columns: [
+          { field: 'name', headerName: 'Display Name' },
+          { field: 'value', headerName: 'Value' },
+        ],
+        label: 'Options',
+        is_custom: true,
+        targetField: 'style',
+        dataField: 'justify-content'
+      }),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'header': res = [
+      getEditorField("text", "label"),
+      getEditorField("radio", "justifyContent", {
+        data: [{
+          name: 'Left',
+          value: 'flex-start'
+        }, {
+          name: 'Middle',
+          value: 'Center'
+        }, {
+          name: 'Right',
+          value: 'flex-end'
+        }]
+      }),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'label': res = [
+      getEditorField("richeditor", "label"),
+      getEditorField("radio", "justifyContent", {
+        data: [{
+          name: 'Left',
+          value: 'flex-start'
+        }, {
+          name: 'Middle',
+          value: 'Center'
+        }, {
+          name: 'Right',
+          value: 'flex-end'
+        }]
+      }),
+      getEditorField("checkbox", "required"),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'divider': res = [getEditorField("customstyle")]
+      break;
+    case 'image': res = [
+      getEditorField("fileupload"),
+      getEditorField("text", "height", { label: "Height", subtype: "number", col: 6, value: 200, is_custom: true }),
+      getEditorField("text", "width", { label: "Width", subtype: "number", col: 6, value: 200, is_custom: true }),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'video': res = [
+      getEditorField("text", "value", { label: "URL" }),
+      customStyles,
+      customProps
+    ];
+      break;
+    case 'pdf': res = [
+      getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
+      customStyles,
+      customProps
+    ];
+      break;
+    default: res = [];
+  }
+  if (customdefinition && customdefinition[type]) {
+    customdefinition[type].forEach((def) => {
+      let targetEditor = Object.assign({}, EditorFieldMap[def.type]);
+      targetEditor = Object.assign(targetEditor, def.props);
+      res.push(targetEditor)
+    })
+  }
   return res;
 }
 
@@ -146,28 +227,26 @@ const AllControlsTemplates = [{
   datafield: "",
   label: 'Question for one liner answer',
   placeholder: "This is a single line answer template",
-  template: (definition, data, onChange) => {
-    return getFinalField(definition, onChange, data[`${definition.datafield}`], definition.label)
-  },
   custom: {
     styles: {
       height: '50px'
     }
-  },
-  editableFields: [
-    getEditorField("text", "label"),
-    getEditorField("checkbox", "required"),
-    getEditorField("customstyle"),
-    getEditorField("customprops")
-  ]
+  }
+}, {
+  type: "richeditor",
+  datafield: "",
+  label: 'Rich Editor',
+  placeholder: "",
+  custom: {
+    styles: {
+      height: '50px'
+    }
+  }
 }, {
   type: "textarea",
   datafield: "",
   placeholder: "This is a multiline asnwer template",
   label: 'Question for multi liner answer',
-  template: (definition, data, onChange) => {
-    return getFinalField(definition, onChange, data[`${definition.datafield}`], definition.label)
-  },
   custom: {
     styles: {
       height: '100px'
@@ -176,95 +255,64 @@ const AllControlsTemplates = [{
       rows: 4
     }
   },
-  editableFields: [
-    getEditorField("text", "label"),
-    getEditorField("checkbox", "required"),
-    getEditorField("customstyle"),
-    getEditorField("customprops"),
-  ]
+}, {
+  type: "radio",
+  datafield: "",
+  placeholder: "",
+  label: 'This is a radio button example',
+  custom: {
+    styles: {
+      height: '100px'
+    },
+    props: {
+      rows: 4
+    }
+  },
+  data: [{
+    name: "Sample radio button",
+    value: 1
+  }]
 }, {
   type: "header",
   datafield: "",
-  label: 'This is a header',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
-  editableFields: [
-    getEditorField("text", "label"),
-    getEditorField("customstyle"),
-    getEditorField("customprops"),
-  ]
+  label: 'This is a header'
 }, {
   type: "label",
   datafield: "",
   label: 'This is a label',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
   custom: {
     styles: {
       height: '40px'
     }
-  },
-  editableFields: [
-    getEditorField("text", "label"),
-    getEditorField("checkbox", "required"),
-    getEditorField("customstyle"),
-    getEditorField("customprops"),
-  ]
+  }
 }, {
   type: "divider",
   datafield: "",
-  label: 'This is a header',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
-  editableFields: [
-    getEditorField("customstyle")]
+  label: ''
 }, {
   type: "image",
   datafield: "",
-  label: '',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
-  editableFields: [
-    getEditorField("fileupload"),
-    getEditorField("text", "height", { label: "Height", subtype: "number", col: 6, value: 200, is_custom: true }),
-    getEditorField("text", "width", { label: "Width", subtype: "number", col: 6, value: 200, is_custom: true }),
-    getEditorField("customstyle"),
-    getEditorField("customprops")
-  ]
+  label: ''
 }, {
   type: "video",
   datafield: "",
-  label: '',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
-  editableFields: [
-    getEditorField("text", "value", { label: "URL" }),
-    getEditorField("customstyle"),
-    getEditorField("customprops")
-  ]
+  label: ''
 }, {
   type: "pdf",
   datafield: "",
-  label: '',
-  template: (definition) => {
-    return getFinalField(definition, undefined, undefined, definition.label)
-  },
-  editableFields: [
-    getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
-    getEditorField("customstyle"),
-    getEditorField("customprops")
-  ]
+  label: ''
 }]
 
-export const getControlTemplate = (requestedControl) => {
+export const getControlTemplate = (requestedControl, customFieldDefinitions) => {
   if (requestedControl && requestedControl != '') {
     const foundEntry = AllControlsTemplates.filter((ac) => { return ac.type === requestedControl });
     if (foundEntry && foundEntry.length) {
+      foundEntry.forEach((fld) => {
+        fld.editableFields = getEditorFields(fld.type, customFieldDefinitions);
+        fld.template = (definition, data, onChange) => {
+          return getFinalField(definition, onChange, data[`${definition.datafield}`], definition.label)
+        }
+      });
       return foundEntry[0];
     }
   }
