@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { FPControlEdit, SmallHeader, FPSideBar, FPPlanner, FPPlannerWrapper, FPModalLarge, FPEModal, FPListItem, FPListIcon, FPListItemText } from './components/styled';
 
-import { FaTrashAlt, FaClone, FaChevronDown, FaChevronUp, FaEye, FaPenAlt } from 'react-icons/fa';
+import { faTrashAlt, faClone, faChevronDown, faChevronUp, faEye, faPenAlt } from '@fortawesome/free-solid-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -147,7 +147,7 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
                     onClick={() => onPreviewClicked()}
                   >
                     <FPListIcon>
-                      <FaEye />
+                      <FontAwesomeIcon icon={faEye} />
                     </FPListIcon>
                     <FPListItemText primary="Preview" />
                   </FPListItem>
@@ -167,13 +167,13 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
                   <div className="content-details fadeIn-bottom">
 
                     <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={() => { onEditClicked(control_index) }}>
-                      <FaPenAlt />
+                      <FontAwesomeIcon icon={faPenAlt} />
                     </Fab>
                     <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}>
-                      <FaClone />
+                      <FontAwesomeIcon icon={faClone} />
                     </Fab>
                     <Fab color="primary" size="small" aria-label="delete" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={(e) => onRemove(control_index, e)}>
-                      <FaTrashAlt />
+                      <FontAwesomeIcon icon={faTrashAlt} />
                     </Fab>
                     <Fab color="default"
                       size="small"
@@ -182,7 +182,7 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
                       onClick={(e) => onMoveUp(control_index, e)}
                       disabled={control_index === controlListData.length - 1}
                     >
-                      <FaChevronDown />
+                      <FontAwesomeIcon icon={faChevronDown} />
                     </Fab>
                     <Fab color="default"
                       size="small"
@@ -190,7 +190,7 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
                       onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
                       onClick={(e) => onMoveDown(control_index, e)}
                       disabled={control_index === 0}>
-                      <FaChevronUp />
+                      <FontAwesomeIcon icon={faChevronUp} />
                     </Fab>
                   </div>
                   <div className="control-editor-main">

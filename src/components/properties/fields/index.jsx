@@ -4,8 +4,9 @@ import FPDataGrid from "./FPDataGrid";
 import FPRadioControl from "./FPRadio";
 import FPDropzoneDialog from "./FPDropzoneDialog";
 import FPPdfViewer from "./FPPdfViewer";
-import { FaImage, FaVideo, FaFilePdf } from 'react-icons/fa';
-import ReactPlayer from 'react-player'
+import { faImage, faVideo, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import ReactPlayer from 'react-player';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const getStyleObject = (style) => {
@@ -161,7 +162,7 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
           })}
         </React.Fragment>) : (
           <FPNoContentAvailable>
-            <div><FaImage /></div>
+            <div><FontAwesomeIcon icon={faImage} /></div>
             <div>NO IMAGE SELECTED</div>
           </FPNoContentAvailable>
         )}
@@ -172,7 +173,7 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
       <React.Fragment>
         {value ? (<ReactPlayer url={`${value}`} />) : (
           <FPNoContentAvailable>
-            <div><FaVideo /></div>
+            <div><FontAwesomeIcon icon={faVideo} /></div>
             <div >NO VIDEO SELECTED</div>
           </FPNoContentAvailable>
         )}
@@ -183,7 +184,7 @@ export const getFinalField = (infield, onValueChange, invalue, label, fieldname)
       <React.Fragment>
         {value ? (<FPPdfViewer value={value} />) : (
           <FPNoContentAvailable>
-            <div><FaFilePdf /></div>
+            <div><FontAwesomeIcon icon={faFilePdf} /></div>
             <div >NO PDF FILE SELECTED</div>
           </FPNoContentAvailable>
         )}
