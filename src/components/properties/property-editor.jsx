@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 import Box from '@material-ui/core/Box'
 import Fab from '@material-ui/core/Fab'
-import { FormViewer } from '../../FormViewer'
+import { FormViewer } from 'react-form-viewer'
 import Tab from '@material-ui/core/Tab'
 import { getFinalField } from './fields'
 
@@ -46,11 +46,11 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
 
   useEffect(() => {
     if (controls && controls.length) {
-      const control = Object.assign({}, controls[index]);
+      const control = Object.assign({}, controls[index][0]);
       const res = {}
       control.editableFields.forEach((ed) => {
         const groupName = ed.group ? ed.group : 'Default'
-        ed.value = controls[index][ed.targetField];
+        ed.value = controls[index][0][ed.datafield];
         if (!res[groupName]) {
           res[groupName] = [ed]
         } else {
@@ -72,17 +72,17 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
   const onValueChanged = (_key, value, field) => {
     if (field.is_custom) {
       controlState.custom = controlState.custom || {}
-      controlState.custom[field.targetField] = controlState.custom[field.targetField] || [];
+      controlState.custom[field.datafield] = controlState.custom[field.datafield] || [];
 
       if (field.isappend) {
-        controlState.custom[field.targetField].push(value)
-        // controlState.custom[field.targetField] = Object.assign(controlState.custom[field.targetField], { [field.datafield]: value });
+        controlState.custom[field.datafield].push(value)
+        // controlState.custom[field.datafield] = Object.assign(controlState.custom[field.datafield], { [field.datafield]: value });
       } else {
-        controlState.custom[field.targetField] = value
+        controlState.custom[field.datafield] = value
       }
 
     } else {
-      controlState[field.targetField] = value
+      controlState[field.datafield] = value
     }
     setControlState({ ...controlState })
     return controlState;
@@ -105,9 +105,9 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
     return getFinalField(
       field,
       onValueChanged,
-      controlState[field.targetField],
+      controlState[field.datafield],
       undefined,
-      field.targetField
+      field.datafield
     )
   }
 
@@ -197,7 +197,7 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
               }}
             >
               <FormViewer
-                templates={readOnlyTemplate}
+                template={{ fields: readOnlyTemplate }}
                 controlMarker={selectedIndex}
               />
               {/* {getFinalField(controlState)} */}
@@ -235,9 +235,9 @@ export const PropertyEditor = ({ controls, template, index, onChange, onClose })
                     >
                       {
                         <FormViewer
-                          templates={editContainerGroups[group]}
+                          template={{ fields: editContainerGroups[group] }}
                           data={controlState}
-                          onControlValueChanged={onControlValueChanged}
+                          onChange={onControlValueChanged}
                         />
                       }
                     </TabPanel>

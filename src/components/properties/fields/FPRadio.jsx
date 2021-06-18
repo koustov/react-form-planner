@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
-import { FPRadio, FPFormControlLabel, FPHeaderField, FPLabelField, FPTextField, FPNoContentAvailable, FPFormLabel, FPRichTextEditor, FPFieldSet } from "../../styled";
+import { FPRadio, FPFormControlLabel, FPHeaderField, FPLabelField, FPTextField, FPNoContentAvailable, FPFormLabel, FPRichTextEditor, FPFieldSet, FPRadioGroup } from "../../styled";
 import FormControl from '@material-ui/core/FormControl';
 
 const FPRadioControl = ({ field, onChange, ...props }) => {
@@ -29,13 +29,13 @@ const FPRadioControl = ({ field, onChange, ...props }) => {
           field.label ? (<FPFormLabel component="legend">{field.label}</FPFormLabel>) : (null)
         }
 
-        <FPFieldSet aria-label={field.datafield} name={field.datafield} value={localValue} onChange={onValueChanged}>
+        <FPRadioGroup aria-label={field.datafield} name={field.datafield} value={localValue} onChange={onValueChanged}>
           {
             field.data.map((d, di) => {
               return <FPFormControlLabel key={di} value={d.value} control={<FPRadio {...props} />} label={d.name} />
             })
           }
-        </FPFieldSet>
+        </FPRadioGroup>
       </FormControl>
     </div >
   )

@@ -18,8 +18,8 @@ const EditorFieldMap = {
     name: 'customProperties',
     label: "Custom Properties",
     type: 'grid',
-    datafield: "",
-    targetField: 'props',
+
+    datafield: 'props',
     multivalue: true,
 
     group: "Properties",
@@ -34,10 +34,10 @@ const EditorFieldMap = {
   text: {
     name: 'title',
     label: "Label",
-    datafield: "",
+
     type: 'text',
     required: true,
-    targetField: 'label',
+    datafield: 'label',
     multivalue: true,
 
     subtype: 'text',
@@ -46,25 +46,25 @@ const EditorFieldMap = {
   textarea: {
     name: 'textarea',
     label: "Label",
-    datafield: "",
+
     type: 'textarea',
-    targetField: 'label',
+    datafield: 'label',
   },
   richeditor: {
     name: 'richeditor',
     label: "Label",
-    datafield: "",
+
     type: 'richeditor',
     required: true,
-    targetField: 'label'
+    datafield: 'label'
   },
   checkbox: {
     name: 'required',
     label: "Is Required",
     type: 'checkbox',
-    datafield: "",
+
     required: true,
-    targetField: 'required',
+    datafield: 'required',
     multivalue: false,
 
 
@@ -72,20 +72,20 @@ const EditorFieldMap = {
   fileupload: {
     name: 'title',
     label: "Label",
-    datafield: "",
+
     type: 'fileupload',
     required: true,
-    targetField: 'value',
+    datafield: 'value',
     multivalue: true,
     filefilter: ['image/jpeg', 'image/png', 'image/bmp'],
   },
   alignment: {
     name: 'title',
     label: "Alignment",
-    datafield: "",
+
     type: 'fileupload',
     required: true,
-    targetField: 'value',
+    datafield: 'value',
     multivalue: true,
     is_custom: true,
     filefilter: ['image/jpeg', 'image/png', 'image/bmp'],
@@ -94,25 +94,25 @@ const EditorFieldMap = {
 
 const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
   label: "Custom Styles",
-  datafield: "",
-  targetField: 'style',
+
+  datafield: 'style',
   is_custom: true,
   group: "Styles",
 });
 
 const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
   label: "Custom Properties",
-  datafield: "",
-  targetField: 'props',
+
+  datafield: 'props',
   is_custom: true,
   group: "Props",
 });
 
 
-const getEditorField = (type, targetfield, overritevalue) => {
+const getEditorField = (type, datafield, overritevalue) => {
   let res = Object.assign({}, BaseEditorFiled, EditorFieldMap[type], overritevalue || {});
-  if (targetfield) {
-    res.targetField = targetfield
+  if (datafield) {
+    res.datafield = datafield
   }
   return res;
 }
@@ -151,7 +151,7 @@ const getEditorFields = (type, customdefinition) => {
         label: 'Options',
         group: 'Options',
         is_custom: true,
-        targetField: 'style',
+        datafield: 'style',
         dataField: 'justify-content'
       }),
       customStyles,
@@ -159,26 +159,26 @@ const getEditorFields = (type, customdefinition) => {
     ];
       break;
     case 'header': res = [
-      getEditorField("text", "label"),
-      getEditorField("radio", "style", {
-        data: [{
-          name: 'Left',
+      [getEditorField("text", "label")],
+      [getEditorField("radio", "style", {
+        options: [{
+          label: 'Left',
           value: 1,
           returnvalue: { name: 'justify-content', value: 'flex-start' }
         }, {
-          name: 'Middle',
+          label: 'Middle',
           value: 2,
           returnvalue: { name: 'justify-content', value: 'center' }
         }, {
-          name: 'Right',
+          label: 'Right',
           value: 3,
           returnvalue: { name: 'justify-content', value: 'flex-end' }
         }],
         is_custom: true,
         isappend: true,
-      }),
-      customStyles,
-      customProps
+      })],
+      [customStyles],
+      [customProps]
     ];
       break;
     case 'label': res = [
@@ -241,7 +241,7 @@ const getEditorFields = (type, customdefinition) => {
 
 const AllControlsTemplates = [{
   type: "text",
-  datafield: "",
+
   label: 'Question for one liner answer',
   placeholder: "This is a single line answer template",
   custom: {
@@ -251,7 +251,7 @@ const AllControlsTemplates = [{
   }
 }, {
   type: "richeditor",
-  datafield: "",
+
   label: 'Rich Editor',
   placeholder: "",
   custom: {
@@ -261,7 +261,7 @@ const AllControlsTemplates = [{
   }
 }, {
   type: "textarea",
-  datafield: "",
+
   placeholder: "This is a multiline asnwer template",
   label: 'Question for multi liner answer',
   custom: {
@@ -274,7 +274,7 @@ const AllControlsTemplates = [{
   },
 }, {
   type: "radio",
-  datafield: "",
+
   placeholder: "",
   label: 'This is a radio button example',
   custom: {
@@ -291,11 +291,12 @@ const AllControlsTemplates = [{
   }]
 }, {
   type: "header",
-  datafield: "",
-  label: 'This is a header'
+
+  value: 'This is a header',
+  datafield: 'value'
 }, {
   type: "label",
-  datafield: "",
+
   label: 'This is a label',
   custom: {
     styles: {
@@ -304,19 +305,19 @@ const AllControlsTemplates = [{
   }
 }, {
   type: "divider",
-  datafield: "",
+
   label: ''
 }, {
   type: "image",
-  datafield: "",
+
   label: ''
 }, {
   type: "video",
-  datafield: "",
+
   label: ''
 }, {
   type: "pdf",
-  datafield: "",
+
   label: ''
 }]
 

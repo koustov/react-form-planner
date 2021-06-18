@@ -13,6 +13,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Select from "@material-ui/core/Select";
 import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+
+
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -35,6 +38,8 @@ export const FPCheckbox = styled(Checkbox)``;
 export const FPRadio = styled(Radio)`
 
 `;
+
+export const FPRadioGroup = styled(RadioGroup)``;
 
 export const FPTextField = styled(TextField)`
 

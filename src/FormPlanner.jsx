@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from "styled-components";
 import { useState, useEffect } from 'react';
 import { getControls, getControlTemplate } from './services';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { FPControlEdit, SmallHeader, FPSideBar, FPPlanner, FPPlannerWrapper, FPModalLarge, FPEModal, FPListItem, FPListIcon, FPListItemText } from './components/styled';
 
@@ -15,7 +15,7 @@ import { PropertyEditor } from './components/properties/property-editor';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Backdrop from '@material-ui/core/Backdrop';
-import { FormViewer } from './FormViewer';
+import { FormViewer } from 'react-form-viewer';
 
 import Grid from '@material-ui/core/Grid';
 import * as _ from 'lodash';
@@ -53,7 +53,7 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
       selectedTemplate.id = uuidv4();
       selectedTemplate.typeDisplay = value.display;
       const tmpControlListData = controlListData.map(a => Object.assign({}, a));
-      tmpControlListData.push(selectedTemplate);
+      tmpControlListData.push([selectedTemplate]);
       updateList(tmpControlListData);
     }
   }
@@ -161,53 +161,58 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
         <Grid item xs={8} md={9} lg={10}>
           <FPPlanner elevation={3}>
             {
-              controlListData.map((control, control_index) => {
-                return (<FPControlEdit {...{ selected: selectedControlIndex === control_index }} key={control_index} onClick={() => { onEditClicked(control_index) }}>
-                  <div className="content-overlay"></div>
-                  <div className="content-details fadeIn-bottom">
+              controlListData.map((controlrow, controlrow_index) => {
+                return <React.Fragment>{
+                  controlrow.map((control, control_index) => {
+                    return (<FPControlEdit {...{ selected: selectedControlIndex === control_index }} key={control_index} onClick={() => { onEditClicked(control_index) }}>
+                      <div className="content-overlay"></div>
+                      <div className="content-details fadeIn-bottom">
 
-                    <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={() => { onEditClicked(control_index) }}>
-                      <FontAwesomeIcon icon={faPenAlt} />
-                    </Fab>
-                    <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}>
-                      <FontAwesomeIcon icon={faClone} />
-                    </Fab>
-                    <Fab color="primary" size="small" aria-label="delete" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={(e) => onRemove(control_index, e)}>
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </Fab>
-                    <Fab color="default"
-                      size="small"
-                      aria-label="move up"
-                      onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
-                      onClick={(e) => onMoveUp(control_index, e)}
-                      disabled={control_index === controlListData.length - 1}
-                    >
-                      <FontAwesomeIcon icon={faChevronDown} />
-                    </Fab>
-                    <Fab color="default"
-                      size="small"
-                      aria-label="move down"
-                      onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
-                      onClick={(e) => onMoveDown(control_index, e)}
-                      disabled={control_index === 0}>
-                      <FontAwesomeIcon icon={faChevronUp} />
-                    </Fab>
-                  </div>
-                  <div className="control-editor-main">
-                    <div className="editor-control-header">
-                      <div className="editor-control-header">
-                        <SmallHeader>
-                          {control.typeDisplay}
-                        </SmallHeader>
+                        <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={() => { onEditClicked(control_index) }}>
+                          <FontAwesomeIcon icon={faPenAlt} />
+                        </Fab>
+                        <Fab color="secondary" size="small" aria-label="clone" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}>
+                          <FontAwesomeIcon icon={faClone} />
+                        </Fab>
+                        <Fab color="primary" size="small" aria-label="delete" onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }} onClick={(e) => onRemove(control_index, e)}>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Fab>
+                        <Fab color="default"
+                          size="small"
+                          aria-label="move up"
+                          onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
+                          onClick={(e) => onMoveUp(control_index, e)}
+                          disabled={control_index === controlListData.length - 1}
+                        >
+                          <FontAwesomeIcon icon={faChevronDown} />
+                        </Fab>
+                        <Fab color="default"
+                          size="small"
+                          aria-label="move down"
+                          onMouseEnter={(e) => { e.preventDefault(); e.stopPropagation() }}
+                          onClick={(e) => onMoveDown(control_index, e)}
+                          disabled={control_index === 0}>
+                          <FontAwesomeIcon icon={faChevronUp} />
+                        </Fab>
                       </div>
-                    </div>
-                    <div className="editor-control">
-                      {control.template(control, {}, null)}
-                    </div>
-                  </div>
-                </FPControlEdit>
-                )
+                      <div className="control-editor-main">
+                        <div className="editor-control-header">
+                          <div className="editor-control-header">
+                            <SmallHeader>
+                              {control.typeDisplay}
+                            </SmallHeader>
+                          </div>
+                        </div>
+                        <div className="editor-control">
+                          {control.template(control, {}, null)}
+                        </div>
+                      </div>
+                    </FPControlEdit>
+                    )
+                  })}
+                </React.Fragment>
               })
+
             }
           </FPPlanner>
 
@@ -227,7 +232,111 @@ export const FormPlanner = ({ controls, onFormValueChanged, fieldDefinitions, th
         }}
       >
         <FPModalLarge>
-          <FormViewer templates={formTemplates} />
+          <FormViewer onChange={(a, b, c) => { console.log('Value received') }} template={{
+            title: "Back to school registration",
+            description: "",
+            fields: [[
+              {
+                type: 'label',
+                label: "Please submit the form on or before <em>14th June 2021</em> <br/>The confirmation will be sent by end of July"
+              }
+            ], [{
+              type: 'text',
+              datafield: 'firstname',
+              label: 'First Name',
+              validations: {
+                required: true,
+                maxlength: 15
+              },
+              props: {}
+            }, {
+              type: 'text',
+              datafield: 'middlename',
+              label: 'Middle Name',
+              validations: {
+                maxlength: 15
+              },
+              props: {}
+            }, {
+              type: 'text',
+              datafield: 'lastname',
+              label: 'Last Name',
+              validations: {
+                required: true,
+                maxlength: 15
+              },
+              props: {}
+            }], [{
+              type: 'radio',
+              datafield: 'gender',
+              label: 'Gender',
+              options: [{
+                label: 'Boy',
+                value: 'm'
+              }, {
+                label: 'Girl',
+                value: 'f'
+              }]
+            }, {
+              type: 'text',
+              subtype: 'date',
+              datafield: 'dob',
+              label: 'Date of Birth',
+              props: {
+                InputLabelProps: {
+                  shrink: true
+                }
+              }
+            }], [{
+              type: 'text',
+              datafield: 'homephone',
+              subtype: 'number',
+              label: 'Home Phone',
+              validations: {
+                maxlength: 15
+              }
+            }, {
+              type: 'text',
+              datafield: 'cell',
+              label: 'Cell',
+              validations: {
+                required: true,
+                maxlength: 15
+              },
+            }], [{
+              type: 'text',
+              datafield: 'address',
+              label: 'Adress',
+              validations: {
+                maxlength: 150
+              },
+              props: {
+                multiline: true
+              }
+            }], [{
+              type: 'checkbox',
+              datafield: 'needuniform',
+              label: 'Need Uniform'
+            }], [{
+              type: 'video',
+              value: "https://www.youtube.com/watch?v=pAvIZfYa28A&ab_channel=Infinitelysound"
+            }], [{
+              type: "pdf",
+              value: "http://www.africau.edu/images/default/sample.pdf"
+            }], [{
+              type: 'image',
+              value: "",
+              props: {
+                style: {
+                  'align-items': 'center',
+                  'justify-content': 'center',
+                  height: '150px',
+                  overflow: 'hidden'
+                },
+
+              }
+            }]]
+          }} />
         </FPModalLarge>
       </FPEModal>
       <FPEModal
