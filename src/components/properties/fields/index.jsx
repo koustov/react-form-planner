@@ -1,21 +1,23 @@
 import * as React from 'react'
+
 import {
   FPCheckbox,
+  FPFieldSet,
   FPFormControlLabel,
+  FPFormLabel,
   FPHeaderField,
   FPLabelField,
-  FPTextField,
   FPNoContentAvailable,
-  FPFormLabel,
   FPRichTextEditor,
-  FPFieldSet
+  FPTextField
 } from '../../styled'
+import { faFilePdf, faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
+
 import FPRadioControl from './FPRadio'
-import FPDropzoneDialog from './FPDropzoneDialog'
-// import FPPdfViewer from "./FPPdfViewer";
-import { faImage, faVideo, faFilePdf } from '@fortawesome/free-solid-svg-icons'
-import ReactPlayer from 'react-player'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ReactPlayer from 'react-player'
+
+// import FPPdfViewer from "./FPPdfViewer";
 
 const getStyleObject = (style) => {
   const res = {}
@@ -50,47 +52,47 @@ export const getFinalField = (
     ...field.custom.props
   }
   switch (field.type) {
-    case 'richeditor':
-      const modules = {
-        toolbar: [
-          [{ header: [1, 2, false] }],
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' }
-          ],
-          ['clean']
-        ]
-      }
-      const formats = [
-        'header',
-        'bold',
-        'italic',
-        'underline',
-        'strike',
-        'blockquote',
-        'list',
-        'bullet',
-        'indent'
-      ]
-      resComponent = (
-        <FPRichTextEditor
-          value={value}
-          theme={'snow'}
-          placeholder={field.placeholder}
-          modules={modules}
-          formats={formats}
-          bounds={'.app'}
-          onChange={(e) => {
-            if (onValueChange) {
-              onValueChange(strFieldName, e, field)
-            }
-          }}
-        />
-      )
-      break
+    // case 'richeditor':
+    //   const modules = {
+    //     toolbar: [
+    //       [{ header: [1, 2, false] }],
+    //       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    //       [
+    //         { list: 'ordered' },
+    //         { list: 'bullet' },
+    //         { indent: '-1' },
+    //         { indent: '+1' }
+    //       ],
+    //       ['clean']
+    //     ]
+    //   }
+    //   const formats = [
+    //     'header',
+    //     'bold',
+    //     'italic',
+    //     'underline',
+    //     'strike',
+    //     'blockquote',
+    //     'list',
+    //     'bullet',
+    //     'indent'
+    //   ]
+    //   resComponent = (
+    //     <FPRichTextEditor
+    //       value={value}
+    //       theme={'snow'}
+    //       placeholder={field.placeholder}
+    //       modules={modules}
+    //       formats={formats}
+    //       bounds={'.app'}
+    //       onChange={(e) => {
+    //         if (onValueChange) {
+    //           onValueChange(strFieldName, e, field)
+    //         }
+    //       }}
+    //     />
+    //   )
+    //   break
     case 'text':
       resComponent = (
         <FPTextField
@@ -180,19 +182,6 @@ export const getFinalField = (
       )
       break
 
-    case 'fileupload':
-      resComponent = (
-        <FPDropzoneDialog
-          onChange={(fld, val, fielddata) => {
-            if (onValueChange) {
-              onValueChange(fld, val, fielddata)
-            }
-          }}
-          field={field}
-          {...localprops}
-        />
-      )
-      break
     case 'image':
       resComponent = (
         <React.Fragment>

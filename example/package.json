@@ -12,8 +12,9 @@
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "chokidar": "^3.5.1",
-    "form-planner": "link:..",
+    "react-form-planner": "link:..",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "link:../node_modules/react-scripts",
