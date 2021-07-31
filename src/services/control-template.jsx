@@ -1,58 +1,62 @@
-import { getFinalField } from '../components/properties/fields';
+import { getFinalField } from '../components/properties/fields'
 
-
+const allDataFields = []
 const BaseEditorFiled = {
   col: 12,
   value: '',
-  group: "Default",
-  datafield: ""
+  group: 'Default',
+  datafield: ''
 }
 const EditorFieldMap = {
   grid: {
     name: 'grid',
-    label: "",
+    label: '',
     type: 'grid',
-    datafield: ""
+    datafield: ''
   },
   customprops: {
     name: 'customProperties',
-    label: "Custom Properties",
+    label: 'Custom Properties',
     type: 'grid',
 
     datafield: 'props',
     multivalue: true,
 
-    group: "Properties",
+    group: 'Properties',
     is_custom: true
+  },
+  select: {
+    name: 'select',
+    label: 'Select',
+    type: 'select',
+    group: 'Default'
   },
   radio: {
     name: 'alignment',
-    label: "Alignment",
+    label: 'Alignment',
     type: 'radio',
-    group: "Default"
+    group: 'Default'
   },
   text: {
     name: 'title',
-    label: "Label",
+    label: 'Label',
 
     type: 'text',
-    required: true,
     datafield: 'label',
     multivalue: true,
 
-    subtype: 'text',
-
+    subtype: 'text'
   },
   textarea: {
     name: 'textarea',
-    label: "Label",
+    label: 'Label',
 
     type: 'textarea',
-    datafield: 'label',
+    datafield: 'label'
   },
   richeditor: {
     name: 'richeditor',
-    label: "Label",
+    label: 'Label',
 
     type: 'richeditor',
     required: true,
@@ -60,279 +64,359 @@ const EditorFieldMap = {
   },
   checkbox: {
     name: 'required',
-    label: "Is Required",
+    label: 'Is Required',
     type: 'checkbox',
-
-    required: true,
     datafield: 'required',
-    multivalue: false,
-
-
+    multivalue: false
   },
   fileupload: {
     name: 'title',
-    label: "Label",
-
+    label: 'Label',
     type: 'fileupload',
     required: true,
     datafield: 'value',
     multivalue: true,
-    filefilter: ['image/jpeg', 'image/png', 'image/bmp'],
+    filefilter: ['image/jpeg', 'image/png', 'image/bmp']
   },
   alignment: {
     name: 'title',
-    label: "Alignment",
+    label: 'Alignment',
 
     type: 'fileupload',
     required: true,
     datafield: 'value',
     multivalue: true,
     is_custom: true,
-    filefilter: ['image/jpeg', 'image/png', 'image/bmp'],
+    filefilter: ['image/jpeg', 'image/png', 'image/bmp']
   }
 }
 
 const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
-  label: "Custom Styles",
-
+  label: 'Custom Styles',
   datafield: 'style',
-  is_custom: true,
-  group: "Styles",
-});
+  group: 'Styles',
+  isappend: true,
+  asobject: true
+})
 
 const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
-  label: "Custom Properties",
+  label: 'Custom Properties',
 
   datafield: 'props',
   is_custom: true,
-  group: "Props",
-});
+  group: 'Props'
+})
 
-
-const getEditorField = (type, datafield, overritevalue) => {
-  let res = Object.assign({}, BaseEditorFiled, EditorFieldMap[type], overritevalue || {});
+const getUniqueDataField = () => {
+  const df = `Field_${Math.floor(Math.random() * 10000) + 1}`
+  if (allDataFields.indexOf(df) > -1) {
+    getUniqueDataField()
+  } else {
+    allDataFields.push(df)
+    return df
+  }
+}
+const getEditorField = (type, datafield, label, overritevalue) => {
+  let res = Object.assign(
+    {},
+    EditorFieldMap[type],
+    BaseEditorFiled,
+    { label: label },
+    overritevalue || {}
+  )
   if (datafield) {
     res.datafield = datafield
+  } else {
+    const df = getUniqueDataField()
+    res.datafield = df
   }
-  return res;
+
+  return res
 }
 
 const getEditorFields = (type, customdefinition) => {
-  let res = [];
+  let res = []
   switch (type) {
-    case "text": res = [
-      getEditorField("text", "label"),
-      getEditorField("checkbox", "required"),
-      customStyles,
-      customProps
-    ];
+    case 'text':
+      res = [
+        [getEditorField('text', 'label', 'Label', { required: true })],
+        [getEditorField('text', 'placeholder', 'Placeholder')],
+        [getEditorField('text', 'validation', 'Validation Regex')],
+        [getEditorField('checkbox', 'required', 'Required')],
+        [customStyles],
+        [customProps]
+      ]
       break
-    case 'richeditor': res = [
-      getEditorField("text", "label"),
-      getEditorField("checkbox", "required"),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'textarea': [
-      getEditorField("text", "label"),
-      getEditorField("checkbox", "required"),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'radio': res = [
-      getEditorField("text", "label"),
-      getEditorField("grid", "data", {
-        columns: [
-          { field: 'name', headerName: 'Display' },
-          { field: 'value', headerName: 'Value' },
+    case 'richeditor':
+      res = [
+        getEditorField('text', 'label'),
+        getEditorField('checkbox', 'required'),
+        customStyles,
+        customProps
+      ]
+      break
+    case 'select':
+      res = [
+        [getEditorField('text', 'label', 'Label', { required: true })],
+        [getEditorField('text', 'placeholder', 'Placeholder')],
+        [getEditorField('checkbox', 'required', 'Required')],
+        [
+          getEditorField('grid', 'options', 'Options', {
+            columns: [
+              { field: 'label', headerName: 'Display' },
+              { field: 'value', headerName: 'Value' }
+            ],
+            group: 'Options'
+          })
         ],
-        label: 'Options',
-        group: 'Options',
-        is_custom: true,
-        datafield: 'style',
-        dataField: 'justify-content'
-      }),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'header': res = [
-      [getEditorField("text", "label")],
-      [getEditorField("radio", "style", {
-        options: [{
-          label: 'Left',
-          value: 1,
-          returnvalue: { name: 'justify-content', value: 'flex-start' }
-        }, {
-          label: 'Middle',
-          value: 2,
-          returnvalue: { name: 'justify-content', value: 'center' }
-        }, {
-          label: 'Right',
-          value: 3,
-          returnvalue: { name: 'justify-content', value: 'flex-end' }
-        }],
-        is_custom: true,
-        isappend: true,
-      })],
-      [customStyles],
-      [customProps]
-    ];
-      break;
-    case 'label': res = [
-      getEditorField("textarea", "label"),
-      getEditorField("radio", "style", {
-        data: [{
-          name: 'Left',
-          value: 1,
-          returnvalue: { name: 'justify-content', value: 'flex-start' }
-        }, {
-          name: 'Middle',
-          value: 2,
-          returnvalue: { name: 'justify-content', value: 'center' }
-        }, {
-          name: 'Right',
-          value: 3,
-          returnvalue: { name: 'justify-content', value: 'flex-end' }
-        }],
-        is_custom: true,
-        isappend: true,
-      }),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'divider': res = [getEditorField("customstyle")]
-      break;
-    case 'image': res = [
-      getEditorField("fileupload"),
-      getEditorField("text", "height", { label: "Height", subtype: "number", col: 6, value: 200, is_custom: true }),
-      getEditorField("text", "width", { label: "Width", subtype: "number", col: 6, value: 200, is_custom: true }),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'video': res = [
-      getEditorField("text", "value", { label: "URL" }),
-      customStyles,
-      customProps
-    ];
-      break;
-    case 'pdf': res = [
-      getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
-      customStyles,
-      customProps
-    ];
-      break;
-    default: res = [];
+        [customStyles],
+        [customProps]
+      ]
+      break
+    case 'checkbox':
+      res = [
+        [getEditorField('text', 'label', 'Label', { required: true })],
+        [customStyles],
+        [customProps]
+      ]
+      break
+
+    case 'radio':
+      res = [
+        [getEditorField('text', 'label', 'Label')],
+        [
+          getEditorField('grid', 'options', 'Options', {
+            columns: [
+              { field: 'label', headerName: 'Display' },
+              { field: 'value', headerName: 'Value' }
+            ],
+            group: 'Options'
+          })
+        ],
+        [customStyles],
+        [customProps]
+      ]
+      break
+    case 'header':
+      res = [
+        [getEditorField('text', 'value', 'Text')],
+        [
+          getEditorField('select', 'style', 'Alignment', {
+            options: [
+              {
+                label: 'Left',
+                value: 1,
+                returnvalue: { 'justify-content': 'flex-start' }
+              },
+              {
+                label: 'Middle',
+                value: 2,
+                returnvalue: { 'justify-content': 'center' }
+              },
+              {
+                label: 'Right',
+                value: 3,
+                returnvalue: { 'justify-content': 'flex-end' }
+              }
+            ],
+            isappend: true,
+            asobject: true
+          })
+        ],
+        [customStyles],
+        [customProps]
+      ]
+      break
+    case 'label':
+      res = [
+        [getEditorField('textarea', 'value', 'Text')],
+        [
+          getEditorField('select', 'style', 'Alignment', {
+            options: [
+              {
+                label: 'Left',
+                value: 1,
+                returnvalue: { 'justify-content': 'flex-start' }
+              },
+              {
+                label: 'Middle',
+                value: 2,
+                returnvalue: { 'justify-content': 'center' }
+              },
+              {
+                label: 'Right',
+                value: 3,
+                returnvalue: { 'justify-content': 'flex-end' }
+              }
+            ],
+            isappend: true,
+            asobject: true
+          })
+        ],
+        [customStyles],
+        [customProps]
+      ]
+      break
+    case 'divider':
+      res = [getEditorField('customstyle')]
+      break
+    case 'image':
+      res = [
+        [getEditorField('fileupload', 'value', 'Image')],
+        [customStyles],
+        [customProps]
+      ]
+      break
+    case 'video':
+      res = [
+        [getEditorField('text', 'value', 'URL')],
+        [customStyles],
+        [customProps]
+      ]
+      break
+      // case 'pdf': res = [
+      //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
+      //   customStyles,
+      //   customProps
+      // ];
+      break
+    default:
+      res = []
   }
   if (customdefinition && customdefinition[type]) {
     customdefinition[type].forEach((def) => {
-      let targetEditor = Object.assign({}, EditorFieldMap[def.type]);
-      targetEditor = Object.assign(targetEditor, def.props);
+      let targetEditor = Object.assign({}, EditorFieldMap[def.type])
+      targetEditor = Object.assign(targetEditor, def.props)
       res.push(targetEditor)
     })
   }
-  return res;
+  return res
 }
 
-
-const AllControlsTemplates = [{
-  type: "text",
-
-  label: 'Question for one liner answer',
-  placeholder: "This is a single line answer template",
-  custom: {
-    styles: {
-      height: '50px'
-    }
-  }
-}, {
-  type: "richeditor",
-
-  label: 'Rich Editor',
-  placeholder: "",
-  custom: {
-    styles: {
-      height: '50px'
-    }
-  }
-}, {
-  type: "textarea",
-
-  placeholder: "This is a multiline asnwer template",
-  label: 'Question for multi liner answer',
-  custom: {
-    styles: {
-      height: '100px'
-    },
-    props: {
-      rows: 4
+const AllControlsTemplates = [
+  {
+    type: 'text',
+    label: 'Text Box',
+    placeholder: 'Text Box placeholder',
+    iseditable: true,
+    custom: {
+      styles: {
+        height: '50px'
+      }
     }
   },
-}, {
-  type: "radio",
+  {
+    type: 'richeditor',
 
-  placeholder: "",
-  label: 'This is a radio button example',
-  custom: {
-    styles: {
-      height: '100px'
-    },
-    props: {
-      rows: 4
+    label: 'Rich Editor',
+    placeholder: '',
+    iseditable: true,
+    custom: {
+      styles: {
+        height: '50px'
+      }
     }
   },
-  data: [{
-    name: "Sample radio button",
-    value: 1
-  }]
-}, {
-  type: "header",
+  {
+    type: 'radio',
 
-  value: 'This is a header',
-  datafield: 'value'
-}, {
-  type: "label",
+    placeholder: '',
+    label: 'This is a radio button example',
+    iseditable: true,
+    options: [
+      {
+        label: 'Sample radio button',
+        value: 1
+      }
+    ]
+  },
+  {
+    type: 'checkbox',
 
-  label: 'This is a label',
-  custom: {
-    styles: {
-      height: '40px'
+    label: 'This is a checkbox example',
+    iseditable: true,
+    custom: {
+      styles: {
+        height: '100px'
+      }
+    }
+  },
+
+  {
+    type: 'select',
+
+    placeholder: '',
+    label: 'This is a select example',
+    iseditable: true,
+    options: [
+      {
+        label: 'Option Label',
+        value: 'Option Value'
+      }
+    ]
+  },
+  {
+    type: 'header',
+    value: 'This is a header',
+    label: 'Value'
+  },
+  {
+    type: 'label',
+    value: 'This is a label',
+    custom: {
+      styles: {
+        height: '40px'
+      }
+    }
+  },
+  {
+    type: 'divider',
+    label: ''
+  },
+  {
+    type: 'image',
+
+    label: ''
+  },
+  {
+    type: 'video',
+
+    label: ''
+  },
+  {
+    type: 'pdf',
+
+    label: ''
+  }
+]
+
+export const getControlTemplate = (
+  requestedControl,
+  customFieldDefinitions
+) => {
+  if (requestedControl && requestedControl.type != '') {
+    const foundEntry = AllControlsTemplates.filter((ac) => {
+      return ac.type === requestedControl.type
+    })
+    if (foundEntry && foundEntry.length && foundEntry.length === 1) {
+      let fld = Object.assign({}, foundEntry[0])
+      // foundEntry.forEach((fld) => {
+      fld.editableFields = getEditorFields(fld.type, customFieldDefinitions)
+      fld = Object.assign(fld, requestedControl)
+      fld.template = (definition, data, onChange) => {
+        return getFinalField(
+          definition,
+          onChange,
+          data[`${definition.datafield}`],
+          definition.label
+        )
+      }
+      // })
+      if (fld.iseditable) {
+        fld.datafield = getUniqueDataField()
+      }
+      return fld
     }
   }
-}, {
-  type: "divider",
-
-  label: ''
-}, {
-  type: "image",
-
-  label: ''
-}, {
-  type: "video",
-
-  label: ''
-}, {
-  type: "pdf",
-
-  label: ''
-}]
-
-export const getControlTemplate = (requestedControl, customFieldDefinitions) => {
-  if (requestedControl && requestedControl != '') {
-    const foundEntry = AllControlsTemplates.filter((ac) => { return ac.type === requestedControl });
-    if (foundEntry && foundEntry.length) {
-      foundEntry.forEach((fld) => {
-        fld.editableFields = getEditorFields(fld.type, customFieldDefinitions);
-        fld.template = (definition, data, onChange) => {
-          return getFinalField(definition, onChange, data[`${definition.datafield}`], definition.label)
-        }
-      });
-      return foundEntry[0];
-    }
-  }
-  return undefined;
+  return undefined
 }

@@ -16,7 +16,6 @@
     "form-planner": "link:..",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-pdf": "4.2.0",
     "react-scripts": "link:../node_modules/react-scripts",
     "styled-components": "^5.3.0"
   },

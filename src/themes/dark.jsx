@@ -1,57 +1,59 @@
 export const dark = {
   meta: {
-    name: "dark",
-    displayName: "Dark",
+    name: 'dark',
+    displayName: 'Dark'
   },
-  rfp:
-  {
+  rfp: {
     colors: {
-      background: "#141b2d",
-      border: "#7bc5ee",
+      background: '#121212',
+      background1: '#1E1E1E',
+      background2: '#2B2B2B',
+      background3: '#393939',
+      border: '#7bc5ee',
       input: {
-        border: "#3498DB",
-        placeholder: "#ffffff",
-        color: "#454545",
-        disabled: "#454545",
+        border: '#C6C6C6',
+        placeholder: '#ffffff',
+        color: '#C6C6C6',
+        disabled: '#787878'
       },
       error: {
-        color: "yellow",
+        color: 'yellow'
       },
-      primaryButton: "#0D7452",
-      primaryText: "#a3a9b7",
-      secondaryText: "#454545",
-      ternaryText: "#7bc5ee",
-      listPrimary: "#7bc5ee",
-      listSecondary: "#5b98ba",
+      primaryButton: '#A5A5A5',
+      primaryText: '#a3a9b7',
+      secondaryText: '#454545',
+      ternaryText: '#7bc5ee',
+      listPrimary: '#7bc5ee',
+      listSecondary: '#5b98ba',
       card: {
-        start: "#1f2a40",
-        end: "#1f2a40",
-        border: "#202125",
-        title: "#e8e8e8",
-        shadow: "transparent",
+        start: '#1E1E1E',
+        end: '#1E1E1E',
+        border: '#202125',
+        title: '#e8e8e8',
+        shadow: 'transparent'
       },
       link: {
-        color: "#01B075",
+        color: '#A5A5A5'
       },
       button: {
-        color: "#01B075",
-        secondary: "#9e9e9e",
-        danger: "#ff1744",
-        link: "#bec6f4",
+        color: '#01B075',
+        secondary: '#9e9e9e',
+        danger: '#ff1744',
+        link: '#bec6f4'
       },
-      text: "#e8e8e8",
+      text: '#e8e8e8',
       toggle: {
-        color: "#01B075",
-        bg: "#FFFFFF",
-        colorActive: "#FFFFFF",
-        bgActive: "#01B075",
+        color: '#01B075',
+        bg: '#FFFFFF',
+        colorActive: '#FFFFFF',
+        bgActive: '#01B075'
       },
       checks: {
-        color: "#01B075",
-        bg: "#FFFFFF",
-        colorActive: "#FFFFFF",
-        bgActive: "#01B075",
+        color: '#01B075',
+        bg: '#FFFFFF',
+        colorActive: '#FFFFFF',
+        bgActive: '#01B075'
       }
     }
-  },
-};
+  }
+}
