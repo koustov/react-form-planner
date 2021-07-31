@@ -1,35 +1,26 @@
-import TextField from '@material-ui/core/TextField'
-// import Button from '@material-ui/core/Button';
-
-import styled, { css } from 'styled-components'
 import {
-  FormLabel,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  BottomNavigation,
+  BottomNavigationAction,
   Button,
-  FormControlLabel,
   Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  InputLabel,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Select,
   MenuItem,
   Radio,
   RadioGroup,
-  FormControl,
-  InputLabel,
-  AccordionSummary,
-  Accordion,
-  AccordionDetails,
-  BottomNavigation,
-  BottomNavigationAction
+  Select
 } from '@material-ui/core'
+import styled, { css } from 'styled-components'
 
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
-
-export const FPRichTextEditor = styled(ReactQuill)`
-  width: 100%;
-  height: 200px;
-`
+import TextField from '@material-ui/core/TextField'
 
 export const FPBottomNavigation = styled(BottomNavigation)`
   background: transparent;
@@ -37,6 +28,9 @@ export const FPBottomNavigation = styled(BottomNavigation)`
 
 export const FPBottomNavigationAction = styled(BottomNavigationAction)`
   background: transparent;
+  .MuiBottomNavigationAction-label {
+    opacity: 1 !important;
+  }
   color: ${(props) => props.theme.rfp.colors.primaryText};
 `
 
@@ -168,7 +162,10 @@ export const FPListItem = styled(ListItem)`
 `
 
 export const FPListIcon = styled(ListItemIcon)`
-  min-width: unset;
+  min-width: unset !important;
+  .MuiListItemIcon-root {
+    min-width: unset !important;
+  }
   margin-right: 16px;
   font-size: 12px !important;
 `
@@ -497,4 +494,71 @@ export const FVGridCell = styled.div`
 export const FVGridActionCell = styled(FVGridCell)`
   flex: 0;
   width: 50px;
+`
+
+export const FVFileUpload = styled.fieldset`
+  display: block;
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  height: 50px;
+  color: white;
+  border: 1px solid ${({ theme }) => theme.rfp.colors.input.border} !important;
+  border-radius: 4px;
+  padding: 8px;
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: 'center';
+  }
+  .action {
+    display: flex;
+    div {
+      flex: 1;
+    }
+    .action-button {
+      width: 100%;
+      height: 100%;
+      font-size: 15px;
+      display: block;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease-out;
+    }
+  }
+
+  .file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+  }
+  .file-input {
+    height: 100%;
+  }
+
+  .file-name {
+    position: absolute;
+    bottom: -35px;
+    left: 10px;
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  input:hover + label,
+  input:focus + label {
+    transform: scale(1.02);
+  }
+
+  /* Adding an outline to the label on focus */
+  input:focus + label {
+    outline: 1px solid #000;
+    outline: -webkit-focus-ring-color auto 2px;
+  }
 `

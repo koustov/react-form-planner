@@ -95,7 +95,6 @@ const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
   label: 'Custom Styles',
   datafield: 'style',
   group: 'Styles',
-  isappend: true,
   asobject: true
 })
 
@@ -249,7 +248,6 @@ const getEditorFields = (type, customdefinition) => {
                 returnvalue: { 'justify-content': 'flex-end' }
               }
             ],
-            isappend: true,
             asobject: true
           })
         ],
@@ -274,11 +272,35 @@ const getEditorFields = (type, customdefinition) => {
         [customProps]
       ]
       break
-      // case 'pdf': res = [
-      //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
-      //   customStyles,
-      //   customProps
-      // ];
+    // case 'pdf': res = [
+    //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
+    //   customStyles,
+    //   customProps
+    // ];
+    // break
+    case 'question':
+      res = [
+        [getEditorField('text', 'label', 'Question')],
+        [getEditorField('fileupload', 'image', 'Upload Image')],
+        [
+          getEditorField('text', 'imageHeight', 'Image Height', {
+            subtype: 'number'
+          })
+        ],
+
+        // [getEditorField('texnumber', 'imageHeight', 'Image Height')],
+        // [
+        //   getEditorField('grid', 'options', 'Answers', {
+        //     columns: [
+        //       { field: 'label', headerName: 'Options' },
+        //       { field: 'value', headerName: 'Value' }
+        //     ],
+        //     aslist: true
+        //   })
+        // ],
+        [customStyles],
+        [customProps]
+      ]
       break
     default:
       res = []
@@ -331,6 +353,23 @@ const AllControlsTemplates = [
     ]
   },
   {
+    type: 'question',
+
+    placeholder: '',
+    label: 'This is sample question?',
+    iseditable: true,
+    options: [
+      {
+        label: 'Sample answer 1',
+        value: 'xxx'
+      },
+      {
+        label: 'Sample answer 2',
+        value: 'yyy'
+      }
+    ]
+  },
+  {
     type: 'checkbox',
 
     label: 'This is a checkbox example',
@@ -371,6 +410,10 @@ const AllControlsTemplates = [
   },
   {
     type: 'divider',
+    label: ''
+  },
+  {
+    type: 'fileupload',
     label: ''
   },
   {

@@ -1,32 +1,35 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import { Field, reduxForm } from 'redux-form'
 import {
-  FVFormTextField,
-  FVFormSelectField,
+  FPControlEdit,
+  FPFormRow,
+  FPToolButton,
+  FVFormCell,
+  FVFormRow,
+  SmallHeader
+} from './styled'
+import {
+  FPDataGridView,
+  FVFileUploadField,
+  FVFormCheckboxField,
   FVFormNonField,
   FVFormRadioField,
+  FVFormSelectField,
   FVFormTextAreaField,
-  FVFormCheckboxField,
-  FPDataGridView
+  FVFormTextField,
+  FVQuestionField
 } from './form-fields'
+import { Field, reduxForm } from 'redux-form'
+import React, { Fragment, useEffect, useState } from 'react'
 import {
-  FVFormRow,
-  FVFormCell,
-  FPControlEdit,
-  SmallHeader,
-  FPFormRow,
-  FPToolButton
-} from './styled'
-import { Button } from '@material-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faTrashAlt,
-  faClone,
   faChevronDown,
   faChevronUp,
+  faClone,
   faEye,
-  faPenAlt
+  faPenAlt,
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
+
+import { Button } from '@material-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -75,6 +78,10 @@ const renderSwitch = (type) => {
       return FVFormCheckboxField
     case 'grid':
       return FPDataGridView
+    case 'question':
+      return FVQuestionField
+    case 'fileupload':
+      return FVFileUploadField
     default:
       return 'foo'
   }

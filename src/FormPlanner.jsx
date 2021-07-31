@@ -1,52 +1,43 @@
+import './styles.scss'
+
 import * as React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { useState, useEffect } from 'react'
-import { getControls, getControlTemplate } from './services'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {
-  FPControlEdit,
-  SmallHeader,
-  FPSideBar,
+  FPAccordion,
+  FPAccordionDetails,
+  FPAccordionSummary,
+  FPBottomNavigation,
+  FPBottomNavigationAction,
+  FPDividerField,
+  FPEModal,
+  FPListIcon,
+  FPListItem,
+  FPListItemText,
+  FPModalLarge,
   FPPlanner,
   FPPlannerWrapper,
-  FPModalLarge,
-  FPEModal,
-  FPAccordion,
-  FPAccordionSummary,
-  FPListItem,
-  FPListIcon,
-  FPAccordionDetails,
-  FPDividerField,
-  FPListItemText,
-  FPBottomNavigation,
-  FPBottomNavigationAction
+  FPSideBar
 } from './components/styled'
-
+import { Fragment, useEffect, useState } from 'react'
 import {
-  faTrashAlt,
-  faClone,
   faChevronDown,
   faEdit,
-  faStickyNote,
-  faPenAlt
+  faStickyNote
 } from '@fortawesome/free-solid-svg-icons'
-import { v4 as uuidv4 } from 'uuid'
+import { getControlTemplate, getControls } from './services'
+
+import { Backdrop } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import Fab from '@material-ui/core/Fab'
-import { PropertyEditor } from './components/properties/property-editor'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormProperties } from './components/properties/form-properties'
-import { makeStyles } from '@material-ui/core/styles'
-
-import { Backdrop, AccordionDetails } from '@material-ui/core'
 import { FormViewer } from './FormViewer'
-
 import Grid from '@material-ui/core/Grid'
-import * as _ from 'lodash'
-
-import './styles.scss'
+import List from '@material-ui/core/List'
+import { PropertyEditor } from './components/properties/property-editor'
+import { ThemeProvider } from 'styled-components'
 import { dark } from './themes/dark'
+import { makeStyles } from '@material-ui/core/styles'
+import { v4 as uuidv4 } from 'uuid'
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -54,11 +45,28 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
+const DefaultConfig = {
+  showFormProperties: false,
+  showPreview: true,
+  allowCustomStyles: true,
+  allowCustomProps: false,
+  fields: [
+    {
+      name: 'header',
+      props: {}
+    },
+    { name: 'mediumheader' },
+    { name: 'smallheader' },
+    { name: 'label' }
+  ]
+}
+
 export const FormPlanner = ({
-  controls,
+  config,
   onFormValueChanged,
   fieldDefinitions,
-  theme = 'dark'
+  theme,
+  ...rest
 }) => {
   const [finalControls, setFinalControls] = useState([])
   const [controlListData, setControlListData] = useState({ fields: [] })
@@ -66,17 +74,33 @@ export const FormPlanner = ({
   const [previewOpened, setPreviewOpened] = useState(false)
   const [editorOpened, setEditorOpened] = useState(false)
   const [formPropertiesOpened, setFormPropertiesOpened] = useState(false)
-  const [formTemplates, setFormTemplates] = useState([])
+  const [loading, setLoading] = useState(true)
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(0)
-
-  const [bottomNavigationValue, setBottomNavigationValue] = React.useState(0)
-
-  // const [dragState, setDragState] = useState({ quotes: initial });
+  const [localConfig, setLocalConfig] = React.useState({})
 
   useEffect(() => {
-    setFinalControls(getControls(controls))
-  }, [controls])
+    setFinalControls(
+      getControls(getMergedArray(DefaultConfig.fields, config.fields))
+    )
+    const lConfig = Object.assign(DefaultConfig, config)
+    setLocalConfig(lConfig)
+    setLoading(false)
+  }, [config])
+
+  const getMergedArray = (a1, a2) => {
+    const res = a1
+    a2.forEach((a2c) => {
+      if (
+        res.filter((r) => {
+          return r.name === a2c.name
+        }).length === 0
+      ) {
+        res.push(a2c)
+      }
+    })
+    return res
+  }
 
   // Event Handlers
   const onAdd = (value) => {
@@ -93,20 +117,12 @@ export const FormPlanner = ({
       tmpControlListData.fields.push([selectedTemplate])
       updateList(tmpControlListData)
       setSelectedControlIndex(tmpControlListData.fields.length - 1)
-      setEditorOpened(true)
+      // setEditorOpened(true)
     }
-  }
-
-  const onRemove = (index, e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    const tmpControlListData = controlListData.fields.splice(index, 1)
-    updateList(tmpControlListData)
   }
 
   const onFormValueValueChanged = (templates) => {
     const res = JSON.parse(JSON.stringify(templates))
-    setFormTemplates(res)
     if (onFormValueChanged) {
       onFormValueChanged(res)
     }
@@ -132,8 +148,7 @@ export const FormPlanner = ({
         updateList(controlListData.fields)
         break
       case 'cl':
-        const newcontrol = controlListData.fields[index]
-        controlListData.fields.push(newcontrol)
+        controlListData.fields.push(controlListData.fields[index])
         updateList(controlListData)
         break
       default: //DO nothing
@@ -173,88 +188,108 @@ export const FormPlanner = ({
     }
   }
 
-  // Rendering
   return (
-    <ThemeProvider theme={theme == 'dark' ? dark : ''}>
+    <ThemeProvider theme={theme || chalk}>
       <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
-        <Grid item xs={4} md={3} lg={2} style={{ overflow: 'hidden' }}>
-          <FPSideBar elevation={1} className='flex-1'>
-            <div className='fp-side-bar'>
-              <div className='fp-side-bar-body'>
-                {Object.keys(finalControls).map((fc, fci) => {
-                  return (
-                    <FPAccordion
-                      key={fci}
-                      expanded={expanded === fci}
-                      onChange={() => handleExpansionChange(fci)}
-                    >
-                      <FPAccordionSummary
-                        expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
-                        aria-controls='panel1a-content'
-                        id='panel1a-header'
-                      >
-                        {fc}
-                      </FPAccordionSummary>
-                      <FPAccordionDetails>
-                        <List
-                          component='nav'
-                          aria-label='toolbox-body'
-                          className={classes.list}
-                          style={{ width: '100%' }}
+        {loading ? null : (
+          <React.Fragment>
+            <Grid item xs={4} md={3} lg={2} style={{ overflow: 'hidden' }}>
+              <FPSideBar elevation={1} className='flex-1'>
+                <div className='fp-side-bar'>
+                  <div className='fp-side-bar-body'>
+                    {Object.keys(finalControls).map((fc, fci) => {
+                      return (
+                        <FPAccordion
+                          key={fci}
+                          expanded={expanded === fci}
+                          onChange={() => handleExpansionChange(fci)}
                         >
-                          {finalControls[fc].map((con, conti) => {
-                            return (
-                              <React.Fragment key={conti}>
-                                <FPListItem
-                                  dense
-                                  button
-                                  onClick={() => onAdd(con)}
-                                >
-                                  <FPListIcon>
-                                    <FontAwesomeIcon icon={con.icon} />
-                                  </FPListIcon>
-                                  <FPListItemText primary={`${con.display}`} />
-                                </FPListItem>
-                                <Divider />
-                              </React.Fragment>
-                            )
-                          })}
-                        </List>
-                      </FPAccordionDetails>
-                    </FPAccordion>
-                  )
-                })}
-              </div>
-              <div className='fp-side-bar-footer'>
-                <FPDividerField />
-                <FPBottomNavigation showLabels>
-                  <FPBottomNavigationAction
-                    label='Form Properties'
-                    icon={<FontAwesomeIcon icon={faEdit} />}
-                    onClick={() => setFormPropertiesOpened(true)}
-                  />
-                  <FPBottomNavigationAction
-                    label='Preview'
-                    icon={<FontAwesomeIcon icon={faStickyNote} />}
-                    onClick={() => onPreviewClicked()}
-                  />
-                </FPBottomNavigation>
-              </div>
-            </div>
-          </FPSideBar>
-        </Grid>
-        <Grid item xs={8} md={9} lg={10}>
-          <FPPlanner elevation={1}>
-            <FormViewer
-              onChange={(a, b, c) => {
-                console.log('Value received')
-              }}
-              template={controlListData}
-              editable={true}
-              onButtonClick={onActionButtonClicked}
-            />
-          </FPPlanner>
-        </Grid>
+                          <FPAccordionSummary
+                            expandIcon={
+                              <FontAwesomeIcon icon={faChevronDown} />
+                            }
+                            aria-controls='panel1a-content'
+                            id='panel1a-header'
+                          >
+                            {fc}
+                          </FPAccordionSummary>
+                          <FPAccordionDetails>
+                            <List
+                              component='nav'
+                              aria-label='toolbox-body'
+                              className={classes.list}
+                              style={{ width: '100%' }}
+                            >
+                              {finalControls[fc].map((con, conti) => {
+                                return (
+                                  <React.Fragment key={conti}>
+                                    <FPListItem
+                                      dense
+                                      button
+                                      onClick={() => onAdd(con)}
+                                    >
+                                      <FPListIcon>
+                                        <FontAwesomeIcon icon={con.icon} />
+                                      </FPListIcon>
+                                      <FPListItemText
+                                        primary={`${con.display}`}
+                                      />
+                                    </FPListItem>
+                                    <Divider />
+                                  </React.Fragment>
+                                )
+                              })}
+                            </List>
+                          </FPAccordionDetails>
+                        </FPAccordion>
+                      )
+                    })}
+                  </div>
+                  <React.Fragment>
+                    {localConfig.showPreview ||
+                    localConfig.showFormProperties ? (
+                      <div className='fp-side-bar-footer'>
+                        <FPDividerField />
+                        <FPBottomNavigation showLabels>
+                          <Fragment>
+                            {localConfig.showFormProperties ? (
+                              <FPBottomNavigationAction
+                                label='Form Properties'
+                                icon={<FontAwesomeIcon icon={faEdit} />}
+                                onClick={() => setFormPropertiesOpened(true)}
+                              />
+                            ) : null}
+                          </Fragment>
+                          <Fragment>
+                            {localConfig.showPreview ? (
+                              <FPBottomNavigationAction
+                                label='Preview'
+                                icon={<FontAwesomeIcon icon={faStickyNote} />}
+                                onClick={() => onPreviewClicked()}
+                              />
+                            ) : null}
+                          </Fragment>
+                        </FPBottomNavigation>
+                      </div>
+                    ) : null}
+                  </React.Fragment>
+                </div>
+              </FPSideBar>
+            </Grid>
+            <Grid item xs={8} md={9} lg={10}>
+              <FPPlanner elevation={1}>
+                <FormViewer
+                  onChange={(a, b, c) => {
+                    console.log('Value received')
+                  }}
+                  template={controlListData}
+                  editable={true}
+                  onButtonClick={onActionButtonClicked}
+                />
+              </FPPlanner>
+            </Grid>
+          </React.Fragment>
+        )}
       </FPPlannerWrapper>
 
       <FPEModal

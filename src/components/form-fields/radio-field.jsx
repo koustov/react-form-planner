@@ -1,12 +1,15 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+
 import {
-  FVFormLabel,
-  FVRadioGroup,
+  FVFormControl,
   FVFormControlLabel,
+  FVFormLabel,
+  FVHeaderField,
   FVRadio,
-  FVFormControl
+  FVRadioGroup
 } from '../styled'
+import { Fragment, useEffect, useState } from 'react'
+
 export const FVFormRadioField = (
   {
     field,
@@ -34,32 +37,59 @@ export const FVFormRadioField = (
   }
   return (
     <div>
-      <FVFormControl component='fieldset'>
-        {field.label ? (
-          <FVFormLabel component='legend'>{field.label}</FVFormLabel>
-        ) : null}
+      {field.variant === 'open' ? (
+        <div>
+          <FVHeaderField>{field.label}</FVHeaderField>
+          <FVRadioGroup
+            aria-label={field.datafield}
+            name={field.datafield}
+            value={localValue}
+            onChange={onValChange}
+            multiline={field.multiline}
+            style={{ paddingLeft: '2rem' }}
+          >
+            {field.options.map((d, di) => {
+              return (
+                <div key={di}>
+                  <FVFormControlLabel
+                    key={di}
+                    value={d.value}
+                    control={<FVRadio {...rest} />}
+                    label={d.label}
+                  />
+                </div>
+              )
+            })}
+          </FVRadioGroup>
+        </div>
+      ) : (
+        <FVFormControl component='fieldset'>
+          {field.label ? (
+            <FVFormLabel component='legend'>{field.label}</FVFormLabel>
+          ) : null}
 
-        <FVRadioGroup
-          aria-label={field.datafield}
-          name={field.datafield}
-          value={localValue}
-          onChange={onValChange}
-          multiline={field.multiline}
-        >
-          {field.options.map((d, di) => {
-            return (
-              <div>
-                <FVFormControlLabel
-                  key={di}
-                  value={d.value}
-                  control={<FVRadio {...rest} />}
-                  label={d.label}
-                />
-              </div>
-            )
-          })}
-        </FVRadioGroup>
-      </FVFormControl>
+          <FVRadioGroup
+            aria-label={field.datafield}
+            name={field.datafield}
+            value={localValue}
+            onChange={onValChange}
+            multiline={field.multiline}
+          >
+            {field.options.map((d, di) => {
+              return (
+                <div key={di}>
+                  <FVFormControlLabel
+                    key={di}
+                    value={d.value}
+                    control={<FVRadio {...rest} />}
+                    label={d.label}
+                  />
+                </div>
+              )
+            })}
+          </FVRadioGroup>
+        </FVFormControl>
+      )}
     </div>
   )
 }
