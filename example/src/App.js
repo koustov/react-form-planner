@@ -6,7 +6,7 @@ import { dark } from './themes/dark'
 
 const App = () => {
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider>
       <FormPlanner
         config={{
           showPreview: true,
