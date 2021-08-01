@@ -1,6 +1,6 @@
 {
   "name": "react-form-planner",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A form builder/planner for react",
   "author": "koustov",
   "license": "MIT",
@@ -88,5 +88,16 @@
   "directories": {
     "doc": "docs",
     "example": "example"
-  }
+  },
+  "keywords": [
+    "redux-form",
+    "form-viewer",
+    "react-form-viewer",
+    "form-builder",
+    "react-form-builder",
+    "form-viewer",
+    "react",
+    "react-redux",
+    "json-to-form"
+  ]
 }

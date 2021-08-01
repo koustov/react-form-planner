@@ -35,7 +35,7 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import { PropertyEditor } from './components/properties/property-editor'
 import { ThemeProvider } from 'styled-components'
-import { dark } from './themes/dark'
+import { chalk } from './themes/chalk'
 import { makeStyles } from '@material-ui/core/styles'
 import { v4 as uuidv4 } from 'uuid'
 
