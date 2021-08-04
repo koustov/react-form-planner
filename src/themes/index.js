@@ -1,6 +1,2 @@
-import { dark } from './dark';
-import { chalk } from './chalk';
-export const Themes = {
-  dark,
-  chalk
-}
+export * from './dark';
+export * from  './chalk';

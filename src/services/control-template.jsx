@@ -1,10 +1,11 @@
 import { getFinalField } from '../components/properties/fields'
+import { v4 as uuidv4 } from 'uuid'
 
 const allDataFields = []
 const BaseEditorFiled = {
   col: 12,
   value: '',
-  group: 'Default',
+  group: 'General',
   datafield: ''
 }
 const EditorFieldMap = {
@@ -29,13 +30,19 @@ const EditorFieldMap = {
     name: 'select',
     label: 'Select',
     type: 'select',
-    group: 'Default'
+    group: 'General'
   },
   radio: {
     name: 'alignment',
     label: 'Alignment',
     type: 'radio',
-    group: 'Default'
+    group: 'General'
+  },
+  color: {
+    name: 'color',
+    label: 'Background Color',
+    type: 'color',
+    group: 'Colors'
   },
   text: {
     name: 'title',
@@ -100,7 +107,7 @@ const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
 
 const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
   label: 'Custom Properties',
-
+  asobject: true,
   datafield: 'props',
   is_custom: true,
   group: 'Props'
@@ -142,16 +149,29 @@ const getEditorFields = (type, customdefinition) => {
         [getEditorField('text', 'placeholder', 'Placeholder')],
         [getEditorField('text', 'validation', 'Validation Regex')],
         [getEditorField('checkbox', 'required', 'Required')],
-        [customStyles],
-        [customProps]
+        [
+          getEditorField('color', 'style', 'Text Color', {
+            internalDatafield: 'color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Border Color', {
+            internalDatafield: 'border-color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Background Color', {
+            internalDatafield: 'background-color',
+            isappend: true,
+            asobject: true
+          })
+        ]
       ]
       break
     case 'richeditor':
       res = [
         getEditorField('text', 'label'),
-        getEditorField('checkbox', 'required'),
-        customStyles,
-        customProps
+        getEditorField('checkbox', 'required')
       ]
       break
     case 'select':
@@ -162,22 +182,33 @@ const getEditorFields = (type, customdefinition) => {
         [
           getEditorField('grid', 'options', 'Options', {
             columns: [
-              { field: 'label', headerName: 'Display' },
+              { field: 'name', headerName: 'Display' },
               { field: 'value', headerName: 'Value' }
             ],
             group: 'Options'
           })
         ],
-        [customStyles],
-        [customProps]
+        [
+          getEditorField('color', 'style', 'Text Color', {
+            internalDatafield: 'color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Border Color', {
+            internalDatafield: 'border-color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Background Color', {
+            internalDatafield: 'background-color',
+            isappend: true,
+            asobject: true
+          })
+        ]
       ]
       break
     case 'checkbox':
-      res = [
-        [getEditorField('text', 'label', 'Label', { required: true })],
-        [customStyles],
-        [customProps]
-      ]
+      res = [[getEditorField('text', 'label', 'Label', { required: true })]]
       break
 
     case 'radio':
@@ -191,9 +222,7 @@ const getEditorFields = (type, customdefinition) => {
             ],
             group: 'Options'
           })
-        ],
-        [customStyles],
-        [customProps]
+        ]
       ]
       break
     case 'header':
@@ -222,8 +251,23 @@ const getEditorFields = (type, customdefinition) => {
             asobject: true
           })
         ],
-        [customStyles],
-        [customProps]
+        [
+          getEditorField('color', 'style', 'Text Color', {
+            internalDatafield: 'color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Border Color', {
+            internalDatafield: 'borderColor',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Background Color', {
+            internalDatafield: 'backgroundColor',
+            isappend: true,
+            asobject: true
+          })
+        ]
       ]
       break
     case 'label':
@@ -251,26 +295,65 @@ const getEditorFields = (type, customdefinition) => {
             asobject: true
           })
         ],
-        [customStyles],
-        [customProps]
+        [
+          getEditorField('color', 'style', 'Text Color', {
+            internalDatafield: 'color',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Border Color', {
+            internalDatafield: 'borderColor',
+            isappend: true,
+            asobject: true
+          }),
+          getEditorField('color', 'style', 'Background Color', {
+            internalDatafield: 'backgroundColor',
+            isappend: true,
+            asobject: true
+          })
+        ]
       ]
       break
     case 'divider':
       res = [getEditorField('customstyle')]
       break
+    case 'imageupload':
+      res = [
+        [
+          getEditorField('text', 'datafield', 'Data Field', {
+            datafield: uuidv4()
+          })
+        ],
+        [getEditorField('checkbox', 'multiple', 'Allow Multiple imaes')]
+      ]
+      break
+    case 'color':
+      res = [
+        [getEditorField('text', 'label', 'Label Field')],
+        [
+          getEditorField('text', 'datafield', 'Data Field', {
+            datafield: uuidv4()
+          })
+        ]
+      ]
+      break
     case 'image':
       res = [
         [getEditorField('fileupload', 'value', 'Image')],
-        [customStyles],
-        [customProps]
+        [
+          getEditorField('number', 'style', 'height', {
+            asobject: true
+          })
+        ],
+        [
+          getEditorField('number', 'style', 'width', {
+            asobject: true
+          })
+        ]
       ]
       break
     case 'video':
-      res = [
-        [getEditorField('text', 'value', 'URL')],
-        [customStyles],
-        [customProps]
-      ]
+      res = [[getEditorField('text', 'value', 'URL')]]
       break
     // case 'pdf': res = [
     //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
@@ -281,12 +364,23 @@ const getEditorFields = (type, customdefinition) => {
     case 'question':
       res = [
         [getEditorField('text', 'label', 'Question')],
-        [getEditorField('fileupload', 'image', 'Upload Image')],
+        [getEditorField('imageupload', 'image', 'Need an image?')],
         [
-          getEditorField('text', 'imageHeight', 'Image Height', {
-            subtype: 'number'
+          getEditorField('grid', 'options', 'Options', {
+            aslist: true,
+            columns: [
+              { field: 'name', headerName: 'Answer Option' },
+              { field: 'value', hide: true }
+            ],
+            group: 'Options'
           })
         ],
+        [
+          getEditorField('select', 'correctanswer', 'Correct Answer', {
+            options: '[DATAFIELD]=options',
+            group: 'Options'
+          })
+        ]
 
         // [getEditorField('texnumber', 'imageHeight', 'Image Height')],
         // [
@@ -297,9 +391,7 @@ const getEditorFields = (type, customdefinition) => {
         //     ],
         //     aslist: true
         //   })
-        // ],
-        [customStyles],
-        [customProps]
+        // ]
       ]
       break
     default:
@@ -413,7 +505,13 @@ const AllControlsTemplates = [
     label: ''
   },
   {
-    type: 'fileupload',
+    type: 'imageupload',
+    datafield: 'image',
+    label: ''
+  },
+  {
+    type: 'color',
+    datafield: 'color',
     label: ''
   },
   {
@@ -435,7 +533,9 @@ const AllControlsTemplates = [
 
 export const getControlTemplate = (
   requestedControl,
-  customFieldDefinitions
+  customFieldDefinitions,
+  allowCustomProps,
+  allowCustomStyles
 ) => {
   if (requestedControl && requestedControl.type != '') {
     const foundEntry = AllControlsTemplates.filter((ac) => {
@@ -445,6 +545,12 @@ export const getControlTemplate = (
       let fld = Object.assign({}, foundEntry[0])
       // foundEntry.forEach((fld) => {
       fld.editableFields = getEditorFields(fld.type, customFieldDefinitions)
+      if (allowCustomProps) {
+        fld.editableFields.push([customProps])
+      }
+      if (allowCustomStyles) {
+        fld.editableFields.push([customStyles])
+      }
       fld = Object.assign(fld, requestedControl)
       fld.template = (definition, data, onChange) => {
         return getFinalField(

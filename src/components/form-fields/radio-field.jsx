@@ -14,6 +14,7 @@ export const FVFormRadioField = (
   {
     field,
     value,
+    editable,
     onValueChanged,
     required,
     meta: { asyncValidating, touched, error }
@@ -44,7 +45,11 @@ export const FVFormRadioField = (
             aria-label={field.datafield}
             name={field.datafield}
             value={localValue}
-            onChange={onValChange}
+            onChange={(e) => {
+              if (!editable) {
+                onValChange(e)
+              }
+            }}
             multiline={field.multiline}
             style={{ paddingLeft: '2rem' }}
           >
@@ -72,7 +77,11 @@ export const FVFormRadioField = (
             aria-label={field.datafield}
             name={field.datafield}
             value={localValue}
-            onChange={onValChange}
+            onChange={(e) => {
+              if (!editable) {
+                onValChange(e)
+              }
+            }}
             multiline={field.multiline}
           >
             {field.options.map((d, di) => {

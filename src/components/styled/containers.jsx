@@ -39,6 +39,10 @@ export const FPTabPanel = styled.div`
 
 export const FPTabs = styled(Tabs)`
   display: flex;
+  color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  .MuiTab-textColorPrimary {
+    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  }
 `
 
 export const FPTab = styled(Tab)`
@@ -187,12 +191,16 @@ export const FPFiedlSet = styled.fieldset`
   border-color: ${(props) => props.theme.rfp.colors.border};
   height: 100%;
   > legend {
-    padding: 1rem;
+    padding: 0rem 1rem;
     color: ${(props) => props.theme.rfp.colors.primaryButton};
     span {
       margin-left: 0.5rem;
     }
   }
+`
+
+export const FPInputFiedlSet = styled(FPFiedlSet)`
+  border-color: ${(props) => props.theme.rfp.colors.input.border};
 `
 
 export const FPDividerField = styled.hr`
@@ -322,12 +330,14 @@ export const FPControlEditBox = styled.div`
 `
 
 export const FPNoContentAvailable = styled.div`
-  height: 80px;
-  background: #efefef;
+  height: 300px;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px dotted #787878;
+  border: 1px dotted ${(props) => props.theme.rfp.colors.border};
+  border-radius: 4px;
+  width: 100%;
   > div {
     margin-right: 8px;
     color: #787878;
@@ -626,7 +636,7 @@ export const FVNoContentAvailable = styled.div`
   }
 `
 
-export const FVFormBannerDefault = styled(FPPaper)`
+export const FVFormBannerDefault = styled.div`
   height: 60px;
   display: flex;
   justify-content: flex-start;
@@ -634,6 +644,12 @@ export const FVFormBannerDefault = styled(FPPaper)`
   padding: 1rem;
   background-repeat: no-repeat;
   background-size: cover;
+  background: ${(props) =>
+    props.bg
+      ? props.bg
+      : props.theme.rfp.colors[
+          props.elevation ? `background${props.elevation}` : `background1`
+        ]} !important;
 `
 
 export const FVFormBanner = styled(FVFormBannerDefault)`
@@ -641,7 +657,7 @@ export const FVFormBanner = styled(FVFormBannerDefault)`
 `
 
 export const FVBannerImage = styled(FVFormBanner)`
-  background-image: url(${(props) => props.background});
+  background-image: url(${(props) => props.background}) !important;
 `
 
 export const FVImageContainer = styled.div`

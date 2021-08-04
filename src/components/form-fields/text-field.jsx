@@ -6,6 +6,7 @@ export const FVFormTextField = (
   {
     field,
     value,
+    editable,
     inputvalue,
     onValueChanged,
     required,
@@ -21,8 +22,10 @@ export const FVFormTextField = (
         label={`${field.label}`}
         value={inputvalue}
         onChange={(e) => {
-          if (onValueChanged) {
-            onValueChanged(field.datafield, e.target.value, field)
+          if (!editable) {
+            if (onValueChanged) {
+              onValueChanged(field.datafield, e.target.value, field)
+            }
           }
         }}
         type={field.subtype || 'text'}
@@ -42,12 +45,4 @@ export const FVFormTextField = (
       {touched && error && <span>{error}</span>}
     </div>
   )
-  //   <div>
-  //     <label>{label}</label>
-  //     <div>
-  //       <input {...input} placeholder={label} type={type} />
-  //       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  //     </div>
-  //   </div>
-  // )
 }

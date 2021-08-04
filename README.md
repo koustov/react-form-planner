@@ -16,15 +16,10 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/koustov/react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/react-form-planner?logo=github&label=Stars)
 
 This is a **fully customizable** form builder based on [`React`](https://facebook.github.io/react/)
-**Content**
 
-- [Features](##features)
-- [When do you need it?](##when_do_you_need_it?)
-- [How to use](##Howtouse?)
-- [Playground/Demo](##playground)
-- [Screenshots](##screenshots)
-- [Contribution](##contribution)
-- [License](##license)
+**Table of Contents**
+
+[TOC]
 
 ## Features ✨
 
@@ -38,7 +33,7 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 - Full validation support
 - Custom theme
 
-## When do you need it? 🔥
+## When do you need it?
 
 - You have complex form to be created?
 - Forms are dynamic in nature?
@@ -67,7 +62,7 @@ or
 yarn add react-form-planner
 ```
 
-## Highlight
+## Highlight 🔥
 
 This project contains an advanced Form Builder and a Form Viewer.
 
@@ -105,25 +100,29 @@ Just drop it to desired place
 
 FormPlanner comes with tons of prebuilt elements which are already grouped for convenience. Few of them are visible by default. Rest can be turned on when required
 
-| Group         | Element       | Availability |
-| ------------- | ------------- | ------------ |
-| Basic         | Header        | Default      |
-|               | Medium Header | Default      |
-|               | Small Header  | Default      |
-|               | Label         | Default      |
-| Form Control  | Text Box      | On Demand    |
-|               | Number Box    | On Demand    |
-|               | Multiline Box | On Demand    |
-|               | Checkbox      | On Demand    |
-|               | Radio         | On Demand    |
-|               | Select        | On Demand    |
-| Media         | Image         | On Demand    |
-|               | Video         | On Demand    |
-|               | PDF           | On Demand    |
-| Quiz          | Question      | On Demand    |
-| Advanced      | Grid          | On Demand    |
-|               | Rich Text     | On Demand    |
-| Miscellaneous | Divider       | On Demand    |
+| Group         | Element               | Internal Name | Availability |
+| ------------- | --------------------- | ------------- | ------------ |
+| Basic         | Header                | header        | Default      |
+|               | Medium Header         | mediumheader  | Default      |
+|               | Small Header          | smallheader   | Default      |
+|               | Label                 | label         | Default      |
+| Form Control  | Text Box              | text          | On Demand    |
+|               | Number Box            | number        | On Demand    |
+|               | Multiline Box         | multiline     | On Demand    |
+|               | Checkbox              | checkbox      | On Demand    |
+|               | Radio                 | radio         | On Demand    |
+|               | Select                | select        | On Demand    |
+|               | Color Picker          | color         | On Demand    |
+| Media         | Image                 | image         | On Demand    |
+|               | Video                 | video         | On Demand    |
+|               | PDF                   | pdf           | On Demand    |
+| Quiz          | Question              | question      | On Demand    |
+| Advanced      | Grid                  | grid          | On Demand    |
+|               | Rich Text             | richtext      | On Demand    |
+|               | Multi Values          | multivalue    | On Demand    |
+| Uploads       | Image Upload          | imageupload   | On Demand    |
+|               | Multiple Image Upload | imagesupload  | On Demand    |
+| Miscellaneous | Divider               | divider       | On Demand    |
 
 ### Form Viewer
 
@@ -145,11 +144,11 @@ Just drop it to desired place
 
 ```jsx
 <FormViewer
-                  onChange={(a, b, c) => {
-                    console.log('Value received')
-                  }}
-                  template={<template_data>}
-                />
+  onChange={(a, b, c) => {
+    console.log('Value received')
+  }}
+  template={<template_data>}
+/>
 ```
 
 ## Playground

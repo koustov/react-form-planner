@@ -1,32 +1,43 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { FVFormControlLabel, FVCheckbox } from '../styled';
+import * as React from 'react'
+import { useState, useEffect } from 'react'
+import { FVFormControlLabel, FVCheckbox } from '../styled'
 
-export const FVFormCheckboxField = ({ field, value, onValueChanged, required, meta: { asyncValidating, touched, error } }, ...rest) => {
-
-  useEffect(() => {
-
-  }, [touched, error])
+export const FVFormCheckboxField = (
+  {
+    field,
+    value,
+    editable,
+    onValueChanged,
+    required,
+    meta: { asyncValidating, touched, error }
+  },
+  ...rest
+) => {
+  useEffect(() => {}, [touched, error])
   return (
-    <div><FVFormControlLabel control={
-      <FVCheckbox
-        checked={value}
-        onChange={(e) => {
-          if (onValueChanged) {
-            onValueChanged(field.datafield, e.target.checked, field)
-          }
-        }}
-        name="checkedB"
-        color="primary"
-        error={touched && error}
-        variant="outlined"
-        {...field.props}
-        {...rest}
-      />
-    }
-      label={`${field.label}`}></FVFormControlLabel>
+    <div>
+      <FVFormControlLabel
+        control={
+          <FVCheckbox
+            checked={value}
+            onChange={(e) => {
+              if (onValueChanged) {
+                if (!editable) {
+                  onValueChanged(field.datafield, e.target.checked, field)
+                }
+              }
+            }}
+            name='checkedB'
+            color='primary'
+            error={touched && error}
+            variant='outlined'
+            {...field.props}
+            {...rest}
+          />
+        }
+        label={`${field.label}`}
+      ></FVFormControlLabel>
     </div>
-
   )
   //   <div>
   //     <label>{label}</label>
