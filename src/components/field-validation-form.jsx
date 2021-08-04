@@ -15,7 +15,9 @@ import {
   FVFormSelectField,
   FVFormTextAreaField,
   FVFormTextField,
-  FVQuestionField
+  FVQuestionField,
+  FVImageloadField,
+  FVFormColorField
 } from './form-fields'
 import { Field, reduxForm } from 'redux-form'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -82,6 +84,10 @@ const renderSwitch = (type) => {
       return FVQuestionField
     case 'fileupload':
       return FVFileUploadField
+    case 'imageupload':
+      return FVImageloadField
+    case 'color':
+      return FVFormColorField
     default:
       return 'foo'
   }
@@ -107,30 +113,30 @@ const asyncValidate = (values, dis, props) => {
   })
 }
 
-const FieldLevelValidationForm = (props) => {
+const FieldLevelValidationForm = ({ data, fields, onChange, ...props }) => {
   const { handleSubmit, pristine, reset, submitting } = props
   const [controlsState, setControlsSet] = useState({})
-  const [fields, setFields] = useState([])
+  const [localFields, setLocalFields] = useState([])
   const classes = useStyles()
 
   useEffect(() => {
     const res = {}
-    setFields(JSON.parse(JSON.stringify(props.fields)))
-    props.fields.forEach((fldRow) => {
+    setLocalFields(JSON.parse(JSON.stringify(fields)))
+    fields.forEach((fldRow) => {
       fldRow.forEach((fld) => {
-        if (fld.datafield && props.data[fld.datafield]) {
-          res[fld.datafield] = props.data[fld.datafield]
+        if (fld.datafield && data[fld.datafield]) {
+          res[fld.datafield] = data[fld.datafield]
         }
       })
     })
     setControlsSet(res)
-  }, [props.fields])
+  }, [fields, data])
 
   const onValueChanged = (key, value, field) => {
     controlsState[key] = value
     setControlsSet({ ...controlsState })
-    if (props.onChange) {
-      props.onChange(key, value, field)
+    if (onChange) {
+      onChange(key, value, field)
     }
   }
   const getValidations = (field) => {
@@ -158,7 +164,7 @@ const FieldLevelValidationForm = (props) => {
       <div style={{ flex: 1 }}>
         <Grid container spacing={1}>
           <React.Fragment>
-            {fields.map((fldrow, fldrowi) => {
+            {localFields.map((fldrow, fldrowi) => {
               return (
                 <React.Fragment key={fldrowi}>
                   {fldrow.map((fld, fldi) => {
@@ -184,9 +190,11 @@ const FieldLevelValidationForm = (props) => {
                                   fld.validations && fld.validations.required
                                 }
                                 inputvalue={controlsState[fld.datafield]}
+                                allvalue={controlsState}
                                 onValueChanged={(key, value, field) =>
                                   onValueChanged(key, value, field)
                                 }
+                                editable={props.editable}
                                 input={{
                                   value: controlsState[fld.datafield]
                                 }}
@@ -266,7 +274,9 @@ const FieldLevelValidationForm = (props) => {
                                     onClick={(e) =>
                                       onActionButtonClick('md', fldrowi, e)
                                     }
-                                    disabled={fldrowi === fields.length - 1}
+                                    disabled={
+                                      fldrowi === localFields.length - 1
+                                    }
                                   >
                                     <FontAwesomeIcon icon={faChevronDown} />
                                     <span>Move Down</span>

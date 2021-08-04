@@ -7,7 +7,12 @@ import { Button } from '@material-ui/core'
 import { FVFileUpload } from '../styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const FVFileUploadField = ({ field, filefilter, onValueChanged }) => {
+export const FVFileUploadField = ({
+  field,
+  editable,
+  filefilter,
+  onValueChanged
+}) => {
   const handleUpload = (e) => {
     e.preventDefault()
 
@@ -47,7 +52,7 @@ export const FVFileUploadField = ({ field, filefilter, onValueChanged }) => {
           <input
             type='file'
             id='modal-image-file'
-            accept='.jpg,.jpeg,.png'
+            accept={field.accept || '.jpg,.jpeg,.png'}
             className='file'
             onChange={handleUpload}
           />
@@ -61,7 +66,11 @@ export const FVFileUploadField = ({ field, filefilter, onValueChanged }) => {
             <div>
               <Button
                 color='primary'
-                onClick={() => onImageClear()}
+                onClick={() => {
+                  if (!editable) {
+                    onImageClear()
+                  }
+                }}
                 className='action-button'
               >
                 <FontAwesomeIcon icon={faTrashAlt} />

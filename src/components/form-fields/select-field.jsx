@@ -1,70 +1,112 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { FVSelect, FVMenuItem, FVTextField } from '../styled'
+import {
+  FVSelect,
+  FVMenuItem,
+  FVTextField,
+  FPSelect,
+  FPInputFiedlSet
+} from '../styled'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { Fields } from 'redux-form'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import FormControl from '@material-ui/core/FormControl'
+import { Fragment } from 'react'
 
 export const FVFormSelectField = (
   {
     input,
     field,
+    editable,
     value,
     onValueChanged,
+    inputvalue,
+    allvalue,
     required,
     meta: { touched, error, warning }
   },
   ...rest
 ) => {
-  const [localValue, setLocalvalue] = useState(value)
+  const [localValue, setLocalvalue] = useState('')
   useEffect(() => {
     if (field) {
-      if (value) {
-        const selectedOptions = field.options.filter((o) => {
-          return o.value === value
+      if (inputvalue) {
+        const selectedOptions = getOptions().filter((o) => {
+          return o.returnvalue === inputvalue
         })
         if (selectedOptions.length) {
           setLocalvalue(selectedOptions[0].value)
           return
+        } else {
+          const ops = getOptions()
+          const selectedOptionsValue = ops.filter((o) => {
+            return o.value === inputvalue
+          })
+          if (selectedOptionsValue.length) {
+            setLocalvalue('')
+            setLocalvalue(selectedOptionsValue[0].value)
+            return
+          }
         }
       }
-      setLocalvalue(field.options[0].value)
+      setLocalvalue(getOptions()[0].value)
     }
   }, [value])
 
-  const onValChange = (e, newval) => {
-    setLocalvalue(newval.value)
+  const getOptions = () => {
+    if (field.options) {
+      if (Array.isArray(field.options)) {
+        return field.options
+      }
+
+      if (field.options.indexOf('[DATAFIELD]') > -1) {
+        const df = field.options.split('=')[1]
+        return allvalue[df]
+      }
+    }
+  }
+
+  const onValChange = (newval) => {
+    const val = newval.target.value
+    setLocalvalue(val)
     if (onValueChanged) {
-      if (newval.returnvalue) {
-        onValueChanged(field.datafield, newval.returnvalue, field)
+      const retValue = getOptions().filter((o) => {
+        return o.value === val
+      })
+      if (retValue[0].returnvalue) {
+        onValueChanged(field.datafield, retValue[0].returnvalue, field)
       } else {
-        onValueChanged(field.datafield, newval, field)
+        onValueChanged(field.datafield, retValue[0].value, field)
       }
     }
   }
   return (
-    <Autocomplete
-      id={`autocomplete-field-${field.datafield}`}
-      options={field.options}
-      getOptionLabel={(option) => option.label}
-      getOptionValue={(option) => option.value}
-      onChange={onValChange}
-      style={{ width: '100%' }}
-      renderInput={(params) => (
-        <FVTextField
-          {...params}
-          label={field.label}
-          variant='outlined'
-          size='small'
-        />
-      )}
-    />
+    <FPInputFiedlSet>
+      <legend>{field.label}</legend>
+      <FPSelect
+        labelId={`select-field-${field.datafield}`}
+        id={`select-field-${field.datafield}`}
+        size='small'
+        fullWidth
+        value={localValue}
+        onChange={(e, nv) => {
+          if (!editable) {
+            onValChange(e)
+          }
+        }}
+        label='Age'
+      >
+        {getOptions().map((o, oi) => {
+          return (
+            <MenuItem name={o.name} value={o.value} key={oi}>
+              {o.name}
+            </MenuItem>
+          )
+        })}
+      </FPSelect>
+    </FPInputFiedlSet>
   )
-  //   <div>
-  //     <label>{label}</label>
-  //     <div>
-  //       <input {...input} placeholder={label} type={type} />
-  //       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
-  //     </div>
-  //   </div>
-  // )
 }

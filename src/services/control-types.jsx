@@ -13,7 +13,9 @@ import {
   faTextHeight,
   faTextWidth,
   faTh,
-  faVideo
+  faUpload,
+  faVideo,
+  faPallet
 } from '@fortawesome/free-solid-svg-icons'
 import { faCheckSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
 
@@ -124,6 +126,15 @@ const AllControls = [
     multiline: true
   },
   {
+    type: 'color',
+    icon: faPallet,
+    name: 'color',
+    display: 'Color Picker',
+    label: 'Color Picker',
+    group: 'Form Control',
+    bordered: true
+  },
+  {
     type: 'divider',
     icon: faGripLines,
     name: 'divider',
@@ -137,7 +148,7 @@ const AllControls = [
     name: 'image',
     display: 'Image',
     group: 'Media',
-    style: { height: '100px', width: '100px' },
+    style: { height: '300px', width: '300px' },
     default: true
   },
   {
@@ -156,6 +167,26 @@ const AllControls = [
     style: { justifyContent: 'center' }
   },
   {
+    type: 'imageupload',
+    icon: faUpload,
+    multiple: false,
+    name: 'imageupload',
+    display: 'Image Upload',
+    group: 'Uploads',
+    accept: '.jpg,.jpeg,.png',
+    bordered: true
+  },
+  {
+    type: 'imageupload',
+    icon: faUpload,
+    multiple: true,
+    name: 'imagesupload',
+    display: 'Multiple Image Upload',
+    group: 'Uploads',
+    accept: '.jpg,.jpeg,.png',
+    bordered: true
+  },
+  {
     type: 'question',
     icon: faQuestionCircle,
     name: 'question',
@@ -164,12 +195,12 @@ const AllControls = [
     label: 'This is an example of question?',
     options: [
       {
-        label: 'Sample answer options',
-        value: 'xx'
+        name: 'Sample answer options',
+        value: 'afba8147-3aef-4426-8384-4e969c70c77d'
       },
       {
-        label: 'Sample answer options 2',
-        value: 'xx'
+        name: 'Sample answer options 2',
+        value: 'cfe76801-0ecf-4f8b-9b32-46cdbc0db875'
       }
     ],
     group: 'Quiz'

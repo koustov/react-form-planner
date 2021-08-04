@@ -21,6 +21,7 @@ export const FPDataGridView = (
   {
     field,
     value,
+    editable,
     inputvalue,
     onValueChanged,
     required,
@@ -51,38 +52,51 @@ export const FPDataGridView = (
   }
 
   useEffect(() => {
-    if (input && input.value) {
+    let gcolumns = []
+    if (field.columns && field.columns.length) {
+      setGridColumns(field.columns)
+      gcolumns = field.columns
+    } else {
+      gcolumns = [
+        { field: 'name', headerName: 'Property Name' },
+        { field: 'value', headerName: 'Value' }
+      ]
+      setGridColumns(gcolumns)
+    }
+    if (inputvalue) {
       if (!field.asobject) {
-        setGridRows(input.value)
+        // const r = []
+        // if (typeof inputvalue === 'object') {
+        //   Object.keys(inputvalue).forEach((k) => {
+        //     r.push({
+        //       [gcolumns[0].field]: k,
+        //       [gcolumns[0].value]: inputvalue[k]
+        //     })
+        //   })
+        //   setGridRows(r)
+        // } else {
+        setGridRows(inputvalue)
+        // }
       } else {
         const res = []
-        Object.keys(input.value).forEach((k) => {
+        Object.keys(inputvalue).forEach((k) => {
           res.push({
-            name: k,
-            value: input.value[k]
+            name: input.value[k].name,
+            value: input.value[k].value
           })
         })
         setGridRows(res)
       }
-    }
-
-    if (field.columns && field.columns.length) {
-      setGridColumns(field.columns)
-    } else {
-      setGridColumns([
-        { field: 'name', headerName: 'Property Name' },
-        { field: 'value', headerName: 'Value' }
-      ])
     }
     setLoading(false)
   }, [field])
 
   const onAdd = () => {
     const newRow = {
-      name: field.aslist ? uuidv4() : ''
+      value: field.aslist ? uuidv4() : ''
     }
     gridColumns.forEach((gc) => {
-      newRow[gc['field']] = ''
+      newRow[gc['field']] = newRow[gc['field']] || ''
     })
     gridRows.push(newRow)
     setGridRows(gridRows.concat([]))
@@ -92,10 +106,11 @@ export const FPDataGridView = (
     gridRows.splice(index, 1)
     setGridRows(JSON.parse(JSON.stringify(gridRows)))
   }
-
   return (
-    <Fragement>
-      {loading ? null : (
+    <div>
+      {loading ? (
+        <div></div>
+      ) : (
         <FPFieldSet bordered>
           <legend>{field.label}</legend>
           <React.Fragment>
@@ -108,7 +123,11 @@ export const FPDataGridView = (
                         size='small'
                         color='secondary'
                         aria-label='save'
-                        onClick={() => onRemove(gri)}
+                        onClick={() => {
+                          if (!editable) {
+                            onRemove(gri)
+                          }
+                        }}
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </Button>
@@ -117,27 +136,29 @@ export const FPDataGridView = (
                   <React.Fragment>
                     {gridColumns.map((gc, gci) => {
                       return (
-                        <Fragement key={gci}>
-                          {!field.aslist || gci > 0 ? (
+                        <div key={gci} style={{ flex: gc.hide ? 0 : 1 }}>
+                          {!gc.hide ? (
                             <FPGridCell key={gci}>
                               <FPTextField
                                 size='small'
                                 value={gridRows[gri][gc['field']]}
                                 label={`${gc['headerName']}`}
                                 placeholder={`update ${gc['field']}`}
-                                onChange={(e) =>
-                                  onValueUpdate(
-                                    gri,
-                                    gc['field'],
-                                    e.target.value
-                                  )
-                                }
+                                onChange={(e) => {
+                                  if (!editable) {
+                                    onValueUpdate(
+                                      gri,
+                                      gc['field'],
+                                      e.target.value
+                                    )
+                                  }
+                                }}
                               />
                             </FPGridCell>
                           ) : (
-                            <Fragement />
+                            <span style={{ flex: 0 }}></span>
                           )}
-                        </Fragement>
+                        </div>
                       )
                     })}
                   </React.Fragment>
@@ -152,7 +173,11 @@ export const FPDataGridView = (
                   variant='contained'
                   color='primary'
                   anchor='bottom'
-                  onClick={() => onAdd()}
+                  onClick={() => {
+                    if (!editable) {
+                      onAdd()
+                    }
+                  }}
                 >
                   <FontAwesomeIcon icon={faPlus} />
                   <span>Add</span>
@@ -162,6 +187,7 @@ export const FPDataGridView = (
           </FPGridRow>
         </FPFieldSet>
       )}
-    </Fragement>
+    </div>
   )
+  return <Fragement></Fragement>
 }

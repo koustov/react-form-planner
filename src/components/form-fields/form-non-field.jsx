@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragement } from 'react'
 import {
   FVTextField,
   FVFormRow,
+  FPNoContentAvailable,
   FPDividerField,
   FVImageContainer,
   FVHeaderField,
@@ -10,6 +11,8 @@ import {
 } from '../styled'
 import { Field } from 'redux-form'
 import { FVVideoField } from './video-field'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
 
 export const FVFormNonField = (props) => {
   const renderSwitch = () => {
@@ -17,10 +20,19 @@ export const FVFormNonField = (props) => {
       case 'image':
         return (
           <FVImageContainer {...props.field.props}>
-            <img
-              src={props.field.value}
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
-            />
+            {props.field.value && props.field.value.length ? (
+              <img
+                src={props.field.value}
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
+              />
+            ) : (
+              <FPNoContentAvailable>
+                <div>
+                  <FontAwesomeIcon icon={faImage} />
+                </div>
+                <div>NO IMAGE SELECTED</div>
+              </FPNoContentAvailable>
+            )}
           </FVImageContainer>
         )
       case 'divider':
@@ -43,11 +55,22 @@ export const FVFormNonField = (props) => {
         )
       case 'video':
         return (
-          <FVVideoField
-            field={props.field}
-            {...props}
-            style={JSON.parse(JSON.stringify(props.field.style || {}))}
-          ></FVVideoField>
+          <Fragement>
+            {props.field.value && props.field.value.length ? (
+              <FVVideoField
+                field={props.field}
+                {...props}
+                style={JSON.parse(JSON.stringify(props.field.style || {}))}
+              ></FVVideoField>
+            ) : (
+              <FPNoContentAvailable>
+                <div>
+                  <FontAwesomeIcon icon={faVideo} />
+                </div>
+                <div>NO VIDEO SELECTED</div>
+              </FPNoContentAvailable>
+            )}
+          </Fragement>
         )
       default:
         return 'foo'

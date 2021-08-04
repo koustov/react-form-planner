@@ -24,10 +24,17 @@ import TextField from '@material-ui/core/TextField'
 
 export const FPBottomNavigation = styled(BottomNavigation)`
   background: transparent;
+  display: flex;
+  > div {
+    flex: 1;
+    display: flex;
+  }
 `
 
 export const FPBottomNavigationAction = styled(BottomNavigationAction)`
   background: transparent;
+  flex: 1;
+  display: flex;
   .MuiBottomNavigationAction-label {
     opacity: 1 !important;
   }
@@ -118,22 +125,22 @@ export const FPTextField = styled(TextField)`
 export const FPSelect = styled(Select)`
   margin: 8px;
   .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) => theme.rfp.colors.input.border} !important;
   }
 
   .MuiInput-underline:before {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) => theme.rfp.colors.input.border} !important;
   }
 
   .MuiInputLabel-animated {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) => theme.rfp.colors.input.border} !important;
   }
   .MuiInputBase-input {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) => theme.rfp.colors.input.placeholder} !important;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) => theme.rfp.colors.input.placeholder} !important;
   }
 `
 
@@ -335,6 +342,40 @@ export const FVTextField = styled(TextField)`
 
   .MuiInputLabel-outlined {
     color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  }
+`
+
+export const FVColorField = styled(TextField)`
+  width: 200px !important;
+  padding: 0px !important;
+  height: 40px !important;
+  label {
+    display: none !important;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .MuiInput-underline:before {
+    border-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .MuiInputLabel-animated {
+    color: transparent !important;
+  }
+  .MuiInputBase-input {
+    color: transparent !important;
+  }
+
+  .MuiInputLabel-outlined {
+    color: transparent !important;
+  }
+  input {
+    padding: 0px !important;
+    height: 40px !important;
+    width: 150px !important;
   }
 `
 
@@ -560,5 +601,119 @@ export const FVFileUpload = styled.fieldset`
   input:focus + label {
     outline: 1px solid #000;
     outline: -webkit-focus-ring-color auto 2px;
+  }
+`
+
+export const FVImageUpload = styled.fieldset`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ theme }) => theme.rfp.colors.input.border} !important;
+  border-radius: 4px;
+  legend {
+    padding: 0px 4px;
+    margin-left: 5px;
+    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  }
+  .image-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 100px;
+    border: 1px solid ${({ theme }) => theme.rfp.colors.input.border} !important;
+    border-radius: 4px;
+    margin: 1rem;
+    button {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      min-height: unset;
+    }
+    .image-container {
+      flex: 1;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .footer {
+      height: 30px;
+      display: flex;
+      background: ${({ theme }) => theme.rfp.colors.background3} !important;
+
+      div {
+        flex: 1;
+        text-align: center;
+        color: ${({ theme }) => theme.rfp.colors.listPrimary} !important;
+      }
+    }
+  }
+  .upload-file {
+    display: block;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100px;
+    height: 100px;
+    color: white;
+
+    padding: 8px;
+    .action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      div {
+        flex: 1;
+      }
+      .action-button {
+        width: 100px;
+        height: 100px;
+        border: 1px solid ${({ theme }) => theme.rfp.colors.input.border} !important;
+        border-radius: 4px;
+        font-size: 15px;
+        display: block;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease-out;
+      }
+    }
+
+    .file {
+      opacity: 0;
+      width: 0.1px;
+      height: 0.1px;
+      position: absolute;
+    }
+    .file-input {
+      height: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .file-name {
+      position: absolute;
+      bottom: -35px;
+      left: 10px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    input:hover + label,
+    input:focus + label {
+      transform: scale(1.02);
+    }
+
+    /* Adding an outline to the label on focus */
+    input:focus + label {
+      outline: 1px solid #000;
+      outline: -webkit-focus-ring-color auto 2px;
+    }
   }
 `

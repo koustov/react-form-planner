@@ -14,6 +14,7 @@ export const FVQuestionField = (
   {
     field,
     value,
+    editable,
     onValueChanged,
     required,
     meta: { asyncValidating, touched, error }
@@ -52,7 +53,11 @@ export const FVQuestionField = (
           aria-label={field.datafield}
           name={field.datafield}
           value={localValue}
-          onChange={onValChange}
+          onChange={(e) => {
+            if (!editable) {
+              onValChange(e)
+            }
+          }}
           multiline={field.multiline}
           style={{ paddingLeft: '2rem' }}
         >
@@ -63,7 +68,7 @@ export const FVQuestionField = (
                   key={di}
                   value={d.value}
                   control={<FVRadio {...rest} />}
-                  label={d.label}
+                  label={d.name}
                 />
               </div>
             )

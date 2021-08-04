@@ -35,7 +35,7 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import { PropertyEditor } from './components/properties/property-editor'
 import { ThemeProvider } from 'styled-components'
-import { chalk } from './themes/chalk'
+import * as Themes from './themes'
 import { makeStyles } from '@material-ui/core/styles'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 const DefaultConfig = {
   showFormProperties: false,
   showPreview: true,
-  allowCustomStyles: true,
+  allowCustomStyles: false,
   allowCustomProps: false,
   fields: [
     {
@@ -64,8 +64,10 @@ const DefaultConfig = {
 export const FormPlanner = ({
   config,
   onFormValueChanged,
+  fieldTemplate = {},
   fieldDefinitions,
-  theme,
+  baseTheme = 'dark',
+  themeOverride = {},
   ...rest
 }) => {
   const [finalControls, setFinalControls] = useState([])
@@ -78,6 +80,7 @@ export const FormPlanner = ({
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(0)
   const [localConfig, setLocalConfig] = React.useState({})
+  const [finalTheme, setFinalTheme] = React.useState({})
 
   useEffect(() => {
     setFinalControls(
@@ -85,6 +88,14 @@ export const FormPlanner = ({
     )
     const lConfig = Object.assign(DefaultConfig, config)
     setLocalConfig(lConfig)
+    const defaultTheme = Themes[baseTheme]
+    defaultTheme.rfp = Object.assign(defaultTheme.rfp, themeOverride)
+    setFinalTheme(defaultTheme)
+    const localTemplate = fieldTemplate
+    if (!localTemplate.fields) {
+      localTemplate.fields = []
+    }
+    setControlListData(localTemplate)
     setLoading(false)
   }, [config])
 
@@ -105,7 +116,12 @@ export const FormPlanner = ({
   // Event Handlers
   const onAdd = (value) => {
     const selectedTemplate = Object.assign(
-      getControlTemplate(value, fieldDefinitions),
+      getControlTemplate(
+        value,
+        fieldDefinitions,
+        localConfig.allowCustomProps,
+        localConfig.allowCustomStyles
+      ),
       {}
     )
 
@@ -189,9 +205,9 @@ export const FormPlanner = ({
   }
 
   return (
-    <ThemeProvider theme={theme || chalk}>
-      <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
-        {loading ? null : (
+    <ThemeProvider theme={finalTheme}>
+      {loading ? null : (
+        <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
           <React.Fragment>
             <Grid item xs={4} md={3} lg={2} style={{ overflow: 'hidden' }}>
               <FPSideBar elevation={1} className='flex-1'>
@@ -251,7 +267,7 @@ export const FormPlanner = ({
                       <div className='fp-side-bar-footer'>
                         <FPDividerField />
                         <FPBottomNavigation showLabels>
-                          <Fragment>
+                          <div>
                             {localConfig.showFormProperties ? (
                               <FPBottomNavigationAction
                                 label='Form Properties'
@@ -259,8 +275,8 @@ export const FormPlanner = ({
                                 onClick={() => setFormPropertiesOpened(true)}
                               />
                             ) : null}
-                          </Fragment>
-                          <Fragment>
+                          </div>
+                          <div>
                             {localConfig.showPreview ? (
                               <FPBottomNavigationAction
                                 label='Preview'
@@ -268,7 +284,7 @@ export const FormPlanner = ({
                                 onClick={() => onPreviewClicked()}
                               />
                             ) : null}
-                          </Fragment>
+                          </div>
                         </FPBottomNavigation>
                       </div>
                     ) : null}
@@ -288,79 +304,77 @@ export const FormPlanner = ({
                 />
               </FPPlanner>
             </Grid>
-          </React.Fragment>
-        )}
-      </FPPlannerWrapper>
-
-      <FPEModal
-        aria-labelledby='preview-form'
-        aria-describedby='transition-form'
-        open={previewOpened}
-        onClose={() => {
-          setPreviewOpened(false)
-        }}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <FPModalLarge>
-          <FormViewer
-            theme='dark'
-            template={controlListData}
-            onButtonClick={onActionButtonClicked}
-          />
-        </FPModalLarge>
-      </FPEModal>
-      <FPEModal
-        aria-labelledby='editor-form'
-        aria-describedby='transition-form'
-        open={editorOpened}
-        onClose={() => {
-          setEditorOpened(false)
-        }}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <FPModalLarge>
-          <PropertyEditor
-            controls={controlListData.fields}
-            index={selectedControlIndex}
-            onChange={onControlPropertyUpdated}
+          </React.Fragment>{' '}
+          <FPEModal
+            aria-labelledby='preview-form'
+            aria-describedby='transition-form'
+            open={previewOpened}
+            onClose={() => {
+              setPreviewOpened(false)
+            }}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <FPModalLarge>
+              <FormViewer
+                theme='dark'
+                template={controlListData}
+                onButtonClick={onActionButtonClicked}
+              />
+            </FPModalLarge>
+          </FPEModal>
+          <FPEModal
+            aria-labelledby='editor-form'
+            aria-describedby='transition-form'
+            open={editorOpened}
             onClose={() => {
               setEditorOpened(false)
             }}
-          />
-        </FPModalLarge>
-      </FPEModal>
-
-      <FPEModal
-        aria-labelledby='editor-form'
-        aria-describedby='transition-form'
-        open={formPropertiesOpened}
-        onClose={() => {
-          setFormPropertiesOpened(false)
-        }}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <FPModalLarge>
-          <FormProperties
-            data={controlListData}
-            onChange={onFormPropertyUpdated}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <FPModalLarge>
+              <PropertyEditor
+                controls={controlListData.fields}
+                index={selectedControlIndex}
+                onChange={onControlPropertyUpdated}
+                onClose={() => {
+                  setEditorOpened(false)
+                }}
+              />
+            </FPModalLarge>
+          </FPEModal>
+          <FPEModal
+            aria-labelledby='editor-form'
+            aria-describedby='transition-form'
+            open={formPropertiesOpened}
             onClose={() => {
               setFormPropertiesOpened(false)
             }}
-          />
-        </FPModalLarge>
-      </FPEModal>
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500
+            }}
+          >
+            <FPModalLarge>
+              <FormProperties
+                data={controlListData}
+                onChange={onFormPropertyUpdated}
+                onClose={() => {
+                  setFormPropertiesOpened(false)
+                }}
+              />
+            </FPModalLarge>
+          </FPEModal>
+        </FPPlannerWrapper>
+      )}
     </ThemeProvider>
   )
 }
