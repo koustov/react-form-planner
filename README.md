@@ -124,6 +124,22 @@ FormPlanner comes with tons of prebuilt elements which are already grouped for c
 |               | Multiple Image Upload | imagesupload  | On Demand    |
 | Miscellaneous | Divider               | divider       | On Demand    |
 
+### Form Properties
+
+Allows to add/update form meta information like
+
+- Title
+- Description
+- Header background image
+- Header background color
+- Background image
+- Background color
+  ![image info](./docs/images/fp.PNG)
+
+### Preview your form
+
+Preview your form while editing
+
 ### Form Viewer
 
 This is a full fledged form viewer.
@@ -157,7 +173,20 @@ Getting built
 
 ## Screenshots
 
-Coming Soon
+Form Planner example
+![image info](./docs/images/ff.PNG)
+
+Edit element on hover
+![image info](./docs/images/edit.PNG)
+
+Edit element
+![image info](./docs/images/editelement.PNG)
+
+Prebuilt Customization
+![image info](./docs/images/custom1.PNG)
+
+Or add your own custmization
+![image info](./docs/images/custom2.PNG)
 
 ## Items in queue
 
@@ -165,8 +194,10 @@ Coming Soon
 
 ## Contribution 🍰
 
-Feel free to create PR and make pull request
+Feel free to create issue and make pull request
+
 Refer [code of conduct ](./CODE_OF_CONDUCT.md)
+
 Refer [contributing ](./CONTRIBUTING.md)
 
 ## License

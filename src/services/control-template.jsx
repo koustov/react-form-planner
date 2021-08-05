@@ -238,17 +238,17 @@ const getEditorFields = (type, customdefinition) => {
           getEditorField('select', 'style', 'Alignment', {
             options: [
               {
-                label: 'Left',
+                name: 'Left',
                 value: 1,
                 returnvalue: { 'justify-content': 'flex-start' }
               },
               {
-                label: 'Middle',
+                name: 'Middle',
                 value: 2,
                 returnvalue: { 'justify-content': 'center' }
               },
               {
-                label: 'Right',
+                name: 'Right',
                 value: 3,
                 returnvalue: { 'justify-content': 'flex-end' }
               }
