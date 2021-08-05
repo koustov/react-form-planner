@@ -15,9 +15,10 @@ import {
   faTh,
   faUpload,
   faVideo,
-  faPallet
+  faPallet,
+  faCheckSquare,
+  faCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { faCheckSquare, faCircle } from '@fortawesome/free-regular-svg-icons'
 
 const AllControls = [
   {

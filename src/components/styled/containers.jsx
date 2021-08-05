@@ -201,6 +201,9 @@ export const FPFiedlSet = styled.fieldset`
 
 export const FPInputFiedlSet = styled(FPFiedlSet)`
   border-color: ${(props) => props.theme.rfp.colors.input.border};
+  > legend {
+    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  }
 `
 
 export const FPDividerField = styled.hr`
