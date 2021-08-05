@@ -55,22 +55,11 @@ export const FVFormNonField = (props) => {
         )
       case 'video':
         return (
-          <Fragement>
-            {props.field.value && props.field.value.length ? (
-              <FVVideoField
-                field={props.field}
-                {...props}
-                style={JSON.parse(JSON.stringify(props.field.style || {}))}
-              ></FVVideoField>
-            ) : (
-              <FPNoContentAvailable>
-                <div>
-                  <FontAwesomeIcon icon={faVideo} />
-                </div>
-                <div>NO VIDEO SELECTED</div>
-              </FPNoContentAvailable>
-            )}
-          </Fragement>
+          <FVVideoField
+            field={props.field}
+            {...props}
+            style={JSON.parse(JSON.stringify(props.field.style || {}))}
+          ></FVVideoField>
         )
       default:
         return 'foo'

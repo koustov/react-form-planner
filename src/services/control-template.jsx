@@ -44,6 +44,12 @@ const EditorFieldMap = {
     type: 'color',
     group: 'Colors'
   },
+  imageupload: {
+    name: 'imageupload',
+    label: 'Image Upload',
+    type: 'imageupload',
+    group: 'Default'
+  },
   text: {
     name: 'title',
     label: 'Label',
@@ -232,17 +238,17 @@ const getEditorFields = (type, customdefinition) => {
           getEditorField('select', 'style', 'Alignment', {
             options: [
               {
-                label: 'Left',
+                name: 'Left',
                 value: 1,
                 returnvalue: { 'justify-content': 'flex-start' }
               },
               {
-                label: 'Middle',
+                name: 'Middle',
                 value: 2,
                 returnvalue: { 'justify-content': 'center' }
               },
               {
-                label: 'Right',
+                name: 'Right',
                 value: 3,
                 returnvalue: { 'justify-content': 'flex-end' }
               }
@@ -339,7 +345,7 @@ const getEditorFields = (type, customdefinition) => {
       break
     case 'image':
       res = [
-        [getEditorField('fileupload', 'value', 'Image')],
+        [getEditorField('imageupload', 'value', 'Image')],
         [
           getEditorField('number', 'style', 'height', {
             asobject: true
@@ -353,7 +359,31 @@ const getEditorFields = (type, customdefinition) => {
       ]
       break
     case 'video':
-      res = [[getEditorField('text', 'value', 'URL')]]
+      res = [
+        [getEditorField('text', 'value', 'URL')],
+        [
+          getEditorField('select', 'style', 'Alignment', {
+            options: [
+              {
+                name: 'Left',
+                value: 1,
+                returnvalue: { 'justify-content': 'flex-start' }
+              },
+              {
+                name: 'Middle',
+                value: 2,
+                returnvalue: { 'justify-content': 'center' }
+              },
+              {
+                name: 'Right',
+                value: 3,
+                returnvalue: { 'justify-content': 'flex-end' }
+              }
+            ],
+            asobject: true
+          })
+        ]
+      ]
       break
     // case 'pdf': res = [
     //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
@@ -363,8 +393,8 @@ const getEditorFields = (type, customdefinition) => {
     // break
     case 'question':
       res = [
-        [getEditorField('text', 'label', 'Question')],
-        [getEditorField('imageupload', 'image', 'Need an image?')],
+        [getEditorField('text', 'label', 'Question', { required: true })],
+        [getEditorField('imageupload', 'image', 'Upload image [optional]')],
         [
           getEditorField('grid', 'options', 'Options', {
             aslist: true,

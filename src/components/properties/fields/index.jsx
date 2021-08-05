@@ -15,7 +15,6 @@ import { faFilePdf, faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
 
 import FPRadioControl from './FPRadio'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ReactPlayer from 'react-player'
 
 // import FPPdfViewer from "./FPPdfViewer";
 
@@ -201,22 +200,6 @@ export const getFinalField = (
                 <FontAwesomeIcon icon={faImage} />
               </div>
               <div>NO IMAGE SELECTED</div>
-            </FPNoContentAvailable>
-          )}
-        </React.Fragment>
-      )
-      break
-    case 'video':
-      resComponent = (
-        <React.Fragment>
-          {value ? (
-            <ReactPlayer url={`${value}`} />
-          ) : (
-            <FPNoContentAvailable>
-              <div>
-                <FontAwesomeIcon icon={faVideo} />
-              </div>
-              <div>NO VIDEO SELECTED</div>
             </FPNoContentAvailable>
           )}
         </React.Fragment>

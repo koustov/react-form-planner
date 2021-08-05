@@ -1,5 +1,11 @@
 import React, { Suspense } from 'react'
 import { FPNoContentAvailable } from '../styled'
+import styled from 'styled-components'
+
+const FlexDiv = styled.div`
+  display: flex;
+  width: 100%;
+`
 
 const VideoPlayer = React.lazy(() => import('react-player'))
 export const FVVideoField = ({ field }, ...rest) => {
@@ -8,7 +14,9 @@ export const FVVideoField = ({ field }, ...rest) => {
       {VideoPlayer ? (
         <Suspense fallback={<div>Loading...</div>}>
           {field.value ? (
-            <VideoPlayer url={`${field.value}`} />
+            <FlexDiv style={JSON.parse(JSON.stringify(field.style || {}))}>
+              <VideoPlayer url={`${field.value}`} />
+            </FlexDiv>
           ) : (
             <FPNoContentAvailable>
               <div></div>
