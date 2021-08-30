@@ -44,7 +44,7 @@ export const FormViewer = ({
   const [loading, setLoading] = useState(true)
   const [finalData, setFinalData] = useState({})
   const [localTemplate, setLocalTemplate] = useState({})
-  const [finalTheme, setFianlTheme] = React.useState({})
+  const [finalTheme, setFinalTheme] = React.useState({})
 
   useEffect(() => {
     if (data) {
@@ -54,11 +54,8 @@ export const FormViewer = ({
       setLocalTemplate(JSON.parse(JSON.stringify(template)))
     }
     const defaultTheme = Themes[baseTheme]
-    defaultTheme.rfp.colors = Object.assign(
-      defaultTheme.rfp.colors,
-      themeOverride
-    )
-    setFianlTheme(defaultTheme)
+    defaultTheme.rfp = Object.assign(defaultTheme.rfp, themeOverride)
+    setFinalTheme(defaultTheme)
 
     setLoading(false)
   }, [data, template.fields])

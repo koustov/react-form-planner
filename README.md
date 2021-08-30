@@ -13,13 +13,29 @@
 
 ---
 
-![GitHub watchers](https://img.shields.io/github/watchers/koustov/react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/react-form-planner?logo=github&label=Stars)
+![GitHub watchers](https://img.shields.io/github/watchers/koustov/react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/react-form-planner?logo=github&label=Stars) ![GitHub watchers](https://img.shields.io/npm/dt/react-form-planner.svg?logo=npm&label=downloads)
 
 This is a **fully customizable** form builder based on [`React`](https://facebook.github.io/react/)
 
 **Table of Contents**
 
-[TOC]
+- [Features ✨](#features--)
+- [When do you need it?](#when-do-you-need-it-)
+- [Usage](#usage)
+  - [Install 🐙](#install---)
+- [Highlight 🔥](#highlight---)
+  - [Form Builder](#form-builder)
+  - [How to use](#how-to-use)
+  - [Supported Elements](#supported-elements)
+  - [Form Properties](#form-properties)
+  - [Preview your form](#preview-your-form)
+  - [Form Viewer](#form-viewer)
+  - [How to use](#how-to-use-1)
+- [Playground](#playground)
+- [Screenshots](#screenshots)
+- [Items in queue](#items-in-queue)
+- [Contribution 🍰](#contribution---)
+- [License](#license)
 
 ## Features ✨
 

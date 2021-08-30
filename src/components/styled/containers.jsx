@@ -8,7 +8,7 @@ const BoxSelected = css`
 
 export const FPPaper = styled(Paper)`
   background: ${(props) =>
-    props.theme.rfp.colors[
+    props.theme.colors[
       props.elevation ? `background${props.elevation}` : `background1`
     ]} !important;
   padding: 8px;
@@ -16,8 +16,8 @@ export const FPPaper = styled(Paper)`
 
 export const FPEditorPaper = styled(FPPaper)`
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   ) !important;
 `
 
@@ -39,9 +39,9 @@ export const FPTabPanel = styled.div`
 
 export const FPTabs = styled(Tabs)`
   display: flex;
-  color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+  color: ${({ theme }) => theme.colors.ternaryText} !important;
   .MuiTab-textColorPrimary {
-    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+    color: ${({ theme }) => theme.colors.ternaryText} !important;
   }
 `
 
@@ -53,14 +53,14 @@ export const FPTab = styled(Tab)`
 export const FPPlannerWrapper = styled(Grid)`
   height: 100%;
   padding: 4px;
-  background: ${(props) => props.theme.rfp.colors.background};
+  background: ${(props) => props.theme.colors.background};
 `
 
 export const FPSideBar = styled(FPPaper)`
   height: 100%;
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   );
   .fp-side-bar {
     height: 100%;
@@ -82,6 +82,9 @@ export const FPSideBar = styled(FPPaper)`
     }
     &-footer {
       width: 100%;
+      .MuiBottomNavigation-root {
+        background: transparent !important;
+      }
     }
   }
 `
@@ -90,8 +93,8 @@ export const FPPlanner = styled(FPPaper)`
   height: 100%;
   padding: 4px;
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   );
   > * {
     margin: 8px;
@@ -126,7 +129,7 @@ export const FPEModal = styled(Modal)`
   justify-content: center;
 `
 export const FPModalLarge = styled.div`
-  background: ${(props) => props.theme.rfp.colors.background1};
+  background: ${(props) => props.theme.colors.background1};
   height: 90vh;
   width: 90vw;
 `
@@ -159,12 +162,12 @@ export const SmallHeader = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  color: ${(props) => props.theme.rfp.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondaryText};
 `
 
 export const FPMediumHeader = styled(SmallHeader)`
   font-size: 16px;
-  color: ${(props) => props.theme.rfp.colors.primaryText};
+  color: ${(props) => props.theme.colors.primaryText};
 `
 
 export const FPHeaderBar = styled.div`
@@ -188,11 +191,11 @@ export const FPMediumHeaderBar = styled(FPHeaderBar)`
 export const FPFiedlSet = styled.fieldset`
   border: 1px solid transparent;
   border-radius: 4px;
-  border-color: ${(props) => props.theme.rfp.colors.border};
+  border-color: ${(props) => props.theme.colors.border};
   height: 100%;
   > legend {
     padding: 0rem 1rem;
-    color: ${(props) => props.theme.rfp.colors.primaryButton};
+    color: ${(props) => props.theme.colors.primaryButton};
     span {
       margin-left: 0.5rem;
     }
@@ -200,9 +203,9 @@ export const FPFiedlSet = styled.fieldset`
 `
 
 export const FPInputFiedlSet = styled(FPFiedlSet)`
-  border-color: ${(props) => props.theme.rfp.colors.input.border};
+  border-color: ${(props) => props.theme.colors.input.border};
   > legend {
-    color: ${({ theme }) => theme.rfp.colors.ternaryText} !important;
+    color: ${({ theme }) => theme.colors.ternaryText} !important;
   }
 `
 
@@ -211,7 +214,7 @@ export const FPDividerField = styled.hr`
   border: 0;
   border-top: solid 1px;
   text-align: center;
-  border-color: ${(props) => props.theme.rfp.colors.border};
+  border-color: ${(props) => props.theme.colors.border};
 `
 
 export const FPFormWrapper = styled.div`
@@ -240,7 +243,7 @@ export const FPFormRow = styled.div`
       border: 1px solid
         ${(props) =>
           props.editable && !props.bordered
-            ? props.theme.rfp.colors.primaryText
+            ? props.theme.colors.primaryText
             : 'transparent'};
     }
   }
@@ -329,7 +332,7 @@ export const FPControlEditBox = styled.div`
   border: 1px solid;
   display: flex;
   flex-direction: column;
-  border-color: ${(props) => props.theme.rfp.colors.border};
+  border-color: ${(props) => props.theme.colors.border};
 `
 
 export const FPNoContentAvailable = styled.div`
@@ -338,7 +341,7 @@ export const FPNoContentAvailable = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px dotted ${(props) => props.theme.rfp.colors.border};
+  border: 1px dotted ${(props) => props.theme.colors.border};
   border-radius: 4px;
   width: 100%;
   > div {
@@ -351,7 +354,7 @@ export const FPNoContentAvailable = styled.div`
 
 export const FVPaper = styled(Paper)`
   background: ${(props) =>
-    props.theme.rfp.colors[
+    props.theme.colors[
       props.elevation ? `background${props.elevation}` : `background1`
     ]} !important;
   padding: 8px;
@@ -359,8 +362,8 @@ export const FVPaper = styled(Paper)`
 
 export const FVEditorPaper = styled(FVPaper)`
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   ) !important;
 `
 
@@ -377,14 +380,14 @@ export const FVTabs = styled(Tabs)`
 export const FVPlannerWrapper = styled(Grid)`
   height: 100%;
   padding: 4px;
-  background: ${(props) => props.theme.rfp.colors.background};
+  background: ${(props) => props.theme.colors.background};
 `
 
 export const FVSideBar = styled(FVPaper)`
   height: 100%;
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   );
   .fp-side-bar {
     height: 100%;
@@ -414,8 +417,8 @@ export const FVPlanner = styled(FVPaper)`
   height: 100%;
   padding: 4px;
   background-image: linear-gradient(
-    ${(props) => props.theme.rfp.colors.card.start},
-    ${(props) => props.theme.rfp.colors.card.end}
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
   );
   > * {
     margin: 8px;
@@ -451,7 +454,7 @@ export const FVControlEditBox = styled.div`
   border: 1px solid;
   display: flex;
   flex-direction: column;
-  border-color: ${(props) => props.theme.rfp.colors.border};
+  border-color: ${(props) => props.theme.colors.border};
 `
 export const FVEModal = styled(Modal)`
   display: flex;
@@ -590,7 +593,7 @@ export const FVDividerField = styled.hr`
   border: 0;
   border-top: solid 3px;
   text-align: center;
-  border-color: ${(props) => props.theme.rfp.colors.border};
+  border-color: ${(props) => props.theme.colors.border};
 
   &:after {
     content: '\f0e7';
@@ -609,7 +612,7 @@ export const FVFormContainer = styled.div`
 export const FVFormWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.rfp.background};
+  background: ${(props) => props.theme.colors.background};
   background-image: url(${(props) => props.background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -650,7 +653,7 @@ export const FVFormBannerDefault = styled.div`
   background: ${(props) =>
     props.bg
       ? props.bg
-      : props.theme.rfp.colors[
+      : props.theme.colors[
           props.elevation ? `background${props.elevation}` : `background1`
         ]} !important;
 `
