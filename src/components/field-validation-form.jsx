@@ -67,6 +67,7 @@ const ValidationMap = {
       : undefined
 }
 const renderSwitch = (type) => {
+  console.error(type)
   switch (type) {
     case 'text':
       return FVFormTextField

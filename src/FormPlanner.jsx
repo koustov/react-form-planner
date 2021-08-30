@@ -20,8 +20,10 @@ import {
 } from './components/styled'
 import { Fragment, useEffect, useState } from 'react'
 import {
+  faAssistiveListeningSystems,
   faChevronDown,
   faEdit,
+  faLevelUpAlt,
   faStickyNote
 } from '@fortawesome/free-solid-svg-icons'
 import { getControlTemplate, getControls } from './services'
@@ -50,6 +52,7 @@ const DefaultConfig = {
   showPreview: true,
   allowCustomStyles: false,
   allowCustomProps: false,
+  showStylingProps: false,
   fields: [
     {
       name: 'header',
@@ -178,12 +181,18 @@ export const FormPlanner = ({
     controlListData.fields = control
     setControlListData(controlListData)
     setEditorOpened(false)
+    if (onFormValueChanged) {
+      onFormValueChanged(controlListData)
+    }
   }
 
   const onFormPropertyUpdated = (value) => {
     const newControlListData = Object.assign(controlListData, value)
     setControlListData(JSON.parse(JSON.stringify(newControlListData)))
     setFormPropertiesOpened(false)
+    if (onFormValueChanged) {
+      onFormValueChanged(newControlListData)
+    }
   }
 
   // Helper methods
@@ -292,7 +301,13 @@ export const FormPlanner = ({
                 </div>
               </FPSideBar>
             </Grid>
-            <Grid item xs={8} md={9} lg={10}>
+            <Grid
+              item
+              xs={8}
+              md={9}
+              lg={10}
+              style={{ height: '100%', overflow: 'auto' }}
+            >
               <FPPlanner elevation={1}>
                 <FormViewer
                   onChange={(a, b, c) => {
