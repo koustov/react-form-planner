@@ -11,6 +11,7 @@ import {
 } from '../styled'
 import { Field } from 'redux-form'
 import { FVVideoField } from './video-field'
+import { FVPDFViewer } from './pdf-field'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
 
@@ -60,6 +61,14 @@ export const FVFormNonField = (props) => {
             {...props}
             style={JSON.parse(JSON.stringify(props.field.style || {}))}
           ></FVVideoField>
+        )
+      case 'pdf':
+        return (
+          <FVPDFViewer
+            field={props.field}
+            {...props}
+            style={JSON.parse(JSON.stringify(props.field.style || {}))}
+          ></FVPDFViewer>
         )
       default:
         return 'foo'
