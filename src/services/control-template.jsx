@@ -385,12 +385,15 @@ const getEditorFields = (type, customdefinition) => {
         ]
       ]
       break
-    // case 'pdf': res = [
-    //   getEditorField("fileupload", "value", { filefilter: ['application/pdf'] }),
-    //   customStyles,
-    //   customProps
-    // ];
-    // break
+    case 'pdf':
+      res = [
+        [
+          getEditorField('fileupload', 'value', 'PD FFile', {
+            accept: ['application/pdf']
+          })
+        ]
+      ]
+      break
     case 'question':
       res = [
         [getEditorField('text', 'label', 'Question', { required: true })],

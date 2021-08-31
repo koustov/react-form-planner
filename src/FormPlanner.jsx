@@ -91,8 +91,8 @@ export const FormPlanner = ({
     )
     const lConfig = Object.assign(DefaultConfig, config)
     setLocalConfig(lConfig)
-    const defaultTheme = Themes[baseTheme]
-    defaultTheme.rfp = Object.assign(defaultTheme.rfp, themeOverride)
+    let defaultTheme = Themes[baseTheme]
+    defaultTheme = Object.assign(defaultTheme, themeOverride)
     setFinalTheme(defaultTheme)
     const localTemplate = fieldTemplate
     if (!localTemplate.fields) {

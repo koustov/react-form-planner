@@ -6,6 +6,7 @@ export * from './checkbox-field'
 
 export * from './form-non-field'
 export * from './video-field'
+export * from './pdf-field'
 export * from './grid-view'
 export * from './question-field'
 export * from './file-upload'
