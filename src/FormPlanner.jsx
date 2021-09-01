@@ -52,7 +52,7 @@ const DefaultConfig = {
   showPreview: true,
   allowCustomStyles: false,
   allowCustomProps: false,
-  showStylingProps: false,
+  advancedFeatures: false,
   fields: [
     {
       name: 'header',
@@ -119,12 +119,7 @@ export const FormPlanner = ({
   // Event Handlers
   const onAdd = (value) => {
     const selectedTemplate = Object.assign(
-      getControlTemplate(
-        value,
-        fieldDefinitions,
-        localConfig.allowCustomProps,
-        localConfig.allowCustomStyles
-      ),
+      getControlTemplate(value, fieldDefinitions, localConfig),
       {}
     )
 

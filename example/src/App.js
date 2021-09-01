@@ -47,7 +47,7 @@ const App = () => {
         config={{
           showPreview: true,
           showFormProperties: true,
-          showStylingProps: false,
+          advancedFeatures: false,
           fields: [
             { name: 'header' },
             { name: 'mediumheader' },
