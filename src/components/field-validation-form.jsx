@@ -170,142 +170,150 @@ const FieldLevelValidationForm = ({ data, fields, onChange, ...props }) => {
                 <React.Fragment key={fldrowi}>
                   {fldrow.map((fld, fldi) => {
                     return (
-                      <Grid
-                        item
-                        xs={12}
-                        md={12}
-                        lg={12 / fldrow.length}
-                        key={fldi}
-                      >
-                        <FPFormRow
-                          editable={props.editable}
-                          bordered={fld.bordered}
-                        >
-                          <div className='element-wrapper'>
-                            {fld.datafield ? (
-                              <Field
-                                name={fld.datafield}
-                                component={renderSwitch(fld.type)}
-                                field={fld}
-                                required={
-                                  fld.validations && fld.validations.required
-                                }
-                                inputvalue={controlsState[fld.datafield]}
-                                allvalue={controlsState}
-                                onValueChanged={(key, value, field) =>
-                                  onValueChanged(key, value, field)
-                                }
-                                editable={props.editable}
-                                input={{
-                                  value: controlsState[fld.datafield]
-                                }}
-                                {...props}
-                              />
-                            ) : (
-                              <FVFormNonField field={fld} />
-                            )}{' '}
-                          </div>
-                          <FPControlEdit
-                            className='control-edit-overlay'
-                            {...{
-                              selected: props.selectedControlIndex === fldrowi
-                            }}
-                            key={fldrowi}
+                      <div style={{ width: '100%' }}>
+                        {fld.visible !== false ? (
+                          <Grid
+                            item
+                            xs={12}
+                            md={12}
+                            lg={12 / fldrow.length}
+                            key={fldi}
                           >
-                            <div className='content-details action-button-wrapper fadeIn-bottom'>
-                              {props.editable ? (
-                                <Fragment>
-                                  <FPToolButton
-                                    variant='contained'
-                                    color='primary'
-                                    size='small'
-                                    aria-label='clone'
-                                    onMouseEnter={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
+                            <FPFormRow
+                              editable={props.editable}
+                              bordered={fld.bordered}
+                            >
+                              <div className='element-wrapper'>
+                                {fld.datafield ? (
+                                  <Field
+                                    name={fld.datafield}
+                                    component={renderSwitch(fld.type)}
+                                    field={fld}
+                                    required={
+                                      fld.validations &&
+                                      fld.validations.required
+                                    }
+                                    inputvalue={controlsState[fld.datafield]}
+                                    allvalue={controlsState}
+                                    onValueChanged={(key, value, field) =>
+                                      onValueChanged(key, value, field)
+                                    }
+                                    editable={props.editable}
+                                    input={{
+                                      value: controlsState[fld.datafield]
                                     }}
-                                    onClick={(e) =>
-                                      onActionButtonClick('ed', fldrowi, e)
-                                    }
-                                  >
-                                    <FontAwesomeIcon icon={faPenAlt} />
-                                    <span>Edit</span>
-                                  </FPToolButton>
-                                  <FPToolButton
-                                    variant='contained'
-                                    color='primary'
-                                    size='small'
-                                    aria-label='clone'
-                                    onMouseEnter={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
-                                    }}
-                                    onClick={(e) =>
-                                      onActionButtonClick('cl', fldrowi, e)
-                                    }
-                                  >
-                                    <FontAwesomeIcon icon={faClone} />
-                                    <span>Clone</span>
-                                  </FPToolButton>
-                                  <FPToolButton
-                                    variant='contained'
-                                    color='secondary'
-                                    size='small'
-                                    aria-label='delete'
-                                    onMouseEnter={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
-                                    }}
-                                    onClick={(e) =>
-                                      onActionButtonClick('rm', fldrowi, e)
-                                    }
-                                  >
-                                    <FontAwesomeIcon icon={faTrashAlt} />
-                                    <span>Remove</span>
-                                  </FPToolButton>
-                                  <FPToolButton
-                                    variant='contained'
-                                    color='default'
-                                    size='small'
-                                    aria-label='move up'
-                                    onMouseEnter={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
-                                    }}
-                                    onClick={(e) =>
-                                      onActionButtonClick('md', fldrowi, e)
-                                    }
-                                    disabled={
-                                      fldrowi === localFields.length - 1
-                                    }
-                                  >
-                                    <FontAwesomeIcon icon={faChevronDown} />
-                                    <span>Move Down</span>
-                                  </FPToolButton>
-                                  <FPToolButton
-                                    variant='contained'
-                                    color='default'
-                                    size='small'
-                                    aria-label='move down'
-                                    onMouseEnter={(e) => {
-                                      e.preventDefault()
-                                      e.stopPropagation()
-                                    }}
-                                    onClick={(e) =>
-                                      onActionButtonClick('mu', fldrowi, e)
-                                    }
-                                    disabled={fldrowi === 0}
-                                  >
-                                    <FontAwesomeIcon icon={faChevronUp} />
-                                    <span>Move Up</span>
-                                  </FPToolButton>
-                                </Fragment>
-                              ) : null}
-                            </div>
-                          </FPControlEdit>
-                        </FPFormRow>
-                        <Fragment></Fragment>
-                      </Grid>
+                                    {...props}
+                                  />
+                                ) : (
+                                  <FVFormNonField field={fld} />
+                                )}{' '}
+                              </div>
+                              <FPControlEdit
+                                className='control-edit-overlay'
+                                {...{
+                                  selected:
+                                    props.selectedControlIndex === fldrowi
+                                }}
+                                key={fldrowi}
+                              >
+                                <div className='content-details action-button-wrapper fadeIn-bottom'>
+                                  {props.editable ? (
+                                    <Fragment>
+                                      <FPToolButton
+                                        variant='contained'
+                                        color='primary'
+                                        size='small'
+                                        aria-label='clone'
+                                        onMouseEnter={(e) => {
+                                          e.preventDefault()
+                                          e.stopPropagation()
+                                        }}
+                                        onClick={(e) =>
+                                          onActionButtonClick('ed', fldrowi, e)
+                                        }
+                                      >
+                                        <FontAwesomeIcon icon={faPenAlt} />
+                                        <span>Edit</span>
+                                      </FPToolButton>
+                                      <FPToolButton
+                                        variant='contained'
+                                        color='primary'
+                                        size='small'
+                                        aria-label='clone'
+                                        onMouseEnter={(e) => {
+                                          e.preventDefault()
+                                          e.stopPropagation()
+                                        }}
+                                        onClick={(e) =>
+                                          onActionButtonClick('cl', fldrowi, e)
+                                        }
+                                      >
+                                        <FontAwesomeIcon icon={faClone} />
+                                        <span>Clone</span>
+                                      </FPToolButton>
+                                      <FPToolButton
+                                        variant='contained'
+                                        color='secondary'
+                                        size='small'
+                                        aria-label='delete'
+                                        onMouseEnter={(e) => {
+                                          e.preventDefault()
+                                          e.stopPropagation()
+                                        }}
+                                        onClick={(e) =>
+                                          onActionButtonClick('rm', fldrowi, e)
+                                        }
+                                      >
+                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                        <span>Remove</span>
+                                      </FPToolButton>
+                                      <FPToolButton
+                                        variant='contained'
+                                        color='default'
+                                        size='small'
+                                        aria-label='move up'
+                                        onMouseEnter={(e) => {
+                                          e.preventDefault()
+                                          e.stopPropagation()
+                                        }}
+                                        onClick={(e) =>
+                                          onActionButtonClick('md', fldrowi, e)
+                                        }
+                                        disabled={
+                                          fldrowi === localFields.length - 1
+                                        }
+                                      >
+                                        <FontAwesomeIcon icon={faChevronDown} />
+                                        <span>Move Down</span>
+                                      </FPToolButton>
+                                      <FPToolButton
+                                        variant='contained'
+                                        color='default'
+                                        size='small'
+                                        aria-label='move down'
+                                        onMouseEnter={(e) => {
+                                          e.preventDefault()
+                                          e.stopPropagation()
+                                        }}
+                                        onClick={(e) =>
+                                          onActionButtonClick('mu', fldrowi, e)
+                                        }
+                                        disabled={fldrowi === 0}
+                                      >
+                                        <FontAwesomeIcon icon={faChevronUp} />
+                                        <span>Move Up</span>
+                                      </FPToolButton>
+                                    </Fragment>
+                                  ) : null}
+                                </div>
+                              </FPControlEdit>
+                            </FPFormRow>
+                            <Fragment></Fragment>
+                          </Grid>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
                     )
                   })}
                 </React.Fragment>

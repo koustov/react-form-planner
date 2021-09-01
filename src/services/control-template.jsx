@@ -42,7 +42,8 @@ const EditorFieldMap = {
     name: 'color',
     label: 'Background Color',
     type: 'color',
-    group: 'Colors'
+    group: 'Colors',
+    advancedfeature: true
   },
   imageupload: {
     name: 'imageupload',
@@ -146,7 +147,7 @@ const getEditorField = (type, datafield, label, overritevalue) => {
   return res
 }
 
-const getEditorFields = (type, customdefinition) => {
+const getEditorFields = (type, customdefinition, config) => {
   let res = []
   switch (type) {
     case 'text':
@@ -261,6 +262,7 @@ const getEditorFields = (type, customdefinition) => {
           getEditorField('color', 'style', 'Text Color', {
             internalDatafield: 'color',
             isappend: true,
+            advancedfeature: true,
             asobject: true
           }),
           getEditorField('color', 'style', 'Border Color', {
@@ -298,6 +300,7 @@ const getEditorFields = (type, customdefinition) => {
                 returnvalue: { 'justify-content': 'flex-end' }
               }
             ],
+            advancedfeature: true,
             asobject: true
           })
         ],
@@ -437,6 +440,15 @@ const getEditorFields = (type, customdefinition) => {
       res.push(targetEditor)
     })
   }
+  if (config) {
+    res.forEach((row) => {
+      row.forEach((c) => {
+        if (c.advancedfeature && !config.advancedFeatures) {
+          c.visible = false
+        }
+      })
+    })
+  }
   return res
 }
 
@@ -567,8 +579,7 @@ const AllControlsTemplates = [
 export const getControlTemplate = (
   requestedControl,
   customFieldDefinitions,
-  allowCustomProps,
-  allowCustomStyles
+  config
 ) => {
   if (requestedControl && requestedControl.type != '') {
     const foundEntry = AllControlsTemplates.filter((ac) => {
@@ -577,11 +588,15 @@ export const getControlTemplate = (
     if (foundEntry && foundEntry.length && foundEntry.length === 1) {
       let fld = Object.assign({}, foundEntry[0])
       // foundEntry.forEach((fld) => {
-      fld.editableFields = getEditorFields(fld.type, customFieldDefinitions)
-      if (allowCustomProps) {
+      fld.editableFields = getEditorFields(
+        fld.type,
+        customFieldDefinitions,
+        config
+      )
+      if (config.allowCustomProps) {
         fld.editableFields.push([customProps])
       }
-      if (allowCustomStyles) {
+      if (config.allowCustomStyles) {
         fld.editableFields.push([customStyles])
       }
       fld = Object.assign(fld, requestedControl)
