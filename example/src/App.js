@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { FormPlanner, FormViewer } from 'react-form-planner'
+import { FormPlanner } from 'react-form-planner'
 import { ThemeProvider } from 'styled-components'
 import { chalk } from './themes/chalk'
 
@@ -8,6 +8,7 @@ const App = () => {
   const [template, setTemplate] = React.useState({});
   return (
     <ThemeProvider theme={chalk}>
+      <div style={{backgroundImage: `url(https://www.kolpaper.com/wp-content/uploads/2021/02/Blackboard-Wallpaper-3.jpg)`, height: '100vh'}}>
        {/* <FormViewer
                   onChange={(a, b, c) => {
                     console.log('Value received')
@@ -47,7 +48,7 @@ const App = () => {
         config={{
           showPreview: true,
           showFormProperties: true,
-          advancedFeatures: false,
+          showStylingProps: false,
           fields: [
             { name: 'header' },
             { name: 'mediumheader' },
@@ -78,6 +79,7 @@ const App = () => {
         }}
         fieldTemplate={template}
       />
+      </div>
       </ThemeProvider>
   )
 }

@@ -170,7 +170,7 @@ const FieldLevelValidationForm = ({ data, fields, onChange, ...props }) => {
                 <React.Fragment key={fldrowi}>
                   {fldrow.map((fld, fldi) => {
                     return (
-                      <div style={{ width: '100%' }}>
+                      <div style={{ width: '100%' }} key={{ fldi }}>
                         {fld.visible !== false ? (
                           <Grid
                             item

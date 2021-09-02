@@ -146,12 +146,18 @@ export const FormPlanner = ({
     let tmpCLD
     switch (type) {
       case 'mu':
-        tmpCLD = moveItem(index, index - 1, controlListData.fields)
-        updateList(tmpCLD)
+        const movedUpFields = moveItem(index, index - 1, controlListData.fields)
+        controlListData.fields = movedUpFields
+        updateList(controlListData)
         break
       case 'md':
-        tmpCLD = moveItem(index, index + 1, controlListData.fields)
-        updateList(tmpCLD)
+        const movedDownFields = moveItem(
+          index,
+          index + 1,
+          controlListData.fields
+        )
+        controlListData.fields = movedDownFields
+        updateList(controlListData)
         break
       case 'ed':
         setSelectedControlIndex(index)
@@ -159,7 +165,7 @@ export const FormPlanner = ({
         break
       case 'rm':
         controlListData.fields.splice(index, 1)
-        updateList(controlListData.fields)
+        updateList(controlListData)
         break
       case 'cl':
         controlListData.fields.push(controlListData.fields[index])
