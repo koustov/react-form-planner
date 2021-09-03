@@ -3,12 +3,26 @@ import * as React from 'react'
 import { FormPlanner } from 'react-form-planner'
 import { ThemeProvider } from 'styled-components'
 import { chalk } from './themes/chalk'
+import { glass } from './themes/glass'
 
 const App = () => {
   const [template, setTemplate] = React.useState({});
   return (
-    <ThemeProvider theme={chalk}>
-      <div style={{backgroundImage: `url(https://www.kolpaper.com/wp-content/uploads/2021/02/Blackboard-Wallpaper-3.jpg)`, height: '100vh'}}>
+    <ThemeProvider theme={glass}>
+      
+      <div style={{
+        backgroundImage: `url(https://4kwallpapers.com/images/wallpapers/macos-big-sur-apple-layers-fluidic-colorful-dark-wwdc-2020-5120x2880-1432.jpg)`, 
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        flex: '1', 
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'}}>
+          <div style={{height: '100px'}}>
+          <h1>
+            Reach Form Planner
+          </h1>
+          </div>
        {/* <FormViewer
                   onChange={(a, b, c) => {
                     console.log('Value received')
@@ -74,9 +88,7 @@ const App = () => {
           setTemplate(val)
         }}
         baseTheme={'dark'}
-        themeOverride= {{
-            background: 'transparent'
-        }}
+        themeOverride= {glass}
         fieldTemplate={template}
       />
       </div>
