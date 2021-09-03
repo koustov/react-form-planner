@@ -7,11 +7,14 @@ const BoxSelected = css`
 `
 
 export const FPPaper = styled(Paper)`
+  background: transparent;
+  min-height: 100%;
   background: ${(props) =>
     props.theme.colors[
       props.elevation ? `background${props.elevation}` : `background1`
     ]} !important;
   padding: 8px;
+  backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
 `
 
 export const FPEditorPaper = styled(FPPaper)`
@@ -51,6 +54,7 @@ export const FPTab = styled(Tab)`
 `
 
 export const FPPlannerWrapper = styled(Grid)`
+  overflow: hidden;
   height: 100%;
   padding: 4px;
   background: ${(props) => props.theme.colors.background};
@@ -90,12 +94,16 @@ export const FPSideBar = styled(FPPaper)`
 `
 
 export const FPPlanner = styled(FPPaper)`
-  height: 100%;
   padding: 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
   background-image: linear-gradient(
     ${(props) => props.theme.colors.card.start},
     ${(props) => props.theme.colors.card.end}
   );
+
+  backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
   > * {
     margin: 8px;
   }
@@ -343,10 +351,11 @@ export const FPNoContentAvailable = styled.div`
   align-items: center;
   border: 1px dotted ${(props) => props.theme.colors.border};
   border-radius: 4px;
+  color: ${({ theme }) => theme.colors.secondaryText};
   width: 100%;
   > div {
     margin-right: 8px;
-    color: #787878;
+    color: ${({ theme }) => theme.colors.secondaryText};
     letter-spacing: 4px;
     font-size: 10px;
   }

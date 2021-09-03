@@ -3,59 +3,6 @@ export const glass = {
     name: 'glass',
     displayName: 'Glass'
   },
-  rfp: {
-    colors: {
-      background: 'red',
-      background1: 'red',
-      background2: 'red',
-      background3: '#393939',
-      border: '#7bc5ee',
-      input: {
-        border: '#C6C6C6',
-        placeholder: '#ffffff',
-        color: '#C6C6C6',
-        disabled: '#787878'
-      },
-      error: {
-        color: 'yellow'
-      },
-      primaryButton: '#A5A5A5',
-      primaryText: '#a3a9b7',
-      secondaryText: '#454545',
-      ternaryText: '#7bc5ee',
-      listPrimary: '#7bc5ee',
-      listSecondary: '#5b98ba',
-      card: {
-        start: '#1E1E1E',
-        end: '#1E1E1E',
-        border: '#202125',
-        title: '#e8e8e8',
-        shadow: 'transparent'
-      },
-      link: {
-        color: '#A5A5A5'
-      },
-      button: {
-        color: '#01B075',
-        secondary: '#9e9e9e',
-        danger: '#ff1744',
-        link: '#bec6f4'
-      },
-      text: '#e8e8e8',
-      toggle: {
-        color: '#01B075',
-        bg: '#FFFFFF',
-        colorActive: '#FFFFFF',
-        bgActive: '#01B075'
-      },
-      checks: {
-        color: '#01B075',
-        bg: '#FFFFFF',
-        colorActive: '#FFFFFF',
-        bgActive: '#01B075'
-      }
-    }
-  },
   colors: {
     input: {
       border: '#3498DB',
@@ -76,7 +23,7 @@ export const glass = {
       hover: '#01B075',
       active: '#01B075'
     },
-    primaryButton: '#0D7452',
+    primaryButton: '#EEE',
     primaryText: '#e8e8e8',
     secondaryText: '#CDCDCD',
     ternaryText: '#454545',
@@ -169,18 +116,6 @@ export const glass = {
     ],
     grid: {
       selection: '#f8f8f8'
-    },
-    buildingInfo: {
-      svgColor: 'white',
-      buildingtextColor: 'white',
-      buildingDataColor: '#facaf6',
-      tempColor: 'white',
-      siteColor: 'white',
-      roomTxtColor: '#68ff6f',
-      roomDataColor: '#68ff6f',
-      occTextColor: 'white',
-      currentTextColor: '#f8ff8a',
-      currentDataColor: '#f8ff8a'
     }
   }
 }
