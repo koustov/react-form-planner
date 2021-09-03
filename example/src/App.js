@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { FormPlanner } from 'react-form-planner'
 import { ThemeProvider } from 'styled-components'
-import { chalk } from './themes/chalk'
 import { glass } from './themes/glass'
 
 const App = () => {
