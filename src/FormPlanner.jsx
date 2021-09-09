@@ -281,7 +281,7 @@ export const FormPlanner = ({
                           <div>
                             {localConfig.showFormProperties ? (
                               <FPBottomNavigationAction
-                                label='Form Properties'
+                                label='Properties'
                                 icon={<FontAwesomeIcon icon={faEdit} />}
                                 onClick={() => setFormPropertiesOpened(true)}
                               />
@@ -308,7 +308,7 @@ export const FormPlanner = ({
               xs={8}
               md={9}
               lg={10}
-              style={{ height: '100%', overflow: 'auto' }}
+              style={{ height: '100%', overflow: 'hidden' }}
             >
               <FPPlanner elevation={1}>
                 <FormViewer
