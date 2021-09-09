@@ -86,6 +86,7 @@ export const FPSideBar = styled(FPPaper)`
     }
     &-footer {
       width: 100%;
+      height: 70px;
       .MuiBottomNavigation-root {
         background: transparent !important;
       }
@@ -97,7 +98,6 @@ export const FPPlanner = styled(FPPaper)`
   padding: 4px;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100%;
   background-image: linear-gradient(
     ${(props) => props.theme.colors.card.start},
     ${(props) => props.theme.colors.card.end}
@@ -417,7 +417,9 @@ export const FVSideBar = styled(FVPaper)`
       overflow: auto;
     }
     &-footer {
+      height: 100px;
       width: 100%;
+      padding: 1rem;
     }
   }
 `
