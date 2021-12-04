@@ -21,10 +21,10 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 
 - [Demo](#demo)
 - [Features](#features)
-- [When do you need it?](#when-do-you-need-it)
+- [When do you need it](#when-do-you-need-it)
 - [Usage](#usage)
-  - [Install](#install)
-- [Highlight](#highlight)
+  - [Install 🐙](#install-)
+- [Highlight 🔥](#highlight-)
   - [Form Builder](#form-builder)
   - [How to use](#how-to-use)
   - [Supported Elements](#supported-elements)
@@ -35,7 +35,7 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 - [Playground](#playground)
 - [Screenshots](#screenshots)
 - [Items in queue](#items-in-queue)
-- [Contribution](#contribution)
+- [Contribution 🍰](#contribution-)
 - [License](#license)
 
 ## Demo
@@ -224,3 +224,4 @@ Refer [contributing ](./CONTRIBUTING.md)
 ## License
 
 MIT © [Koustov](https://github.com/koustov)
+

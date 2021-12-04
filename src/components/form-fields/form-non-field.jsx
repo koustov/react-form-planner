@@ -9,7 +9,6 @@ import {
   FVHeaderField,
   FVLabelField
 } from '../styled'
-import { Field } from 'redux-form'
 import { FVVideoField } from './video-field'
 import { FVPDFViewer } from './pdf-field'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

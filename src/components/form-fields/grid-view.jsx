@@ -13,7 +13,7 @@ import {
 import { Fragement, useEffect, useState } from 'react'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import Button from '@material-ui/core/Button'
+import { Button } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -171,7 +171,6 @@ export const FPDataGridView = (
               <div>
                 <FPToolButton
                   variant='contained'
-                  color='primary'
                   anchor='bottom'
                   onClick={() => {
                     if (!editable) {

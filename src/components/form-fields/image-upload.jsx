@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState, Fragment } from 'react'
 
-import { Button, Fab } from '@material-ui/core'
+import { Button, Fab } from '@mui/material'
 import { FVFileUpload, FVImageUpload } from '../styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
