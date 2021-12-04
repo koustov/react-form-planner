@@ -19,6 +19,8 @@ body {
 
 #root {
   height: 100% !important;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 code {
@@ -40,4 +42,5 @@ code {
 .form-wrapper {
   padding: 1rem;
   flex: 1;
+  overflow: hidden;
 }

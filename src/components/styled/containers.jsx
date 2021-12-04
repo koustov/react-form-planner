@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components'
 
-import { Tabs, Tab, Paper, Modal, Grid } from '@material-ui/core'
+import { Tabs, Tab, Paper, Modal, Grid } from '@mui/material'
 
 const BoxSelected = css`
   border-color: #3f51b5;
 `
 
 export const FPPaper = styled(Paper)`
-  background: transparent;
-  min-height: 100%;
+  background: transparent !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
   background: ${(props) =>
     props.theme.colors[
       props.elevation ? `background${props.elevation}` : `background1`
@@ -57,7 +58,7 @@ export const FPPlannerWrapper = styled(Grid)`
   overflow: hidden;
   height: 100%;
   padding: 4px;
-  background: ${(props) => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.background} !important;
 `
 
 export const FPSideBar = styled(FPPaper)`
@@ -65,7 +66,7 @@ export const FPSideBar = styled(FPPaper)`
   background-image: linear-gradient(
     ${(props) => props.theme.colors.card.start},
     ${(props) => props.theme.colors.card.end}
-  );
+  ) !important;
   .fp-side-bar {
     height: 100%;
     display: flex;
@@ -98,10 +99,11 @@ export const FPPlanner = styled(FPPaper)`
   padding: 4px;
   overflow-y: auto;
   overflow-x: hidden;
+  height: inherit;
   background-image: linear-gradient(
     ${(props) => props.theme.colors.card.start},
     ${(props) => props.theme.colors.card.end}
-  );
+  ) !important;
 
   backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
   > * {
@@ -129,6 +131,7 @@ export const FPPreviewBox = styled.div`
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #787878;
+  background: ${(props) => props.theme.colors.modal.bg};
 `
 
 export const FPEModal = styled(Modal)`
@@ -137,7 +140,10 @@ export const FPEModal = styled(Modal)`
   justify-content: center;
 `
 export const FPModalLarge = styled.div`
-  background: ${(props) => props.theme.colors.background1};
+  background-image: linear-gradient(
+    ${(props) => props.theme.colors.card.start},
+    ${(props) => props.theme.colors.card.end}
+  ) !important;
   height: 90vh;
   width: 90vw;
 `
@@ -389,6 +395,7 @@ export const FVTabs = styled(Tabs)`
 export const FVPlannerWrapper = styled(Grid)`
   height: 100%;
   padding: 4px;
+  grid-row-gap: 20px !important;
   background: ${(props) => props.theme.colors.background};
 `
 

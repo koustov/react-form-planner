@@ -18,18 +18,14 @@ import {
 import {
   faSave,
   faTimes,
-  faChevronRight,
-  faChevronLeft,
   faEye,
   faEdit
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 
-import Box from '@material-ui/core/Box'
-import Fab from '@material-ui/core/Fab'
+import { Box } from '@mui/material'
 import { FormViewer } from '../../FormViewer'
-import Tab from '@material-ui/core/Tab'
 import { getFinalField } from './fields'
 
 function TabPanel(props) {
@@ -170,7 +166,6 @@ export const PropertyEditor = ({
           <div className='header-tool-bar'>
             <FPToolButton
               variant='contained'
-              color='primary'
               size='large'
               aria-label='save'
               onClick={() => onSave()}
@@ -182,7 +177,6 @@ export const PropertyEditor = ({
             </FPToolButton>
             <FPToolButton
               variant='contained'
-              color='default'
               size='large'
               aria-label='move down'
               onClick={() => onCancel()}
@@ -208,28 +202,12 @@ export const PropertyEditor = ({
                 zoom: '50%'
               }}
             >
-              {/* <div>
-                {' '}
-                <React.Fragment>
-                  {JSON.stringify(readOnlyTemplate)}
-                </React.Fragment>
-              </div> */}
               <FormViewer
                 template={{ ...{ fields: readOnlyTemplate } }}
                 controlMarker={selectedIndex}
               />
-              {/* {getFinalField(controlState)} */}
             </div>
           </FPFiedlSet>
-          {/* <FPPaper
-            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-            elevation={2}
-          >
-            <FPHeaderBar>
-              <SmallHeader>Preview</SmallHeader>
-            </FPHeaderBar>
-            
-          </FPPaper> */}
         </div>
         <div style={{ flex: 1, padding: '8px' }}>
           <FPFiedlSet>

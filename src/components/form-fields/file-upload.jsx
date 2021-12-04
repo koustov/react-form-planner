@@ -3,7 +3,7 @@ import * as React from 'react'
 import { faTrashAlt, faUpload } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 import { FVFileUpload } from '../styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -65,7 +65,6 @@ export const FVFileUploadField = ({
             </div>
             <div>
               <Button
-                color='primary'
                 onClick={() => {
                   if (!editable) {
                     onImageClear()

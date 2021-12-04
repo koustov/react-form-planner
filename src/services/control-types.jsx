@@ -12,6 +12,7 @@ import {
   faQuestionCircle,
   faTextHeight,
   faTextWidth,
+  faCalendar,
   faTh,
   faUpload,
   faVideo,
@@ -73,6 +74,28 @@ const AllControls = [
     group: 'Form Control',
     subtype: 'number',
     label: 'Number Box',
+    bordered: true,
+    default: true
+  },
+  {
+    type: 'date',
+    icon: faCalendar,
+    name: 'date',
+    display: 'Date Picker',
+    group: 'Form Control',
+    subtype: 'date',
+    label: 'Date Picker',
+    bordered: true,
+    default: true
+  },
+  {
+    type: 'datetime',
+    icon: faCalendar,
+    name: 'datetime',
+    display: 'Date Time Picker',
+    group: 'Form Control',
+    subtype: 'date',
+    label: 'Date Time Picker',
     bordered: true,
     default: true
   },

@@ -28,7 +28,6 @@ export const FVFormCheckboxField = (
               }
             }}
             name='checkedB'
-            color='primary'
             error={touched && error}
             variant='outlined'
             {...field.props}

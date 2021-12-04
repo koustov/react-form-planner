@@ -4,6 +4,7 @@ export const glass = {
     displayName: 'Glass'
   },
   colors: {
+    border: '#ABABAB',
     input: {
       border: '#3498DB',
       placeholder: '#ffffff',
@@ -26,7 +27,7 @@ export const glass = {
     primaryButton: '#EEE',
     primaryText: '#e8e8e8',
     secondaryText: '#CDCDCD',
-    ternaryText: '#454545',
+    ternaryText: '#ABABAB',
     listPrimary: '#7bc5ee',
     listSecondary: '#5b98ba',
     card: {
@@ -60,7 +61,7 @@ export const glass = {
     },
     text: '#e8e8e8',
     modal: {
-      bg: '#16171B ',
+      bg: 'red',
       btn: {
         bg: 'rgba(59,235,255,.21)',
         color: '#5a6062',

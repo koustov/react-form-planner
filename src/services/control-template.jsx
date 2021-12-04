@@ -9,6 +9,12 @@ const BaseEditorFiled = {
   datafield: ''
 }
 const EditorFieldMap = {
+  styleeditor: {
+    name: 'styleeditor',
+    label: '',
+    type: 'styleeditor',
+    datafield: ''
+  },
   grid: {
     name: 'grid',
     label: '',
@@ -105,12 +111,15 @@ const EditorFieldMap = {
   }
 }
 
-const customStyles = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
-  label: 'Custom Styles',
-  datafield: 'style',
-  group: 'Styles',
-  asobject: true
-})
+const customStyles = Object.assign(
+  Object.assign({}, EditorFieldMap['styleeditor']),
+  {
+    label: 'Custom Styles',
+    datafield: 'style',
+    group: 'Styles',
+    asobject: true
+  }
+)
 
 const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
   label: 'Custom Properties',
@@ -154,37 +163,30 @@ const getEditorFields = (type, customdefinition, config) => {
       res = [
         [getEditorField('text', 'label', 'Label', { required: true })],
         [getEditorField('text', 'placeholder', 'Placeholder')],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
         [getEditorField('text', 'validation', 'Validation Regex')],
-        [getEditorField('checkbox', 'required', 'Required')],
-        [
-          getEditorField('color', 'style', 'Text Color', {
-            internalDatafield: 'color',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Border Color', {
-            internalDatafield: 'border-color',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Background Color', {
-            internalDatafield: 'background-color',
-            isappend: true,
-            asobject: true
-          })
-        ]
+        [getEditorField('checkbox', 'required', 'Required')]
+      ]
+      break
+    case 'date':
+    case 'datetime':
+      res = [
+        [getEditorField('text', 'label', 'Label', { required: true })],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })]
       ]
       break
     case 'richeditor':
       res = [
-        getEditorField('text', 'label'),
-        getEditorField('checkbox', 'required')
+        [getEditorField('text', 'label')],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
+        [getEditorField('checkbox', 'required')]
       ]
       break
     case 'select':
       res = [
         [getEditorField('text', 'label', 'Label', { required: true })],
         [getEditorField('text', 'placeholder', 'Placeholder')],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
         [getEditorField('checkbox', 'required', 'Required')],
         [
           getEditorField('grid', 'options', 'Options', {
@@ -194,33 +196,20 @@ const getEditorFields = (type, customdefinition, config) => {
             ],
             group: 'Options'
           })
-        ],
-        [
-          getEditorField('color', 'style', 'Text Color', {
-            internalDatafield: 'color',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Border Color', {
-            internalDatafield: 'border-color',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Background Color', {
-            internalDatafield: 'background-color',
-            isappend: true,
-            asobject: true
-          })
         ]
       ]
       break
     case 'checkbox':
-      res = [[getEditorField('text', 'label', 'Label', { required: true })]]
+      res = [
+        [getEditorField('text', 'label', 'Label', { required: true })],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })]
+      ]
       break
 
     case 'radio':
       res = [
         [getEditorField('text', 'label', 'Label')],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
         [
           getEditorField('grid', 'options', 'Options', {
             columns: [
@@ -233,95 +222,10 @@ const getEditorFields = (type, customdefinition, config) => {
       ]
       break
     case 'header':
-      res = [
-        [getEditorField('text', 'value', 'Text')],
-        [
-          getEditorField('select', 'style', 'Alignment', {
-            options: [
-              {
-                name: 'Left',
-                value: 1,
-                returnvalue: { 'justify-content': 'flex-start' }
-              },
-              {
-                name: 'Middle',
-                value: 2,
-                returnvalue: { 'justify-content': 'center' }
-              },
-              {
-                name: 'Right',
-                value: 3,
-                returnvalue: { 'justify-content': 'flex-end' }
-              }
-            ],
-            isappend: true,
-            asobject: true
-          })
-        ],
-        [
-          getEditorField('color', 'style', 'Text Color', {
-            internalDatafield: 'color',
-            isappend: true,
-            advancedfeature: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Border Color', {
-            internalDatafield: 'borderColor',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Background Color', {
-            internalDatafield: 'backgroundColor',
-            isappend: true,
-            asobject: true
-          })
-        ]
-      ]
+      res = [[getEditorField('text', 'value', 'Text')]]
       break
     case 'label':
-      res = [
-        [getEditorField('textarea', 'value', 'Text')],
-        [
-          getEditorField('select', 'style', 'Alignment', {
-            options: [
-              {
-                label: 'Left',
-                value: 1,
-                returnvalue: { 'justify-content': 'flex-start' }
-              },
-              {
-                label: 'Middle',
-                value: 2,
-                returnvalue: { 'justify-content': 'center' }
-              },
-              {
-                label: 'Right',
-                value: 3,
-                returnvalue: { 'justify-content': 'flex-end' }
-              }
-            ],
-            advancedfeature: true,
-            asobject: true
-          })
-        ],
-        [
-          getEditorField('color', 'style', 'Text Color', {
-            internalDatafield: 'color',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Border Color', {
-            internalDatafield: 'borderColor',
-            isappend: true,
-            asobject: true
-          }),
-          getEditorField('color', 'style', 'Background Color', {
-            internalDatafield: 'backgroundColor',
-            isappend: true,
-            asobject: true
-          })
-        ]
-      ]
+      res = [[getEditorField('textarea', 'value', 'Text')]]
       break
     case 'divider':
       res = [getEditorField('customstyle')]
@@ -333,12 +237,14 @@ const getEditorFields = (type, customdefinition, config) => {
             datafield: uuidv4()
           })
         ],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
         [getEditorField('checkbox', 'multiple', 'Allow Multiple imaes')]
       ]
       break
     case 'color':
       res = [
         [getEditorField('text', 'label', 'Label Field')],
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
         [
           getEditorField('text', 'datafield', 'Data Field', {
             datafield: uuidv4()
@@ -362,31 +268,7 @@ const getEditorFields = (type, customdefinition, config) => {
       ]
       break
     case 'video':
-      res = [
-        [getEditorField('text', 'value', 'URL')],
-        [
-          getEditorField('select', 'style', 'Alignment', {
-            options: [
-              {
-                name: 'Left',
-                value: 1,
-                returnvalue: { 'justify-content': 'flex-start' }
-              },
-              {
-                name: 'Middle',
-                value: 2,
-                returnvalue: { 'justify-content': 'center' }
-              },
-              {
-                name: 'Right',
-                value: 3,
-                returnvalue: { 'justify-content': 'flex-end' }
-              }
-            ],
-            asobject: true
-          })
-        ]
-      ]
+      res = [[getEditorField('text', 'value', 'URL')]]
       break
     case 'pdf':
       res = [
@@ -417,17 +299,6 @@ const getEditorFields = (type, customdefinition, config) => {
             group: 'Options'
           })
         ]
-
-        // [getEditorField('texnumber', 'imageHeight', 'Image Height')],
-        // [
-        //   getEditorField('grid', 'options', 'Answers', {
-        //     columns: [
-        //       { field: 'label', headerName: 'Options' },
-        //       { field: 'value', headerName: 'Value' }
-        //     ],
-        //     aslist: true
-        //   })
-        // ]
       ]
       break
     default:
@@ -457,6 +328,28 @@ const AllControlsTemplates = [
     type: 'text',
     label: 'Text Box',
     placeholder: 'Text Box placeholder',
+    iseditable: true,
+    custom: {
+      styles: {
+        height: '50px'
+      }
+    }
+  },
+  {
+    type: 'date',
+    label: 'Date Picker',
+    placeholder: 'Date picker placeholder',
+    iseditable: true,
+    custom: {
+      styles: {
+        height: '50px'
+      }
+    }
+  },
+  {
+    type: 'datetime',
+    label: 'Date Time Picker',
+    placeholder: 'Date time picker placeholder',
     iseditable: true,
     custom: {
       styles: {

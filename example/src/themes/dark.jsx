@@ -38,7 +38,8 @@ export const dark = {
       color: '#01B075',
       secondary: '#9e9e9e',
       danger: '#ff1744',
-      link: '#bec6f4'
+      link: '#bec6f4',
+      border: 'red'
     },
     text: '#e8e8e8',
     toggle: {

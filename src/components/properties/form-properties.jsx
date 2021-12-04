@@ -14,7 +14,7 @@ import {
 
 import { faTimes, faSave } from '@fortawesome/free-solid-svg-icons'
 import { FormViewer } from '../../FormViewer'
-import Grid from '@material-ui/core/Grid'
+import { Grid } from '@mui/material'
 
 export const FormProperties = ({ data, onChange, onClose }) => {
   const [formProperties, setFormProperties] = useState({})
@@ -68,7 +68,6 @@ export const FormProperties = ({ data, onChange, onClose }) => {
           <div className='header-tool-bar'>
             <FPToolButton
               variant='contained'
-              color='primary'
               size='large'
               aria-label='save'
               onClick={() => onSaveClicked()}
@@ -80,7 +79,6 @@ export const FormProperties = ({ data, onChange, onClose }) => {
             </FPToolButton>
             <FPToolButton
               variant='contained'
-              color='default'
               size='large'
               aria-label='move down'
               onClick={() => onClose()}

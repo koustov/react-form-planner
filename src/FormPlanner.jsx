@@ -9,43 +9,40 @@ import {
   FPBottomNavigation,
   FPBottomNavigationAction,
   FPDividerField,
+  FPMediumHeader,
+  FPPaperVerticalPadding,
   FPEModal,
   FPListIcon,
   FPListItem,
   FPListItemText,
   FPModalLarge,
+  FPPaper,
   FPPlanner,
   FPPlannerWrapper,
   FPSideBar
 } from './components/styled'
 import { Fragment, useEffect, useState } from 'react'
 import {
-  faAssistiveListeningSystems,
   faChevronDown,
   faEdit,
-  faLevelUpAlt,
   faStickyNote
 } from '@fortawesome/free-solid-svg-icons'
 import { getControlTemplate, getControls } from './services'
 
-import { Backdrop } from '@material-ui/core'
-import Divider from '@material-ui/core/Divider'
+import { Backdrop, Divider, Grid, List } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormProperties } from './components/properties/form-properties'
 import { FormViewer } from './FormViewer'
-import Grid from '@material-ui/core/Grid'
-import List from '@material-ui/core/List'
 import { PropertyEditor } from './components/properties/property-editor'
 import { ThemeProvider } from 'styled-components'
 import * as Themes from './themes'
-import { makeStyles } from '@material-ui/core/styles'
 import { v4 as uuidv4 } from 'uuid'
 
-const useStyles = makeStyles(() => ({
-  list: {
-    overflow: 'auto'
-  }
-}))
+// const useStyles = makeStyles(() => ({
+//   list: {
+//     overflow: 'auto'
+//   }
+// }))
 
 const DefaultConfig = {
   showFormProperties: false,
@@ -80,7 +77,7 @@ export const FormPlanner = ({
   const [editorOpened, setEditorOpened] = useState(false)
   const [formPropertiesOpened, setFormPropertiesOpened] = useState(false)
   const [loading, setLoading] = useState(true)
-  const classes = useStyles()
+  // const classes = useStyles()
   const [expanded, setExpanded] = React.useState(0)
   const [localConfig, setLocalConfig] = React.useState({})
   const [finalTheme, setFinalTheme] = React.useState({})
@@ -222,8 +219,8 @@ export const FormPlanner = ({
           <React.Fragment>
             <Grid item xs={4} md={3} lg={2} style={{ overflow: 'hidden' }}>
               <FPSideBar elevation={1} className='flex-1'>
-                <div className='fp-side-bar'>
-                  <div className='fp-side-bar-body'>
+                <FPPaper className='fp-side-bar'>
+                  <FPPaper className='fp-side-bar-body'>
                     {Object.keys(finalControls).map((fc, fci) => {
                       return (
                         <FPAccordion
@@ -244,8 +241,7 @@ export const FormPlanner = ({
                             <List
                               component='nav'
                               aria-label='toolbox-body'
-                              className={classes.list}
-                              style={{ width: '100%' }}
+                              style={{ width: '100%', overflow: 'auto' }}
                             >
                               {finalControls[fc].map((con, conti) => {
                                 return (
@@ -271,36 +267,32 @@ export const FormPlanner = ({
                         </FPAccordion>
                       )
                     })}
-                  </div>
+                  </FPPaper>
                   <React.Fragment>
                     {localConfig.showPreview ||
                     localConfig.showFormProperties ? (
                       <div className='fp-side-bar-footer'>
-                        <FPDividerField />
+                        {/* <FPDividerField /> */}
                         <FPBottomNavigation showLabels>
-                          <div>
-                            {localConfig.showFormProperties ? (
-                              <FPBottomNavigationAction
-                                label='Properties'
-                                icon={<FontAwesomeIcon icon={faEdit} />}
-                                onClick={() => setFormPropertiesOpened(true)}
-                              />
-                            ) : null}
-                          </div>
-                          <div>
-                            {localConfig.showPreview ? (
-                              <FPBottomNavigationAction
-                                label='Preview'
-                                icon={<FontAwesomeIcon icon={faStickyNote} />}
-                                onClick={() => onPreviewClicked()}
-                              />
-                            ) : null}
-                          </div>
+                          {localConfig.showFormProperties ? (
+                            <FPBottomNavigationAction
+                              label='Properties'
+                              icon={<FontAwesomeIcon icon={faEdit} />}
+                              onClick={() => setFormPropertiesOpened(true)}
+                            />
+                          ) : null}
+                          {localConfig.showPreview ? (
+                            <FPBottomNavigationAction
+                              label='Preview'
+                              icon={<FontAwesomeIcon icon={faStickyNote} />}
+                              onClick={() => onPreviewClicked()}
+                            />
+                          ) : null}
                         </FPBottomNavigation>
                       </div>
                     ) : null}
                   </React.Fragment>
-                </div>
+                </FPPaper>
               </FPSideBar>
             </Grid>
             <Grid
@@ -324,7 +316,6 @@ export const FormPlanner = ({
           </React.Fragment>{' '}
           <FPEModal
             aria-labelledby='preview-form'
-            aria-describedby='transition-form'
             open={previewOpened}
             onClose={() => {
               setPreviewOpened(false)
@@ -336,16 +327,23 @@ export const FormPlanner = ({
             }}
           >
             <FPModalLarge>
-              <FormViewer
-                theme='dark'
-                template={controlListData}
-                onButtonClick={onActionButtonClicked}
-              />
+              <FPPaperVerticalPadding style={{ height: '100%' }}>
+                <div>
+                  <FPMediumHeader>Preview Form</FPMediumHeader>
+                  <FPDividerField />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <FormViewer
+                    theme='dark'
+                    template={controlListData}
+                    onButtonClick={onActionButtonClicked}
+                  />
+                </div>
+              </FPPaperVerticalPadding>
             </FPModalLarge>
           </FPEModal>
           <FPEModal
-            aria-labelledby='editor-form'
-            aria-describedby='transition-form'
+            aria-labelledby='property-editor'
             open={editorOpened}
             onClose={() => {
               setEditorOpened(false)
@@ -368,8 +366,7 @@ export const FormPlanner = ({
             </FPModalLarge>
           </FPEModal>
           <FPEModal
-            aria-labelledby='editor-form'
-            aria-describedby='transition-form'
+            aria-labelledby='form-properties'
             open={formPropertiesOpened}
             onClose={() => {
               setFormPropertiesOpened(false)

@@ -1,8 +1,8 @@
 {
   "name": "react-form-planner",
-  "version": "0.1.13",
+  "version": "0.1.15",
   "description": "A form builder/planner for react",
-  "author": "koustov",
+  "author": "Koustov <koustov@live.com> (https://tweeter.com/koustov)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,11 +24,13 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "lint": "eslint . --max-warnings=0"
   },
   "peerDependencies": {
     "react": "^16.12.0",
-    "styled-components": "^5.3.0"
+    "styled-components": "^5.3.0",
+    "@mui/material": "^5.2.2"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
@@ -50,19 +52,20 @@
     "@babel/preset-react": "^7.13.13",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@material-ui/core": "^4.11.4",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "node-sass": "^6.0.1",
     "react-redux": "^7.2.4",
+    "react-ui-css-builder": "^0.0.20",
     "redux": "^4.1.0",
     "redux-form": "^8.3.7",
     "uuid": "^8.3.2"
   },
   "bugs": {
-    "url": "https://github.com/koustov/react-form-planner/issues"
+    "url": "https://github.com/koustov/react-form-planner/issues",
+    "email": "koustov@live.com"
   },
-  "homepage": "https://github.com/koustov/react-form-planner#readme",
+  "homepage": "https://react-form-planner.vercel.app/",
   "directories": {
     "doc": "docs",
     "example": "example"

@@ -16,16 +16,17 @@ import {
   MenuItem,
   Radio,
   RadioGroup,
-  Select
-} from '@material-ui/core'
+  Select,
+  TextField
+} from '@mui/material'
 import styled, { css } from 'styled-components'
-
-import TextField from '@material-ui/core/TextField'
 
 export const FPBottomNavigation = styled(BottomNavigation)`
   background: transparent;
   display: flex;
-  > div {
+  height: 100%;
+  color: ${(props) => props.theme.colors.primaryText} !important;
+  > button {
     flex: 1;
     display: flex;
   }
@@ -33,6 +34,7 @@ export const FPBottomNavigation = styled(BottomNavigation)`
 
 export const FPBottomNavigationAction = styled(BottomNavigationAction)`
   background: transparent;
+  color: ${(props) => props.theme.colors.primaryText} !important;
   flex: 1;
   display: flex;
   .MuiBottomNavigationAction-label {
@@ -43,7 +45,8 @@ export const FPBottomNavigationAction = styled(BottomNavigationAction)`
 
 export const FPAccordion = styled(Accordion)`
   height: ${(props) => (props.expanded ? '100%' : 'auto')};
-  background: transparent;
+  background: transparent !important;
+  color: ${(props) => props.theme.colors.primaryText} !important;
 `
 
 export const FPAccordionSummary = styled(AccordionSummary)`
@@ -53,7 +56,7 @@ export const FPAccordionSummary = styled(AccordionSummary)`
     min-height: unset !important;
   }
   color: ${(props) => props.theme.colors.primaryText};
-  .MuiAccordionSummary-expandIcon {
+  .MuiAccordionSummary-expandIconWrapper {
     color: ${(props) => props.theme.colors.primaryText} !important;
   }
 `
@@ -64,6 +67,7 @@ export const FPAccordionDetails = styled(AccordionDetails)`
 
 export const FPToolButton = styled(Button)`
   border-radius: 0px 0px 0px 0px;
+  color: ${(props) => props.theme.colors.primaryText} !important;
   &:first-child {
     border-top-left-radius: ${(props) =>
       props.anchor === 'bottom' ? '8px' : '0px'};
@@ -104,6 +108,9 @@ export const FPTextField = styled(TextField)`
   width: 100%;
   .MuiOutlinedInput-notchedOutline {
     border-color: ${({ theme }) => theme.colors.input.border} !important;
+    legend {
+      color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    }
   }
 
   .MuiInput-underline:before {
@@ -251,8 +258,7 @@ export const FPFieldSet = styled.fieldset`
 
 export const FPGridRow = styled.div`
   /* border-bottom: 1px solid; */
-  /* border-color: ${({ theme }) =>
-    theme.colors.input.border} !important; */
+  /* border-color: ${({ theme }) => theme.colors.input.border} !important; */
   padding: 0.5rem;
   display: flex;
   height: 50px;
@@ -342,6 +348,12 @@ export const FVTextField = styled(TextField)`
 
   .MuiInputLabel-outlined {
     color: ${({ theme }) => theme.colors.ternaryText} !important;
+  }
+  input {
+    ::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      filter: invert(1);
+    }
   }
 `
 
@@ -514,8 +526,7 @@ export const FVFieldSet = styled.fieldset`
 
 export const FVGridRow = styled.div`
   /* border-bottom: 1px solid; */
-  /* border-color: ${({ theme }) =>
-    theme.colors.input.border} !important; */
+  /* border-color: ${({ theme }) => theme.colors.input.border} !important; */
   display: flex;
   height: 50px;
 `

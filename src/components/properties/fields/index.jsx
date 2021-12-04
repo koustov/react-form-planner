@@ -8,7 +8,6 @@ import {
   FPHeaderField,
   FPLabelField,
   FPNoContentAvailable,
-  FPRichTextEditor,
   FPTextField
 } from '../../styled'
 import { faFilePdf, faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
@@ -154,7 +153,6 @@ export const getFinalField = (
                   }
                 }}
                 name='checkedB'
-                color='primary'
                 {...localprops}
               />
             }

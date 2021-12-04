@@ -19,12 +19,13 @@ import {
   faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 
-import Fab from '@material-ui/core/Fab'
 import FieldLevelValidationForm from './components/field-validation-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Provider } from 'react-redux'
 import * as Themes from './themes'
 import store from './store/store'
+
+import { NoContent } from './components//no-content'
 
 import { ThemeProvider } from 'styled-components'
 
@@ -116,7 +117,10 @@ export const FormViewer = ({
                 onButtonClick={onButtonClick}
               />
             ) : (
-              <div></div>
+              <NoContent
+                label='Your components will appear hear'
+                subtext='Add new component(s) and re-render'
+              />
             )}
           </FVFormContainer>
         </FVFormWrapper>
