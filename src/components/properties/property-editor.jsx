@@ -73,7 +73,6 @@ export const PropertyEditor = ({
       setReadOnlyTemplate(controls)
       setControlState(Object.assign({}, controls[index][0]))
       setEditContainerGroups(res)
-      console.error(JSON.stringify(controls[index]))
     }
   }, [])
 
