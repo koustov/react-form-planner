@@ -130,7 +130,7 @@ const customProps = Object.assign(Object.assign({}, EditorFieldMap['grid']), {
 })
 
 const getUniqueDataField = () => {
-  const df = `Field_${Math.floor(Math.random() * 10000) + 1}`
+  const df = `Field_${uuidv4()}`
   if (allDataFields.indexOf(df) > -1) {
     getUniqueDataField()
   } else {
