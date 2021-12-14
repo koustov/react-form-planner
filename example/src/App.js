@@ -5,9 +5,9 @@ import { ThemeProvider } from 'styled-components'
 import { Themes } from './themes'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-
+import { DefaultTemplate } from './default-template'
 const App = () => {
-  const [template, setTemplate] = React.useState({})
+  const [template, setTemplate] = React.useState(DefaultTemplate)
   const [themeName, setThemeName] = React.useState('glass')
   const handleChange = (event, newAlignment) => {
     setThemeName(newAlignment)
@@ -83,7 +83,7 @@ const App = () => {
               console.log('onControlValueChanged')
             }}
             onFormValueChanged={(val) => {
-              console.log('onFormValueChanged')
+              console.log(`Form value: ${JSON.stringify(val)}`)
               setTemplate(val)
             }}
             baseTheme={'dark'}

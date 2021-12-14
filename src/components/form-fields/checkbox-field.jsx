@@ -8,6 +8,7 @@ export const FVFormCheckboxField = (
     value,
     editable,
     onValueChanged,
+    inputvalue,
     required,
     meta: { asyncValidating, touched, error }
   },
@@ -19,7 +20,7 @@ export const FVFormCheckboxField = (
       <FVFormControlLabel
         control={
           <FVCheckbox
-            checked={value}
+            checked={inputvalue}
             onChange={(e) => {
               if (onValueChanged) {
                 if (!editable) {

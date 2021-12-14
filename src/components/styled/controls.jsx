@@ -317,7 +317,14 @@ export const FVCheckbox = styled(Checkbox)`
   }
 `
 export const FVRadio = styled(Radio)`
+  color: ${({ theme }) => theme.colors.input.border} !important;
   .MuiIconButton-label {
+    color: ${({ theme }) => theme.colors.input.color} !important;
+  }
+  .PrivateSwitchBase-input {
+    color: ${({ theme }) => theme.colors.input.border} !important;
+  }
+  .MuiTouchRipple-root {
     color: ${({ theme }) => theme.colors.input.border} !important;
   }
 `

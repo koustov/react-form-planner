@@ -682,9 +682,10 @@ export const FVFormBanner = styled(FVFormBannerDefault)`
 
 export const FVBannerImage = styled(FVFormBanner)`
   background-image: url(${(props) => props.background}) !important;
+  background-size: contain;
 `
 
 export const FVImageContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: contain;
 `

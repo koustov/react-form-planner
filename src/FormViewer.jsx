@@ -55,7 +55,8 @@ export const FormViewer = ({
       setLocalTemplate(JSON.parse(JSON.stringify(template)))
     }
     let defaultTheme = Themes[baseTheme]
-    defaultTheme = Object.assign(defaultTheme, themeOverride)
+    const oTheme = themeOverride
+    defaultTheme = Object.assign(defaultTheme, oTheme)
     setFinalTheme(defaultTheme)
 
     setLoading(false)
