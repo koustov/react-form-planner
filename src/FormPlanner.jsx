@@ -27,7 +27,7 @@ import {
   faEdit,
   faStickyNote
 } from '@fortawesome/free-solid-svg-icons'
-import { getControlTemplate, getControls } from './services'
+import { getControlTemplate, getControls, getAllInNameFormat } from './services'
 
 import { Backdrop, Divider, Grid, List } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -50,15 +50,7 @@ const DefaultConfig = {
   allowCustomStyles: false,
   allowCustomProps: false,
   advancedFeatures: false,
-  fields: [
-    {
-      name: 'header',
-      props: {}
-    },
-    { name: 'mediumheader' },
-    { name: 'smallheader' },
-    { name: 'label' }
-  ]
+  fields: []
 }
 
 export const FormPlanner = ({
@@ -83,9 +75,23 @@ export const FormPlanner = ({
   const [finalTheme, setFinalTheme] = React.useState({})
 
   useEffect(() => {
+    if (config.showBasicLabels) {
+      DefaultConfig.fields = [
+        {
+          name: 'header',
+          props: {}
+        },
+        { name: 'mediumheader' },
+        { name: 'smallheader' },
+        { name: 'label' }
+      ]
+    }
+
+    const incomingFields = config.fields || getAllInNameFormat()
     setFinalControls(
-      getControls(getMergedArray(DefaultConfig.fields, config.fields))
+      getControls(getMergedArray(DefaultConfig.fields, incomingFields))
     )
+
     const lConfig = Object.assign(DefaultConfig, config)
     setLocalConfig(lConfig)
     let defaultTheme = Themes[baseTheme]
@@ -221,52 +227,93 @@ export const FormPlanner = ({
               <FPSideBar elevation={1} className='flex-1'>
                 <FPPaper className='fp-side-bar'>
                   <FPPaper className='fp-side-bar-body'>
-                    {Object.keys(finalControls).map((fc, fci) => {
-                      return (
-                        <FPAccordion
-                          key={fci}
-                          expanded={expanded === fci}
-                          onChange={() => handleExpansionChange(fci)}
-                        >
-                          <FPAccordionSummary
-                            expandIcon={
-                              <FontAwesomeIcon icon={faChevronDown} />
-                            }
-                            aria-controls='panel1a-content'
-                            id='panel1a-header'
-                          >
-                            {fc}
-                          </FPAccordionSummary>
-                          <FPAccordionDetails>
-                            <List
-                              component='nav'
-                              aria-label='toolbox-body'
-                              style={{ width: '100%', overflow: 'auto' }}
-                            >
-                              {finalControls[fc].map((con, conti) => {
-                                return (
-                                  <React.Fragment key={conti}>
-                                    <FPListItem
-                                      dense
-                                      button
-                                      onClick={() => onAdd(con)}
-                                    >
-                                      <FPListIcon>
-                                        <FontAwesomeIcon icon={con.icon} />
-                                      </FPListIcon>
-                                      <FPListItemText
-                                        primary={`${con.display}`}
-                                      />
-                                    </FPListItem>
-                                    <Divider />
-                                  </React.Fragment>
-                                )
-                              })}
-                            </List>
-                          </FPAccordionDetails>
-                        </FPAccordion>
-                      )
-                    })}
+                    <>
+                      {Object.keys(finalControls).length === 1 ? (
+                        <>
+                          {Object.keys(finalControls).map((fc, fci) => {
+                            return (
+                              <List
+                                component='nav'
+                                aria-label='toolbox-body'
+                                style={{ width: '100%', overflow: 'auto' }}
+                                key={fci}
+                              >
+                                {finalControls[fc].map((con, conti) => {
+                                  return (
+                                    <React.Fragment key={conti}>
+                                      <FPListItem
+                                        dense
+                                        button
+                                        onClick={() => onAdd(con)}
+                                      >
+                                        <FPListIcon>
+                                          <FontAwesomeIcon icon={con.icon} />
+                                        </FPListIcon>
+                                        <FPListItemText
+                                          primary={`${con.display}`}
+                                        />
+                                      </FPListItem>
+                                      <Divider />
+                                    </React.Fragment>
+                                  )
+                                })}
+                              </List>
+                            )
+                          })}
+                        </>
+                      ) : (
+                        <>
+                          {Object.keys(finalControls).map((fc, fci) => {
+                            return (
+                              <FPAccordion
+                                key={fci}
+                                expanded={expanded === fci}
+                                onChange={() => handleExpansionChange(fci)}
+                              >
+                                <FPAccordionSummary
+                                  expandIcon={
+                                    <FontAwesomeIcon icon={faChevronDown} />
+                                  }
+                                  aria-controls='panel1a-content'
+                                  id='panel1a-header'
+                                >
+                                  {fc}
+                                </FPAccordionSummary>
+                                <FPAccordionDetails>
+                                  <List
+                                    component='nav'
+                                    aria-label='toolbox-body'
+                                    style={{ width: '100%', overflow: 'auto' }}
+                                  >
+                                    {finalControls[fc].map((con, conti) => {
+                                      return (
+                                        <React.Fragment key={conti}>
+                                          <FPListItem
+                                            dense
+                                            button
+                                            onClick={() => onAdd(con)}
+                                          >
+                                            <FPListIcon>
+                                              <FontAwesomeIcon
+                                                icon={con.icon}
+                                              />
+                                            </FPListIcon>
+                                            <FPListItemText
+                                              primary={`${con.display}`}
+                                            />
+                                          </FPListItem>
+                                          <Divider />
+                                        </React.Fragment>
+                                      )
+                                    })}
+                                  </List>
+                                </FPAccordionDetails>
+                              </FPAccordion>
+                            )
+                          })}
+                        </>
+                      )}
+                    </>
                   </FPPaper>
                   <React.Fragment>
                     {localConfig.showPreview ||

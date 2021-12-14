@@ -15,13 +15,14 @@ export const FVFormRadioField = (
     field,
     value,
     editable,
+    inputvalue,
     onValueChanged,
     required,
     meta: { asyncValidating, touched, error }
   },
   ...rest
 ) => {
-  const [localValue, setLocalvalue] = useState(value)
+  const [localValue, setLocalvalue] = useState(inputvalue)
 
   const onValChange = (e) => {
     setLocalvalue(e.target.value)

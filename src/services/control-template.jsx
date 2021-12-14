@@ -377,8 +377,16 @@ const AllControlsTemplates = [
     iseditable: true,
     options: [
       {
-        label: 'Sample radio button',
+        label: 'Option 1',
         value: 1
+      },
+      {
+        label: 'Option 2',
+        value: 2
+      },
+      {
+        label: 'Option 3',
+        value: 3
       }
     ]
   },
@@ -509,4 +517,13 @@ export const getControlTemplate = (
     }
   }
   return undefined
+}
+
+export const getAllInNameFormat = () => {
+  const res = []
+
+  AllControlsTemplates.forEach((c) => {
+    res.push({ name: c.type })
+  })
+  return res
 }

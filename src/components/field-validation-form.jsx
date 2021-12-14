@@ -167,7 +167,7 @@ const FieldLevelValidationForm = ({
           <React.Fragment>
             {localFields.map((fldrow, fldrowi) => {
               return (
-                <div style={{ width: '100%', display: 'flex' }}>
+                <div style={{ width: '100%', display: 'flex' }} key={fldrowi}>
                   {fldrow.map((fld, fldi) => {
                     return (
                       <div
@@ -209,7 +209,7 @@ const FieldLevelValidationForm = ({
                               {...{
                                 selected: props.selectedControlIndex === fldrowi
                               }}
-                              key={fldrowi}
+                              key={`${fldrowi}-${fldi}`}
                             >
                               <div className='content-details action-button-wrapper fadeIn-bottom'>
                                 {props.editable ? (
