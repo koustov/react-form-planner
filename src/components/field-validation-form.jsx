@@ -172,7 +172,7 @@ const FieldLevelValidationForm = ({
                     return (
                       <div
                         style={{ width: '100%', padding: '4px' }}
-                        key={{ fldi }}
+                        key={`${fldrowi}-${fldi}`}
                       >
                         {fld.visible !== false ? (
                           <FPFormRow
@@ -276,7 +276,6 @@ const FieldLevelValidationForm = ({
                                       }
                                     >
                                       <FontAwesomeIcon icon={faChevronDown} />
-                                      <span>Move Down</span>
                                     </FPToolButton>
                                     <FPToolButton
                                       variant='contained'
@@ -292,7 +291,6 @@ const FieldLevelValidationForm = ({
                                       disabled={fldrowi === 0}
                                     >
                                       <FontAwesomeIcon icon={faChevronUp} />
-                                      <span>Move Up</span>
                                     </FPToolButton>
                                   </Fragment>
                                 ) : null}

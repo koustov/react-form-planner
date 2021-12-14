@@ -68,6 +68,8 @@ export const FPAccordionDetails = styled(AccordionDetails)`
 export const FPToolButton = styled(Button)`
   border-radius: 0px 0px 0px 0px;
   color: ${(props) => props.theme.colors.primaryText} !important;
+  width: 10px;
+  transition: width 0.5s ease-out;
   &:first-child {
     border-top-left-radius: ${(props) =>
       props.anchor === 'bottom' ? '8px' : '0px'};
@@ -83,11 +85,21 @@ export const FPToolButton = styled(Button)`
   }
 
   span {
+    display: none;
+    transition: opacity 1s ease-out;
+    opacity: 0;
     margin-left: 1rem;
     font-size: ${(props) => (props.size === 'large' ? '15px' : '10px')};
   }
   &:disabled {
     background: #787878 !important;
+  }
+  &:hover {
+    width: 100px;
+    span {
+      opacity: 1;
+      display: inline-flex;
+    }
   }
 `
 
