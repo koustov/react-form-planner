@@ -518,3 +518,12 @@ export const getControlTemplate = (
   }
   return undefined
 }
+
+export const getAllInNameFormat = () => {
+  const res = []
+
+  AllControlsTemplates.forEach((c) => {
+    res.push({ name: c.type })
+  })
+  return res
+}

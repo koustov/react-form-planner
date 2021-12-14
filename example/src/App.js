@@ -60,24 +60,7 @@ const App = () => {
               showFormProperties: true,
               allowCustomProps: true,
               allowCustomStyles: true,
-              fields: [
-                { name: 'header' },
-                { name: 'mediumheader' },
-                { name: 'smallheader' },
-                { name: 'label' },
-                { name: 'textbox' },
-                { name: 'question' },
-                { name: 'number' },
-                { name: 'date' },
-                { name: 'datetime' },
-                { name: 'multiline' },
-                { name: 'select' },
-                { name: 'radio' },
-                { name: 'divider' },
-                { name: 'image' },
-                { name: 'video' },
-                { name: 'pdf' }
-              ]
+              showBasicLabels: true
             }}
             onControlValueChanged={() => {
               console.log('onControlValueChanged')
