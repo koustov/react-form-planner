@@ -64,10 +64,23 @@ export const FormViewer = ({
     setLoading(false)
   }, [data, template.fields])
 
-  const onValueChanged = (key, value, field) => {
-    if (onChange) {
-      onChange(key, value, field)
+  const controlValueChanged = (k, v, f) => {
+    if (onControlValueChanged) {
+      onControlValueChanged(k, v, f)
     }
+  }
+
+  const formValueChanged = (data) => {
+    if (onChange) {
+      onChange(data)
+    }
+  }
+
+  const onValueChanged = (key, value, field) => {
+    finalData[key] = value
+    controlValueChanged(key, value, field)
+    setFinalData({ ...finalData })
+    formValueChanged(finalData)
   }
 
   return (

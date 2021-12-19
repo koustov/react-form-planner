@@ -4,6 +4,7 @@ export const glass = {
     displayName: 'Glass'
   },
   colors: {
+    background: 'transparent',
     border: '#ABABAB',
     input: {
       border: '#3498DB',

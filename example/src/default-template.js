@@ -82,6 +82,14 @@ export const DefaultTemplate = {
         datafield: 'F_89186732-19d3-4271-b132-ed92727cb18',
         id: 'af9a2335-0555-4f24-b8c8-25dd5deda46d'
       }
+    ],
+    [
+      {
+        type: 'checkbox',
+        label: 'I agree to the terms and conditions',
+        datafield: 'F_89186732-19d3-4271-b133-ed92757cb17',
+        id: 'af9a2335-0555-4f24-b8c8-25dd5dtda46d'
+      }
     ]
   ],
   banner:

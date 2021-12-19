@@ -46,7 +46,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const DefaultConfig = {
   showFormProperties: false,
-  showPreview: true,
+  showPreview: false,
   allowCustomStyles: false,
   allowCustomProps: false,
   advancedFeatures: false,
@@ -407,9 +407,7 @@ export const FormPlanner = ({
             >
               <FPPlanner elevation={1}>
                 <FormViewer
-                  onChange={(a, b, c) => {
-                    console.log('Value received')
-                  }}
+                  id='preview-form'
                   plannerConfig={localConfig}
                   template={controlListData}
                   editable={true}
@@ -417,6 +415,16 @@ export const FormPlanner = ({
                   controls={finalControls}
                   onInject={(item, row) => {
                     onAdd(item, row)
+                  }}
+                  onChange={(data) => {
+                    console.log('Form data changed')
+                    console.log(JSON.stringify(data))
+                  }}
+                  onControlValueChanged={(k, v, f) => {
+                    console.log('Control data changed')
+                    console.log(
+                      `Field: ${k} Value: ${v} Field: ${JSON.stringify(f)}`
+                    )
                   }}
                 />
               </FPPlanner>

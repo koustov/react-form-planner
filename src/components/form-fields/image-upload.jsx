@@ -128,7 +128,7 @@ export const FVImageloadField = ({
               <div>
                 {field.multiple || allImages.length === 0 ? (
                   <label
-                    for={`modal-image-file-${field.datafield}`}
+                    htmlFor={`modal-image-file-${field.datafield}`}
                     className='action-button'
                   >
                     <FontAwesomeIcon icon={faUpload} />

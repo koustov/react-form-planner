@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { FVFormControlLabel, FVCheckbox } from '../styled'
+import { FVFormControlLabel, FVCheckbox, FVHeaderField } from '../styled'
 
 export const FVFormCheckboxField = (
   {
@@ -14,30 +14,50 @@ export const FVFormCheckboxField = (
   },
   ...rest
 ) => {
-  useEffect(() => {}, [touched, error])
+  const [val, setVal] = useState()
+  useEffect(() => {
+    if (inputvalue !== undefined) {
+      setVal(inputvalue)
+    }
+  }, [touched, error, inputvalue])
   return (
-    <div>
-      <FVFormControlLabel
-        control={
-          <FVCheckbox
-            checked={inputvalue}
-            onChange={(e) => {
-              if (onValueChanged) {
-                if (!editable) {
-                  onValueChanged(field.datafield, e.target.checked, field)
-                }
-              }
-            }}
-            name='checkedB'
-            error={touched && error}
-            variant='outlined'
-            {...field.props}
-            {...rest}
-          />
-        }
-        label={`${field.label}`}
-      ></FVFormControlLabel>
-    </div>
+    <FVCheckbox>
+      <input
+        type='checkbox'
+        checked={val}
+        id={`${field.datafield}`}
+        error={touched && error}
+        onChange={(e) => {
+          if (onValueChanged) {
+            setVal(!val)
+            onValueChanged(field.datafield, !val, field)
+          }
+        }}
+      />
+      <label htmlFor={`${field.datafield}`}>{field.label}</label>
+    </FVCheckbox>
+    //   <FVHeaderField>{field.label}</FVHeaderField>
+    //   <FVFormControlLabel
+    //     control={
+    //       <FVCheckbox
+    //         checked={inputvalue}
+    //         onChange={(e) => {
+    //           if (onValueChanged) {
+    //             if (!editable) {
+    //               onValueChanged(field.datafield, e.target.checked, field)
+    //             }
+    //           }
+    //         }}
+    //         name='checkedB'
+    //         error={touched && error}
+    //         variant='outlined'
+    //         {...field.props}
+    //         {...rest}
+    //       />
+    //     }
+    //     label={`${field.label}`}
+    //   ></FVFormControlLabel>
+    // </div>
   )
   //   <div>
   //     <label>{label}</label>
