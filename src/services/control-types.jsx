@@ -273,3 +273,12 @@ export const getControls = (requestedControls) => {
     return groupBy(AllControls, 'group')
   }
 }
+
+export const getAllInNameFormat = () => {
+  const res = []
+
+  AllControls.forEach((c) => {
+    res.push({ name: c.name })
+  })
+  return res
+}
