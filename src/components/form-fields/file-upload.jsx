@@ -58,7 +58,7 @@ export const FVFileUploadField = ({
           />
           <div className='action'>
             <div>
-              <label for='modal-image-file' className='action-button'>
+              <label htmlFor='modal-image-file' className='action-button'>
                 <FontAwesomeIcon icon={faUpload} />
                 <p className='file-name'></p>
               </label>

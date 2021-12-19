@@ -20,12 +20,14 @@ import {
   TextField
 } from '@mui/material'
 import styled, { css } from 'styled-components'
+import { getThemeData } from '../../services/utils'
 
 export const FPBottomNavigation = styled(BottomNavigation)`
   background: transparent;
   display: flex;
   height: 100%;
-  color: ${(props) => props.theme.colors.primaryText} !important;
+  color: ${(props) =>
+    getThemeData(props.theme, 'colors.primaryText')} !important;
   > button {
     flex: 1;
     display: flex;
@@ -34,13 +36,17 @@ export const FPBottomNavigation = styled(BottomNavigation)`
 
 export const FPSquareActionButton = styled.button`
   background: ${(props) =>
-    props.selected ? props.theme.colors.primaryText : 'transparent'};
+    props.selected
+      ? getThemeData(props.theme, 'colors.primaryText')
+      : 'transparent'};
   color: ${(props) =>
-    props.selected ? '#454545' : props.theme.colors.primaryText};
+    props.selected
+      ? '#454545'
+      : getThemeData(props.theme, 'colors.primaryText')};
   outline: none;
   height: 80px;
   width: 100%;
-  border: thin solid ${({ theme }) => theme.colors.primaryText};
+  border: thin solid ${({ theme }) => getThemeData(theme, 'colors.primaryText')};
   border-radius: 4px;
   cursor: pointer;
   > div:nth-child(1) {
@@ -67,6 +73,11 @@ export const FPSquareActionButton = styled.button`
   padding: 10rem / @hfs 20rem / @hfs;
   text-transform: uppercase;
   overflow: hidden;
+  :disabled {
+    color: #787878;
+    border-color: #787878;
+    cursor: not-allowed;
+  }
   &:before {
     box-sizing: border-box;
     transform: translateX(100%);
@@ -95,23 +106,29 @@ export const FPSquareActionButton = styled.button`
     border-radius: 4px;
   }
 
-  &:hover {
+  &:not([disabled]):hover {
     color: ${(props) =>
-      props.selected ? '#454545' : props.theme.colors.primaryText};
+      props.selected
+        ? '#454545'
+        : getThemeData(props.theme, 'colors.primaryText')};
     text-decoration: none;
-    backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+    backdrop-filter: blur(
+      ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
+    );
     &:before {
       transition: 0.1s transform linear, 0.1s height linear 0.1s;
       transform: translateX(0);
       height: 100%;
-      border-color: ${(props) => props.theme.colors.primaryText};
+      border-color: ${(props) =>
+        getThemeData(props.theme, 'colors.primaryText')};
       border-radius: 4px;
     }
     &:after {
       transition: 0.1s transform linear 0.2s, 0.1s height linear 0.3s;
       transform: translateX(0);
       height: 100%;
-      border-color: ${(props) => props.theme.colors.primaryText};
+      border-color: ${(props) =>
+        getThemeData(props.theme, 'colors.primaryText')};
       border-radius: 4px;
     }
   }
@@ -120,7 +137,8 @@ export const FPSquareActionButton = styled.button`
 export const FPAccordion = styled(Accordion)`
   height: ${(props) => (props.expanded ? '100%' : 'auto')};
   background: transparent !important;
-  color: ${(props) => props.theme.colors.primaryText} !important;
+  color: ${(props) =>
+    getThemeData(props.theme, 'colors.primaryText')} !important;
 `
 
 export const FPAccordionSummary = styled(AccordionSummary)`
@@ -129,9 +147,10 @@ export const FPAccordionSummary = styled(AccordionSummary)`
   .MuiAccordionSummary-root.Mui-expanded {
     min-height: unset !important;
   }
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
   .MuiAccordionSummary-expandIconWrapper {
-    color: ${(props) => props.theme.colors.primaryText} !important;
+    color: ${(props) =>
+      getThemeData(props.theme, 'colors.primaryText')} !important;
   }
 `
 
@@ -141,7 +160,8 @@ export const FPAccordionDetails = styled(AccordionDetails)`
 
 export const FPToolButton = styled(Button)`
   border-radius: 0px 0px 0px 0px;
-  color: ${(props) => props.theme.colors.primaryText} !important;
+  color: ${(props) =>
+    getThemeData(props.theme, 'colors.primaryText')} !important;
   width: 10px;
   transition: width 0.5s ease-out;
   &:first-child {
@@ -164,11 +184,11 @@ export const FPToolButton = styled(Button)`
 `
 
 export const FPFormControlLabel = styled(FormControlLabel)`
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPFormLabel = styled(FormLabel)`
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPCheckbox = styled(Checkbox)``
@@ -179,53 +199,64 @@ export const FPRadioGroup = styled(RadioGroup)``
 export const FPTextField = styled(TextField)`
   width: 100%;
   .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
     legend {
-      color: ${({ theme }) => theme.colors.input.placeholder} !important;
+      color: ${({ theme }) =>
+        getThemeData(theme, 'colors.input.placeholder')} !important;
     }
   }
 
   .MuiInput-underline:before {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 
   .MuiInputLabel-animated {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
   .MuiInputBase-input {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
 export const FPSelect = styled(Select)`
   margin: 8px;
   .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 
   .MuiInput-underline:before {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 
   .MuiInputLabel-animated {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
   .MuiInputBase-input {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
   }
 `
 
 export const FPLabelField = styled.div`
   margin: 8px;
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPHeaderField = styled(FPLabelField)`
@@ -238,12 +269,12 @@ export const FPListItem = styled(ListItem)`
   height: 30px;
   width: 100%;
   border-left: 2px solid transparent;
-  color: ${(props) => props.theme.colors.primaryButton};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
   .MuiListItemIcon-root {
-    color: ${(props) => props.theme.colors.primaryButton};
+    color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
   }
   :hover {
-    border-color: ${(props) => props.theme.colors.border};
+    border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
   }
 `
 
@@ -307,7 +338,8 @@ export const FPFieldSet = styled.fieldset`
     css`
       border: 1px solid;
     `}
-  border-color: ${({ theme }) => theme.colors.input.border} !important;
+  border-color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -324,13 +356,15 @@ export const FPFieldSet = styled.fieldset`
   legend {
     padding: 0px 4px;
     margin-left: 10px;
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
 export const FPGridRow = styled.div`
   /* border-bottom: 1px solid; */
-  /* border-color: ${({ theme }) => theme.colors.input.border} !important; */
+  /* border-color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important; */
   padding: 0.5rem;
   display: flex;
   height: 50px;
@@ -363,7 +397,7 @@ export const FPGridActionCell = styled(FPGridCell)`
 export const FVFormControlLabel = styled(FormControlLabel)`
   flex: 1;
   height: 100%;
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FVFormControl = styled(FormControl)`
@@ -371,33 +405,82 @@ export const FVFormControl = styled(FormControl)`
   border-radius: 5px;
   padding: 8px !important;
   border: 1px solid !important;
-  border-color: ${({ theme }) => theme.colors.input.border} !important;
+  border-color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important;
   padding: 0px 8px 2px 8px !important;
   top: -5px !important;
 `
 
 export const FVFormLabel = styled(FormLabel)`
   text-align: initial;
-  color: ${(props) => props.theme.colors.primaryText} !important;
+  color: ${(props) =>
+    getThemeData(props.theme, 'colors.primaryText')} !important;
   padding: 0px 4px !important;
   font-size: 0.75em !important;
 `
 
-export const FVCheckbox = styled(Checkbox)`
-  .MuiIconButton-label {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+export const FVCheckbox = styled.div`
+  display: block;
+  margin-bottom: 15px;
+
+  input {
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+  }
+  label {
+    position: relative;
+    color: ${({ theme }) => getThemeData(theme, 'colors.primaryText')};
+    cursor: pointer;
+  }
+
+  label:before {
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 2px solid
+      ${({ theme }) => getThemeData(theme, 'colors.input.border')};
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+      inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  input:checked + label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 9px;
+    width: 6px;
+    height: 14px;
+    border: solid ${({ theme }) => getThemeData(theme, 'colors.input.border')};
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
   }
 `
 export const FVRadio = styled(Radio)`
-  color: ${({ theme }) => theme.colors.input.border} !important;
+  color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important;
   .MuiIconButton-label {
-    color: ${({ theme }) => theme.colors.input.color} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.color')} !important;
   }
   .PrivateSwitchBase-input {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
   .MuiTouchRipple-root {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 `
 
@@ -409,24 +492,29 @@ export const FVRadioGroup = styled(RadioGroup)`
 
 export const FVTextField = styled(TextField)`
   .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
     border-color: ${(props) => props.error && 'red'} !important;
   }
 
   .MuiInput-underline:before {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
     border-color: ${(props) => props.error && 'red'} !important;
   }
 
   .MuiInputLabel-animated {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
   .MuiInputBase-input {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
   input {
     ::-webkit-calendar-picker-indicator {
@@ -476,28 +564,33 @@ export const FVInputLabel = styled(InputLabel)``
 export const FVSelect = styled(Select)`
   margin: 8px;
   .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 
   .MuiInput-underline:before {
-    border-color: ${({ theme }) => theme.colors.input.border} !important;
+    border-color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
 
   .MuiInputLabel-animated {
-    color: ${({ theme }) => theme.colors.input.border} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
   }
   .MuiInputBase-input {
-    color: ${({ theme }) => theme.colors.input.placeholder} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
   }
 
   .MuiInputLabel-outlined {
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
 export const FVLabelField = styled.div`
   margin: 8px;
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FVTitleField = styled(FVLabelField)`
@@ -516,12 +609,12 @@ export const FVHeaderField = styled(FVLabelField)`
 export const FVListItem = styled(ListItem)`
   height: 30px;
   border-left: 2px solid transparent;
-  color: ${(props) => props.theme.colors.primaryButton};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
   .MuiListItemIcon-root {
-    color: ${(props) => props.theme.colors.primaryButton};
+    color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
   }
   :hover {
-    border-color: ${(props) => props.theme.colors.border};
+    border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
   }
 `
 
@@ -582,7 +675,8 @@ export const FVFieldSet = styled.fieldset`
     css`
       border: 1px solid;
     `}
-  border-color: ${({ theme }) => theme.colors.input.border} !important;
+  border-color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -599,13 +693,15 @@ export const FVFieldSet = styled.fieldset`
   legend {
     padding: 0px 4px;
     margin-left: 10px;
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
 export const FVGridRow = styled.div`
   /* border-bottom: 1px solid; */
-  /* border-color: ${({ theme }) => theme.colors.input.border} !important; */
+  /* border-color: ${({ theme }) =>
+    getThemeData(theme, 'colors.input.border')} !important; */
   display: flex;
   height: 50px;
 `
@@ -613,7 +709,7 @@ export const FVGridRow = styled.div`
 export const FVGridHeaderRow = styled(FVGridRow)`
   border-bottom: 2px solid;
   height: 30px;
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FVGridCell = styled.div`
@@ -636,7 +732,7 @@ export const FVFileUpload = styled.fieldset`
   width: 100%;
   height: 50px;
   color: white;
-  border: 1px solid ${({ theme }) => theme.colors.input.border} !important;
+  border: 1px solid ${({ theme }) => getThemeData(theme, 'colors.input.border')} !important;
   border-radius: 4px;
   padding: 8px;
   .preview {
@@ -699,19 +795,21 @@ export const FVImageUpload = styled.fieldset`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.input.border} !important;
+  border: 1px solid ${({ theme }) => getThemeData(theme, 'colors.input.border')} !important;
   border-radius: 4px;
   legend {
     padding: 0px 4px;
     margin-left: 5px;
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
   .image-wrapper {
     display: flex;
     flex-direction: column;
     width: 100px;
     height: 100px;
-    border: 1px solid ${({ theme }) => theme.colors.input.border} !important;
+    border: 1px solid
+      ${({ theme }) => getThemeData(theme, 'colors.input.border')} !important;
     border-radius: 4px;
     margin: 1rem;
     button {
@@ -730,12 +828,14 @@ export const FVImageUpload = styled.fieldset`
     .footer {
       height: 30px;
       display: flex;
-      background: ${({ theme }) => theme.colors.background3} !important;
+      background: ${({ theme }) =>
+        getThemeData(theme, 'colors.background3')} !important;
 
       div {
         flex: 1;
         text-align: center;
-        color: ${({ theme }) => theme.colors.listPrimary} !important;
+        color: ${({ theme }) =>
+          getThemeData(theme, 'colors.listPrimary')} !important;
       }
     }
   }
@@ -759,7 +859,8 @@ export const FVImageUpload = styled.fieldset`
       .action-button {
         width: 100px;
         height: 100px;
-        border: 1px solid ${({ theme }) => theme.colors.input.border} !important;
+        border: 1px solid
+          ${({ theme }) => getThemeData(theme, 'colors.input.border')} !important;
         border-radius: 4px;
         font-size: 15px;
         display: block;

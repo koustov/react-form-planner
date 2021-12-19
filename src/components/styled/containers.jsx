@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { Tabs, Tab, Paper, Modal, Grid, Drawer } from '@mui/material'
+import { getThemeData } from '../../services/utils'
 
 const BoxSelected = css`
   border-color: #3f51b5;
@@ -15,13 +16,15 @@ export const FPPaper = styled(Paper)`
       props.elevation ? `background${props.elevation}` : `background1`
     ]} !important;
   padding: 8px;
-  backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+  backdrop-filter: blur(
+    ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
+  );
 `
 
 export const FPEditorPaper = styled(FPPaper)`
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   ) !important;
 `
 
@@ -43,9 +46,10 @@ export const FPTabPanel = styled.div`
 
 export const FPTabs = styled(Tabs)`
   display: flex;
-  color: ${({ theme }) => theme.colors.ternaryText} !important;
+  color: ${({ theme }) => getThemeData(theme, 'colors.ternaryText')} !important;
   .MuiTab-textColorPrimary {
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
@@ -58,14 +62,15 @@ export const FPPlannerWrapper = styled(Grid)`
   overflow: hidden;
   height: 100%;
   padding: 4px;
-  background: ${(props) => props.theme.colors.background} !important;
+  background: ${(props) =>
+    getThemeData(props.theme, 'colors.background')} !important;
 `
 
 export const FPSideBar = styled(FPPaper)`
   height: 100%;
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   ) !important;
   .fp-side-bar {
     height: 100%;
@@ -101,11 +106,13 @@ export const FPPlanner = styled(FPPaper)`
   overflow-x: hidden;
   height: inherit;
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   ) !important;
 
-  backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+  backdrop-filter: blur(
+    ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
+  );
   > * {
     margin: 8px;
   }
@@ -131,7 +138,7 @@ export const FPPreviewBox = styled.div`
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #787878;
-  background: ${(props) => props.theme.colors.modal.bg};
+  background: ${(props) => getThemeData(props.theme, 'colors.modal.bg')};
 `
 
 export const FPEModal = styled(Modal)`
@@ -141,8 +148,8 @@ export const FPEModal = styled(Modal)`
 `
 export const FPModalLarge = styled.div`
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   ) !important;
   height: 90vh;
   width: 90vw;
@@ -176,12 +183,12 @@ export const SmallHeader = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.secondaryText')};
 `
 
 export const FPMediumHeader = styled(SmallHeader)`
   font-size: 16px;
-  color: ${(props) => props.theme.colors.primaryText};
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPHeaderBar = styled.div`
@@ -205,11 +212,11 @@ export const FPMediumHeaderBar = styled(FPHeaderBar)`
 export const FPFiedlSet = styled.fieldset`
   border: 1px solid transparent;
   border-radius: 4px;
-  border-color: ${(props) => props.theme.colors.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
   height: 100%;
   > legend {
     padding: 0rem 1rem;
-    color: ${(props) => props.theme.colors.primaryButton};
+    color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
     span {
       margin-left: 0.5rem;
     }
@@ -217,9 +224,10 @@ export const FPFiedlSet = styled.fieldset`
 `
 
 export const FPInputFiedlSet = styled(FPFiedlSet)`
-  border-color: ${(props) => props.theme.colors.input.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.input.border')};
   > legend {
-    color: ${({ theme }) => theme.colors.ternaryText} !important;
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
   }
 `
 
@@ -228,7 +236,7 @@ export const FPDividerField = styled.hr`
   border: 0;
   border-top: solid 2px;
   text-align: center;
-  border-color: ${(props) => props.theme.colors.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
   width: 100%;
 `
 
@@ -270,14 +278,14 @@ export const FPFormColumn = styled.div`
   border: 1px solid
     ${(props) =>
       props.editable && props.selected
-        ? props.theme.colors.primaryText
+        ? getThemeData(props.theme, 'colors.primaryText')
         : 'transparent'};
   &:hover {
     border-radius: 4px;
     border: 1px solid
       ${(props) =>
         props.editable && !props.bordered
-          ? props.theme.colors.primaryText
+          ? getThemeData(props.theme, 'colors.primaryText')
           : 'transparent'};
   }
 `
@@ -366,7 +374,7 @@ export const FPControlEditBox = styled.div`
   border: 1px solid;
   display: flex;
   flex-direction: column;
-  border-color: ${(props) => props.theme.colors.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
 `
 
 export const FPNoContentAvailable = styled.div`
@@ -375,13 +383,13 @@ export const FPNoContentAvailable = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px dotted ${(props) => props.theme.colors.border};
+  border: 1px dotted ${(props) => getThemeData(props.theme, 'colors.border')};
   border-radius: 4px;
-  color: ${({ theme }) => theme.colors.secondaryText};
+  color: ${({ theme }) => getThemeData(theme, 'colors.secondaryText')};
   width: 100%;
   > div {
     margin-right: 8px;
-    color: ${({ theme }) => theme.colors.secondaryText};
+    color: ${({ theme }) => getThemeData(theme, 'colors.secondaryText')};
     letter-spacing: 4px;
     font-size: 10px;
   }
@@ -397,8 +405,8 @@ export const FVPaper = styled(Paper)`
 
 export const FVEditorPaper = styled(FVPaper)`
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}}
   ) !important;
 `
 
@@ -422,8 +430,8 @@ export const FVPlannerWrapper = styled(Grid)`
 export const FVSideBar = styled(FVPaper)`
   height: 100%;
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   );
   .fp-side-bar {
     height: 100%;
@@ -455,8 +463,8 @@ export const FVPlanner = styled(FVPaper)`
   height: 100%;
   padding: 4px;
   background-image: linear-gradient(
-    ${(props) => props.theme.colors.card.start},
-    ${(props) => props.theme.colors.card.end}
+    ${(props) => getThemeData(props.theme, 'colors.card.start')},
+    ${(props) => getThemeData(props.theme, 'colors.card.end')}
   );
   > * {
     margin: 8px;
@@ -492,7 +500,7 @@ export const FVControlEditBox = styled.div`
   border: 1px solid;
   display: flex;
   flex-direction: column;
-  border-color: ${(props) => props.theme.colors.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
 `
 export const FVEModal = styled(Modal)`
   display: flex;
@@ -631,7 +639,7 @@ export const FVDividerField = styled.hr`
   border: 0;
   border-top: solid 3px;
   text-align: center;
-  border-color: ${(props) => props.theme.colors.border};
+  border-color: ${(props) => getThemeData(props.theme, 'colors.border')};
 
   &:after {
     content: '\f0e7';
@@ -650,7 +658,7 @@ export const FVFormContainer = styled.div`
 export const FVFormWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.colors.background};
+  background: ${(props) => getThemeData(props.theme, 'colors.background')};
   background-image: url(${(props) => props.background});
   background-repeat: no-repeat;
   background-size: cover;
@@ -715,9 +723,11 @@ export const FPDrawer = styled(Drawer)`
     width: 600px !important;
     background: none !important;
     background-image: linear-gradient(
-      ${(props) => props.theme.colors.card.start},
-      ${(props) => props.theme.colors.card.end}
+      ${(props) => getThemeData(props.theme, 'colors.card.start')},
+      ${(props) => getThemeData(props.theme, 'colors.card.end')}
     ) !important;
-    backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+    backdrop-filter: blur(
+      ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
+    );
   }
 `

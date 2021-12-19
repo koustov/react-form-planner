@@ -145,12 +145,12 @@ const FieldLevelValidationForm = ({
     setLocalFields(JSON.parse(JSON.stringify(fields)))
     fields.forEach((fldRow) => {
       fldRow.forEach((fld) => {
-        if (fld.datafield && data[fld.datafield]) {
+        if (fld.datafield && data[fld.datafield] !== undefined) {
           res[fld.datafield] = data[fld.datafield]
         }
       })
     })
-    setControlsSet(res)
+    setControlsSet({ ...res })
   }, [fields, data])
 
   const onValueChanged = (key, value, field) => {
