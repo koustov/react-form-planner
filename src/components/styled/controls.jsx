@@ -32,15 +32,89 @@ export const FPBottomNavigation = styled(BottomNavigation)`
   }
 `
 
-export const FPBottomNavigationAction = styled(BottomNavigationAction)`
-  background: transparent;
-  color: ${(props) => props.theme.colors.primaryText} !important;
-  flex: 1;
-  display: flex;
-  .MuiBottomNavigationAction-label {
-    opacity: 1 !important;
+export const FPSquareActionButton = styled.button`
+  background: ${(props) =>
+    props.selected ? props.theme.colors.primaryText : 'transparent'};
+  color: ${(props) =>
+    props.selected ? '#454545' : props.theme.colors.primaryText};
+  outline: none;
+  height: 80px;
+  width: 100%;
+  border: thin solid ${({ theme }) => theme.colors.primaryText};
+  border-radius: 4px;
+  cursor: pointer;
+  > div:nth-child(1) {
+    font-size: 1.2rem;
   }
-  color: ${(props) => props.theme.colors.primaryText};
+  div {
+    display: flex;
+    flex: 1;
+
+    justify-content: center;
+    align-items: center;
+  }
+  flex: 1;
+  display: flex !important;
+  transition: all 1sec;
+  flex-direction: column;
+  position: relative;
+  display: block;
+  margin: 0 2px;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 10rem / @hfs 20rem / @hfs;
+  text-transform: uppercase;
+  overflow: hidden;
+  &:before {
+    box-sizing: border-box;
+    transform: translateX(100%);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 99.5%;
+    height: 2px;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-radius: 4px;
+  }
+
+  &:after {
+    box-sizing: border-box;
+    transform: translateX(-100%);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99.5%;
+    height: 2px;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    color: ${(props) =>
+      props.selected ? '#454545' : props.theme.colors.primaryText};
+    text-decoration: none;
+    backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+    &:before {
+      transition: 0.1s transform linear, 0.1s height linear 0.1s;
+      transform: translateX(0);
+      height: 100%;
+      border-color: ${(props) => props.theme.colors.primaryText};
+      border-radius: 4px;
+    }
+    &:after {
+      transition: 0.1s transform linear 0.2s, 0.1s height linear 0.3s;
+      transform: translateX(0);
+      height: 100%;
+      border-color: ${(props) => props.theme.colors.primaryText};
+      border-radius: 4px;
+    }
+  }
 `
 
 export const FPAccordion = styled(Accordion)`
@@ -84,22 +158,8 @@ export const FPToolButton = styled(Button)`
       props.anchor === 'bottom' ? '0px' : '8px'};
   }
 
-  span {
-    display: none;
-    transition: opacity 1s ease-out;
-    opacity: 0;
-    margin-left: 1rem;
-    font-size: ${(props) => (props.size === 'large' ? '15px' : '10px')};
-  }
   &:disabled {
     background: #787878 !important;
-  }
-  &:hover {
-    width: 100px;
-    span {
-      opacity: 1;
-      display: inline-flex;
-    }
   }
 `
 
@@ -553,6 +613,7 @@ export const FVGridRow = styled.div`
 export const FVGridHeaderRow = styled(FVGridRow)`
   border-bottom: 2px solid;
   height: 30px;
+  color: ${(props) => props.theme.colors.primaryText};
 `
 
 export const FVGridCell = styled.div`

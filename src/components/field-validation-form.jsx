@@ -5,7 +5,15 @@ import {
   FVFormCell,
   FVFormRow,
   FVPlannerWrapper,
-  SmallHeader
+  SmallHeader,
+  FPBottomNavigation,
+  FPDrawer,
+  FPPaperVerticalPadding,
+  FPSquareActionButton,
+  FPDividerField,
+  FPFormColumn,
+  FVGridHeaderRow,
+  FPHeaderField
 } from './styled'
 import {
   FPDataGridView,
@@ -26,11 +34,16 @@ import {
 import { Field, reduxForm } from 'redux-form'
 import React, { Fragment, useEffect, useState } from 'react'
 import {
+  faChevronRight,
+  faChevronLeft,
   faChevronDown,
   faChevronUp,
   faClone,
   faPenAlt,
-  faTrashAlt
+  faTrashAlt,
+  faPen,
+  faPlus,
+  faEllipsisH
 } from '@fortawesome/free-solid-svg-icons'
 import { Button, Grid } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -114,11 +127,18 @@ const FieldLevelValidationForm = ({
   fields,
   onChange,
   theme,
+  controls,
+  onAddColumn,
+  plannerConfig,
+  controlMarker = {},
   ...props
 }) => {
   const { handleSubmit, pristine, reset, submitting } = props
   const [controlsState, setControlsSet] = useState({})
   const [localFields, setLocalFields] = useState([])
+  const [selectedIndices, setSelectedIndices] = useState({})
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [addAdditional, setAddAdditional] = useState('')
 
   useEffect(() => {
     const res = {}
@@ -152,12 +172,36 @@ const FieldLevelValidationForm = ({
     return res
   }
 
-  const onActionButtonClick = (type, index, e) => {
+  const onActionButtonClick = (type, row, column, e, closeDrawer) => {
     e.preventDefault()
     e.stopPropagation()
-    if (props.onButtonClick) {
-      props.onButtonClick(type, index)
+    if (closeDrawer) {
+      setDrawerOpen(false)
     }
+    if (props.onButtonClick) {
+      props.onButtonClick(type, row, column)
+    }
+  }
+
+  const onMoreClick = (row, column, columncount, rowcount) => {
+    setSelectedIndices({
+      rowIndex: row,
+      columnIndex: column,
+      columnCount: columncount,
+      rowCount: rowcount
+    })
+    setDrawerOpen(true)
+  }
+
+  const getSelectedLabel = () => {
+    if (selectedIndices.rowIndex > -1 && selectedIndices.columnIndex > -1) {
+      try {
+        return localFields[selectedIndices.rowIndex][
+          selectedIndices.columnIndex
+        ].label
+      } catch {}
+    }
+    return ''
   }
 
   return (
@@ -179,7 +223,14 @@ const FieldLevelValidationForm = ({
                             editable={props.editable}
                             bordered={fld.bordered}
                           >
-                            <div className='element-wrapper'>
+                            <FPFormColumn
+                              editable={props.editable}
+                              selected={
+                                selectedIndices.rowIndex === fldrowi &&
+                                selectedIndices.columnIndex === fldi
+                              }
+                              className='element-wrapper'
+                            >
                               {fld.datafield ? (
                                 <Field
                                   name={fld.datafield}
@@ -203,7 +254,7 @@ const FieldLevelValidationForm = ({
                               ) : (
                                 <FVFormNonField field={fld} />
                               )}{' '}
-                            </div>
+                            </FPFormColumn>
                             <FPControlEdit
                               className='control-edit-overlay'
                               {...{
@@ -223,26 +274,15 @@ const FieldLevelValidationForm = ({
                                         e.stopPropagation()
                                       }}
                                       onClick={(e) =>
-                                        onActionButtonClick('ed', fldrowi, e)
+                                        onActionButtonClick(
+                                          'ed',
+                                          fldrowi,
+                                          fldi,
+                                          e
+                                        )
                                       }
                                     >
                                       <FontAwesomeIcon icon={faPenAlt} />
-                                      <span>Edit</span>
-                                    </FPToolButton>
-                                    <FPToolButton
-                                      variant='contained'
-                                      size='small'
-                                      aria-label='clone'
-                                      onMouseEnter={(e) => {
-                                        e.preventDefault()
-                                        e.stopPropagation()
-                                      }}
-                                      onClick={(e) =>
-                                        onActionButtonClick('cl', fldrowi, e)
-                                      }
-                                    >
-                                      <FontAwesomeIcon icon={faClone} />
-                                      <span>Clone</span>
                                     </FPToolButton>
                                     <FPToolButton
                                       variant='contained'
@@ -254,43 +294,34 @@ const FieldLevelValidationForm = ({
                                         e.stopPropagation()
                                       }}
                                       onClick={(e) =>
-                                        onActionButtonClick('rm', fldrowi, e)
+                                        onActionButtonClick(
+                                          'rm',
+                                          fldrowi,
+                                          fldi,
+                                          e
+                                        )
                                       }
                                     >
                                       <FontAwesomeIcon icon={faTrashAlt} />
-                                      <span>Remove</span>
                                     </FPToolButton>
                                     <FPToolButton
                                       variant='contained'
                                       size='small'
-                                      aria-label='move up'
+                                      aria-label='more'
                                       onMouseEnter={(e) => {
                                         e.preventDefault()
                                         e.stopPropagation()
                                       }}
                                       onClick={(e) =>
-                                        onActionButtonClick('md', fldrowi, e)
-                                      }
-                                      disabled={
-                                        fldrowi === localFields.length - 1
+                                        onMoreClick(
+                                          fldrowi,
+                                          fldi,
+                                          fldrow.length,
+                                          localFields.length
+                                        )
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faChevronDown} />
-                                    </FPToolButton>
-                                    <FPToolButton
-                                      variant='contained'
-                                      size='small'
-                                      aria-label='move down'
-                                      onMouseEnter={(e) => {
-                                        e.preventDefault()
-                                        e.stopPropagation()
-                                      }}
-                                      onClick={(e) =>
-                                        onActionButtonClick('mu', fldrowi, e)
-                                      }
-                                      disabled={fldrowi === 0}
-                                    >
-                                      <FontAwesomeIcon icon={faChevronUp} />
+                                      <FontAwesomeIcon icon={faEllipsisH} />
                                     </FPToolButton>
                                   </Fragment>
                                 ) : null}
@@ -309,6 +340,177 @@ const FieldLevelValidationForm = ({
           </React.Fragment>
         </FVPlannerWrapper>
       </div>
+      <FPDrawer
+        anchor={'right'}
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
+        {drawerOpen ? (
+          <FPPaperVerticalPadding>
+            <FPHeaderField>More Option: {getSelectedLabel()}</FPHeaderField>
+            <FPDividerField />
+            <div style={{ display: 'flex' }}>
+              <FPSquareActionButton
+                onClick={(e) =>
+                  onActionButtonClick(
+                    'ed',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    true
+                  )
+                }
+              >
+                <div>
+                  <FontAwesomeIcon icon={faPen} />
+                </div>
+                <div>Edit</div>
+              </FPSquareActionButton>
+              <FPSquareActionButton
+                onClick={(e) =>
+                  onActionButtonClick(
+                    'cl',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    true
+                  )
+                }
+              >
+                <div>
+                  <FontAwesomeIcon icon={faClone} />
+                </div>
+                <div>Clone</div>
+              </FPSquareActionButton>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <FPSquareActionButton
+                disabled={selectedIndices.rowIndex === 0}
+                onClick={(e) => {
+                  setSelectedIndices({
+                    ...selectedIndices,
+                    rowIndex: selectedIndices.rowIndex + -1
+                  })
+                  onActionButtonClick(
+                    'mu',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    false
+                  )
+                }}
+              >
+                <div>
+                  <FontAwesomeIcon icon={faChevronUp} />
+                </div>
+                <div>Move Up Row</div>
+              </FPSquareActionButton>
+              <FPSquareActionButton
+                disabled={
+                  selectedIndices.rowIndex === selectedIndices.rowCount - 1
+                }
+                onClick={(e) => {
+                  setSelectedIndices({
+                    ...selectedIndices,
+                    rowIndex: selectedIndices.rowIndex + 1
+                  })
+                  onActionButtonClick(
+                    'md',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    false
+                  )
+                }}
+              >
+                <div>
+                  <FontAwesomeIcon icon={faChevronDown} />
+                </div>
+                <div>Move Down Row</div>
+              </FPSquareActionButton>
+              <FPSquareActionButton
+                disabled={selectedIndices.columnIndex === 0}
+                onClick={(e) => {
+                  setSelectedIndices({
+                    ...selectedIndices,
+                    columnIndex: selectedIndices.columnIndex - 1
+                  })
+                  onActionButtonClick(
+                    'ml',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    false
+                  )
+                }}
+              >
+                <div>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+                </div>
+                <div>Move Left Column</div>
+              </FPSquareActionButton>
+              <FPSquareActionButton
+                disabled={
+                  selectedIndices.columnIndex ===
+                  selectedIndices.columnCount - 1
+                }
+                onClick={(e) => {
+                  setSelectedIndices({
+                    ...selectedIndices,
+                    columnIndex: selectedIndices.columnIndex + 1
+                  })
+                  onActionButtonClick(
+                    'mr',
+                    selectedIndices.rowIndex,
+                    selectedIndices.columnIndex,
+                    e,
+                    false
+                  )
+                }}
+              >
+                <div>
+                  <FontAwesomeIcon icon={faChevronRight} />
+                </div>
+                <div>Move Right Column</div>
+              </FPSquareActionButton>
+            </div>
+
+            <FPHeaderField>Add new column</FPHeaderField>
+            <FPDividerField />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                gridGap: '8px'
+              }}
+            >
+              {Object.keys(controls).map((k, ki) => {
+                return (
+                  <React.Fragment key={ki}>
+                    {controls[k].map((c, ci) => {
+                      return (
+                        <FPSquareActionButton
+                          key={`${ki}-${ci}`}
+                          onClick={() => {
+                            setDrawerOpen(false)
+                            if (onAddColumn)
+                              onAddColumn(c, selectedIndices.rowIndex)
+                          }}
+                        >
+                          <div>
+                            <FontAwesomeIcon icon={c.icon} />
+                          </div>
+                          <div>{c.display}</div>
+                        </FPSquareActionButton>
+                      )
+                    })}
+                  </React.Fragment>
+                )
+              })}
+            </div>
+          </FPPaperVerticalPadding>
+        ) : null}
+      </FPDrawer>
     </form>
   )
 }

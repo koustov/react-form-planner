@@ -39,6 +39,8 @@ export const FormViewer = ({
   controlMarker,
   editable,
   onButtonClick,
+  onInject,
+  controls = [],
   baseTheme = 'dark',
   themeOverride = {}
 }) => {
@@ -114,8 +116,11 @@ export const FormViewer = ({
                 onChange={(key, value, field) =>
                   onValueChanged(key, value, field)
                 }
+                onAddColumn={onInject}
+                controls={controls}
                 editable={editable}
                 onButtonClick={onButtonClick}
+                controlMarker={controlMarker}
               />
             ) : (
               <NoContent

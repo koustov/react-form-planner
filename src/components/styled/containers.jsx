@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Tabs, Tab, Paper, Modal, Grid } from '@mui/material'
+import { Tabs, Tab, Paper, Modal, Grid, Drawer } from '@mui/material'
 
 const BoxSelected = css`
   border-color: #3f51b5;
@@ -226,9 +226,10 @@ export const FPInputFiedlSet = styled(FPFiedlSet)`
 export const FPDividerField = styled.hr`
   padding: 0;
   border: 0;
-  border-top: solid 1px;
+  border-top: solid 2px;
   text-align: center;
   border-color: ${(props) => props.theme.colors.border};
+  width: 100%;
 `
 
 export const FPFormWrapper = styled.div`
@@ -239,29 +240,48 @@ export const FPFormRow = styled.div`
   width: 99%;
   border: 1px solid transparent;
   ${(props) => props.selected && BoxSelected}
+
   .control-edit-overlay {
     height: ${(props) => (props.editable ? '20px' : '0px')};
   }
   .action-button-wrapper {
     display: none;
   }
-  .element-wrapper {
+  /* .element-wrapper {
     border: 1px solid transparent;
-  }
+  } */
   &:hover {
     .action-button-wrapper {
       display: ${(props) => (props.editable ? 'flex' : 'none')};
     }
-    .element-wrapper {
+    /* .element-wrapper {
       border-radius: 4px;
       border: 1px solid
         ${(props) =>
-          props.editable && !props.bordered
-            ? props.theme.colors.primaryText
-            : 'transparent'};
-    }
+      props.editable && !props.bordered
+        ? props.theme.colors.primaryText
+        : 'transparent'};
+    } */
   }
 `
+
+export const FPFormColumn = styled.div`
+  border: 1px solid transparent;
+  border: 1px solid
+    ${(props) =>
+      props.editable && props.selected
+        ? props.theme.colors.primaryText
+        : 'transparent'};
+  &:hover {
+    border-radius: 4px;
+    border: 1px solid
+      ${(props) =>
+        props.editable && !props.bordered
+          ? props.theme.colors.primaryText
+          : 'transparent'};
+  }
+`
+
 export const FPControlEdit = styled.div`
   width: 100%;
   display: flex;
@@ -688,4 +708,16 @@ export const FVBannerImage = styled(FVFormBanner)`
 export const FVImageContainer = styled.div`
   display: flex;
   align-items: contain;
+`
+
+export const FPDrawer = styled(Drawer)`
+  .MuiDrawer-paper {
+    width: 600px !important;
+    background: none !important;
+    background-image: linear-gradient(
+      ${(props) => props.theme.colors.card.start},
+      ${(props) => props.theme.colors.card.end}
+    ) !important;
+    backdrop-filter: blur(${({ theme }) => theme.colors.card.blur || '0px'});
+  }
 `

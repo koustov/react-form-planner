@@ -28,6 +28,8 @@ import { Box } from '@mui/material'
 import { FormViewer } from '../../FormViewer'
 import { getFinalField } from './fields'
 
+import { getControlTemplate } from '../../services/control-template'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props
 
@@ -48,8 +50,10 @@ export const PropertyEditor = ({
   controls,
   template,
   index,
+
   onChange,
-  onClose
+  onClose,
+  plannerConfig = { plannerConfig }
 }) => {
   const [controlState, setControlState] = useState({})
   const [editContainerGroups, setEditContainerGroups] = useState({})
@@ -59,11 +63,18 @@ export const PropertyEditor = ({
 
   useEffect(() => {
     if (controls && controls.length) {
-      const control = Object.assign({}, controls[index][0])
+      let control = Object.assign({}, controls[index.row][index.column])
+
       const res = {}
+      if (!control.editableFields) {
+        control = Object.assign(
+          control,
+          getControlTemplate(control, control, plannerConfig)
+        )
+      }
       control.editableFields.forEach((ed) => {
         const groupName = ed[0].group ? ed[0].group : 'Default'
-        ed.value = controls[index][0][ed.datafield]
+        ed.value = controls[index.row][index.column][ed.datafield]
         if (!res[groupName]) {
           res[groupName] = [ed]
         } else {
@@ -71,7 +82,7 @@ export const PropertyEditor = ({
         }
       })
       setReadOnlyTemplate(controls)
-      setControlState(Object.assign({}, controls[index][0]))
+      setControlState(Object.assign({}, controls[index.row][index.column]))
       setEditContainerGroups(res)
     }
   }, [])
@@ -136,23 +147,8 @@ export const PropertyEditor = ({
 
   const onControlValueChanged = (key, value, field) => {
     const res = onValueChanged(key, value, field)
-    readOnlyTemplate[selectedIndex][0][key] = value
+    readOnlyTemplate[selectedIndex.row][selectedIndex.column][key] = value
     setReadOnlyTemplate(JSON.parse(JSON.stringify(readOnlyTemplate)))
-  }
-  const onNextClicked = () => {
-    if (onChange) {
-      onChange(controlState)
-    }
-    setSelectedIndex(selectedIndex + 1)
-    setControlState(Object.assign({}, controls[selectedIndex + 1][0]))
-  }
-
-  const onPreviousClicked = () => {
-    if (onChange) {
-      onChange(controlState)
-    }
-    setSelectedIndex(selectedIndex - 1)
-    setControlState(Object.assign({}, controls[selectedIndex - 1][0]))
   }
 
   return (

@@ -7,7 +7,7 @@ import {
   FPAccordionDetails,
   FPAccordionSummary,
   FPBottomNavigation,
-  FPBottomNavigationAction,
+  FPSquareActionButton,
   FPDividerField,
   FPMediumHeader,
   FPPaperVerticalPadding,
@@ -121,7 +121,7 @@ export const FormPlanner = ({
   }
 
   // Event Handlers
-  const onAdd = (value) => {
+  const onAdd = (value, rowindex) => {
     const selectedTemplate = Object.assign(
       getControlTemplate(value, fieldDefinitions, localConfig),
       {}
@@ -132,9 +132,16 @@ export const FormPlanner = ({
       selectedTemplate.typeDisplay = value.display
       const tmpControlListData = controlListData
 
-      tmpControlListData.fields.push([selectedTemplate])
+      if (rowindex) {
+        tmpControlListData.fields[rowindex].push(selectedTemplate)
+      } else {
+        tmpControlListData.fields.push([selectedTemplate])
+      }
       updateList(tmpControlListData)
-      setSelectedControlIndex(tmpControlListData.fields.length - 1)
+      setSelectedControlIndex({
+        row: tmpControlListData.fields.length - 1,
+        column: 0
+      })
       // setEditorOpened(true)
     }
   }
@@ -146,33 +153,68 @@ export const FormPlanner = ({
     }
   }
 
-  const onActionButtonClicked = (type, index) => {
+  const onActionButtonClicked = (type, row, column) => {
     let tmpCLD
     switch (type) {
       case 'mu':
-        const movedUpFields = moveItem(index, index - 1, controlListData.fields)
+        const movedUpFields = moveItem(
+          row,
+          row - 1,
+          column,
+          column,
+          controlListData.fields
+        )
         controlListData.fields = movedUpFields
         updateList(controlListData)
         break
       case 'md':
         const movedDownFields = moveItem(
-          index,
-          index + 1,
+          row,
+          row + 1,
+          column,
+          column,
           controlListData.fields
         )
         controlListData.fields = movedDownFields
         updateList(controlListData)
         break
+      case 'ml':
+        const movedLeftFields = moveItem(
+          row,
+          row,
+          column,
+          column - 1,
+          controlListData.fields
+        )
+        controlListData.fields = movedLeftFields
+        updateList(controlListData)
+        break
+      case 'mr':
+        const movedRightFields = moveItem(
+          row,
+          row,
+          column,
+          column + 1,
+          controlListData.fields
+        )
+        controlListData.fields = movedRightFields
+        updateList(controlListData)
+        break
       case 'ed':
-        setSelectedControlIndex(index)
+        setSelectedControlIndex({
+          row: row,
+          column: column
+        })
         setEditorOpened(true)
         break
       case 'rm':
-        controlListData.fields.splice(index, 1)
+        if (controlListData.fields[row].length === 1)
+          controlListData.fields.splice(row, 1)
+        else controlListData.fields[row].splice(column, 1)
         updateList(controlListData)
         break
       case 'cl':
-        controlListData.fields.push(controlListData.fields[index])
+        controlListData.fields.push([controlListData.fields[row][column]])
         updateList(controlListData)
         break
       default: //DO nothing
@@ -201,9 +243,17 @@ export const FormPlanner = ({
   }
 
   // Helper methods
-  const moveItem = (from, to, list) => {
-    var f = list.splice(from, 1)[0]
-    list.splice(to, 0, f)
+  const moveItem = (fromRow, toRow, fromColumn, toColumn, list) => {
+    if (fromRow === toRow) {
+      let rowList = list[fromRow]
+      const item = rowList[fromColumn]
+      const f = rowList.splice(fromColumn, 1)
+      rowList.splice(toColumn, 0, item)
+    } else {
+      var f = list.splice(fromRow, 1)[0]
+      list.splice(toRow, 0, f)
+    }
+
     return list
   }
 
@@ -322,18 +372,24 @@ export const FormPlanner = ({
                         {/* <FPDividerField /> */}
                         <FPBottomNavigation showLabels>
                           {localConfig.showFormProperties ? (
-                            <FPBottomNavigationAction
-                              label='Properties'
-                              icon={<FontAwesomeIcon icon={faEdit} />}
+                            <FPSquareActionButton
                               onClick={() => setFormPropertiesOpened(true)}
-                            />
+                            >
+                              <div>
+                                <FontAwesomeIcon icon={faEdit} />
+                              </div>
+                              <div>Properties</div>
+                            </FPSquareActionButton>
                           ) : null}
                           {localConfig.showPreview ? (
-                            <FPBottomNavigationAction
-                              label='Preview'
-                              icon={<FontAwesomeIcon icon={faStickyNote} />}
+                            <FPSquareActionButton
                               onClick={() => onPreviewClicked()}
-                            />
+                            >
+                              <div>
+                                <FontAwesomeIcon icon={faStickyNote} />
+                              </div>
+                              <div>Preview</div>
+                            </FPSquareActionButton>
                           ) : null}
                         </FPBottomNavigation>
                       </div>
@@ -354,9 +410,14 @@ export const FormPlanner = ({
                   onChange={(a, b, c) => {
                     console.log('Value received')
                   }}
+                  plannerConfig={localConfig}
                   template={controlListData}
                   editable={true}
                   onButtonClick={onActionButtonClicked}
+                  controls={finalControls}
+                  onInject={(item, row) => {
+                    onAdd(item, row)
+                  }}
                 />
               </FPPlanner>
             </Grid>
@@ -406,6 +467,7 @@ export const FormPlanner = ({
                 controls={controlListData.fields}
                 index={selectedControlIndex}
                 onChange={onControlPropertyUpdated}
+                plannerConfig={localConfig}
                 onClose={() => {
                   setEditorOpened(false)
                 }}
