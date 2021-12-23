@@ -179,7 +179,7 @@ const getEditorFields = (type, customdefinition, config) => {
       res = [
         [getEditorField('text', 'label')],
         [getEditorField('text', 'datafield', 'Datafield', { required: true })],
-        [getEditorField('checkbox', 'required')]
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'select':
@@ -202,7 +202,8 @@ const getEditorFields = (type, customdefinition, config) => {
     case 'checkbox':
       res = [
         [getEditorField('text', 'label', 'Label', { required: true })],
-        [getEditorField('text', 'datafield', 'Datafield', { required: true })]
+        [getEditorField('text', 'datafield', 'Datafield', { required: true })],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
 
@@ -218,7 +219,8 @@ const getEditorFields = (type, customdefinition, config) => {
             ],
             group: 'Options'
           })
-        ]
+        ],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'header':
@@ -238,7 +240,8 @@ const getEditorFields = (type, customdefinition, config) => {
           })
         ],
         [getEditorField('text', 'datafield', 'Datafield', { required: true })],
-        [getEditorField('checkbox', 'multiple', 'Allow Multiple imaes')]
+        [getEditorField('checkbox', 'multiple', 'Allow Multiple imaes')],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'color':
@@ -249,7 +252,8 @@ const getEditorFields = (type, customdefinition, config) => {
           getEditorField('text', 'datafield', 'Data Field', {
             datafield: uuidv4()
           })
-        ]
+        ],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'image':
@@ -264,7 +268,8 @@ const getEditorFields = (type, customdefinition, config) => {
           getEditorField('number', 'style', 'width', {
             asobject: true
           })
-        ]
+        ],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'video':
@@ -276,7 +281,8 @@ const getEditorFields = (type, customdefinition, config) => {
           getEditorField('fileupload', 'value', 'PD FFile', {
             accept: ['application/pdf']
           })
-        ]
+        ],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     case 'question':
@@ -298,7 +304,8 @@ const getEditorFields = (type, customdefinition, config) => {
             options: '[DATAFIELD]=options',
             group: 'Options'
           })
-        ]
+        ],
+        [getEditorField('checkbox', 'required', 'Required')]
       ]
       break
     default:

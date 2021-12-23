@@ -130,6 +130,8 @@ FormPlanner comes with tons of prebuilt elements which are already grouped for c
 | Form Control  | Text Box              | text          | On Demand    |
 |               | Number Box            | number        | On Demand    |
 |               | Multiline Box         | multiline     | On Demand    |
+|               | Date Picker           | date          | On Demand    |
+|               | Date Time Picker      | datetime      | On Demand    |
 |               | Checkbox              | checkbox      | On Demand    |
 |               | Radio                 | radio         | On Demand    |
 |               | Select                | select        | On Demand    |

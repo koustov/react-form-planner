@@ -1,6 +1,6 @@
 {
   "name": "react-form-planner",
-  "version": "0.1.19",
+  "version": "0.2.03",
   "description": "A form builder/planner for react",
   "author": "Koustov <koustov@live.com> (https://tweeter.com/koustov)",
   "license": "MIT",
@@ -76,6 +76,8 @@
     "react-form-viewer",
     "form-builder",
     "react-form-builder",
+    "react form builder",
+    "react form builder",
     "form-viewer",
     "react",
     "react-redux",
