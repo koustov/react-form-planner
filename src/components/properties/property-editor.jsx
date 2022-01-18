@@ -241,7 +241,7 @@ export const PropertyEditor = ({
                         <FormViewer
                           template={{ fields: editContainerGroups[group] }}
                           data={controlState}
-                          onChange={onControlValueChanged}
+                          onControlValueChanged={onControlValueChanged}
                         />
                       }
                     </TabPanel>
