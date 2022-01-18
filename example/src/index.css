@@ -44,3 +44,7 @@ code {
   flex: 1;
   overflow: hidden;
 }
+
+.MuiMenu-paper {
+  background: transparent !important;
+}

@@ -15,12 +15,15 @@ import {
   FPListIcon,
   FPListItem,
   FPListItemText,
+  FPSideBarWrapper,
   FPModalLarge,
   FPPaper,
   FPPlanner,
   FPPlannerWrapper,
+  FPSideBarSmall,
   FPSideBar
 } from './components/styled'
+import { Sidebar } from './components/sidebar'
 import { Fragment, useEffect, useState } from 'react'
 import {
   faChevronDown,
@@ -70,7 +73,7 @@ export const FormPlanner = ({
   const [formPropertiesOpened, setFormPropertiesOpened] = useState(false)
   const [loading, setLoading] = useState(true)
   // const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(0)
+
   const [localConfig, setLocalConfig] = React.useState({})
   const [finalTheme, setFinalTheme] = React.useState({})
 
@@ -262,146 +265,38 @@ export const FormPlanner = ({
     onFormValueValueChanged(theList)
   }
 
-  const handleExpansionChange = (index) => {
-    if (expanded !== index) {
-      setExpanded(index)
-    }
-  }
-
   return (
     <ThemeProvider theme={finalTheme}>
       {loading ? null : (
         <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
+          <FPSideBarSmall>
+            <Sidebar
+              controls={finalControls}
+              onAdd={(c) => onAdd(c)}
+              config={localConfig}
+              small={true}
+            />
+          </FPSideBarSmall>
           <React.Fragment>
-            <Grid item xs={4} md={3} lg={2} style={{ overflow: 'hidden' }}>
-              <FPSideBar elevation={1} className='flex-1'>
-                <FPPaper className='fp-side-bar'>
-                  <FPPaper className='fp-side-bar-body'>
-                    <>
-                      {Object.keys(finalControls).length === 1 ? (
-                        <>
-                          {Object.keys(finalControls).map((fc, fci) => {
-                            return (
-                              <List
-                                component='nav'
-                                aria-label='toolbox-body'
-                                style={{ width: '100%', overflow: 'auto' }}
-                                key={fci}
-                              >
-                                {finalControls[fc].map((con, conti) => {
-                                  return (
-                                    <React.Fragment key={conti}>
-                                      <FPListItem
-                                        dense
-                                        button
-                                        onClick={() => onAdd(con)}
-                                      >
-                                        <FPListIcon>
-                                          <FontAwesomeIcon icon={con.icon} />
-                                        </FPListIcon>
-                                        <FPListItemText
-                                          primary={`${con.display}`}
-                                        />
-                                      </FPListItem>
-                                      <Divider />
-                                    </React.Fragment>
-                                  )
-                                })}
-                              </List>
-                            )
-                          })}
-                        </>
-                      ) : (
-                        <>
-                          {Object.keys(finalControls).map((fc, fci) => {
-                            return (
-                              <FPAccordion
-                                key={fci}
-                                expanded={expanded === fci}
-                                onChange={() => handleExpansionChange(fci)}
-                              >
-                                <FPAccordionSummary
-                                  expandIcon={
-                                    <FontAwesomeIcon icon={faChevronDown} />
-                                  }
-                                  aria-controls='panel1a-content'
-                                  id='panel1a-header'
-                                >
-                                  {fc}
-                                </FPAccordionSummary>
-                                <FPAccordionDetails>
-                                  <List
-                                    component='nav'
-                                    aria-label='toolbox-body'
-                                    style={{ width: '100%', overflow: 'auto' }}
-                                  >
-                                    {finalControls[fc].map((con, conti) => {
-                                      return (
-                                        <React.Fragment key={conti}>
-                                          <FPListItem
-                                            dense
-                                            button
-                                            onClick={() => onAdd(con)}
-                                          >
-                                            <FPListIcon>
-                                              <FontAwesomeIcon
-                                                icon={con.icon}
-                                              />
-                                            </FPListIcon>
-                                            <FPListItemText
-                                              primary={`${con.display}`}
-                                            />
-                                          </FPListItem>
-                                          <Divider />
-                                        </React.Fragment>
-                                      )
-                                    })}
-                                  </List>
-                                </FPAccordionDetails>
-                              </FPAccordion>
-                            )
-                          })}
-                        </>
-                      )}
-                    </>
-                  </FPPaper>
-                  <React.Fragment>
-                    {localConfig.showPreview ||
-                    localConfig.showFormProperties ? (
-                      <div className='fp-side-bar-footer'>
-                        {/* <FPDividerField /> */}
-                        <FPBottomNavigation showLabels>
-                          {localConfig.showFormProperties ? (
-                            <FPSquareActionButton
-                              onClick={() => setFormPropertiesOpened(true)}
-                            >
-                              <div>
-                                <FontAwesomeIcon icon={faEdit} />
-                              </div>
-                              <div>Properties</div>
-                            </FPSquareActionButton>
-                          ) : null}
-                          {localConfig.showPreview ? (
-                            <FPSquareActionButton
-                              onClick={() => onPreviewClicked()}
-                            >
-                              <div>
-                                <FontAwesomeIcon icon={faStickyNote} />
-                              </div>
-                              <div>Preview</div>
-                            </FPSquareActionButton>
-                          ) : null}
-                        </FPBottomNavigation>
-                      </div>
-                    ) : null}
-                  </React.Fragment>
-                </FPPaper>
-              </FPSideBar>
-            </Grid>
+            <FPSideBarWrapper
+              item
+              // xs={0}
+              md={2}
+              // sm={0}
+              lg={2}
+              style={{ overflow: 'hidden' }}
+            >
+              <Sidebar
+                controls={finalControls}
+                onAdd={(c) => onAdd(c)}
+                config={localConfig}
+              />
+            </FPSideBarWrapper>
             <Grid
               item
-              xs={8}
-              md={9}
+              xs={12}
+              md={10}
+              sm={12}
               lg={10}
               style={{ height: '100%', overflow: 'hidden' }}
             >

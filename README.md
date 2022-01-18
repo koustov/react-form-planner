@@ -3,7 +3,11 @@
     <h1>react-form-planner</h1>
   </p>
   <p>
-     <i>Build or view, you beautiful form is just a click away.</i>
+     <i>Build or view, your beautiful form is just a click away.</i>
+     <br/>
+     <i>No technical knowledge is required.</i>
+     <br/>
+     <b>NO BACKEND,Entirely based on frontend.</b>
   </p>
 
   <p>
@@ -20,6 +24,7 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 **Table of Contents**
 
 - [Demo](#demo)
+- [Playground](#playground)
 - [Features](#features)
 - [When do you need it](#when-do-you-need-it)
 - [Usage](#usage)
@@ -29,10 +34,11 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
   - [How to use](#how-to-use)
   - [Supported Elements](#supported-elements)
   - [Form Properties](#form-properties)
+  - [Form Parameters](#form-parameters)
   - [Preview your form](#preview-your-form)
   - [Form Viewer](#form-viewer)
   - [How to use](#how-to-use-1)
-- [Playground](#playground)
+- [Playground](#playground-1)
 - [Screenshots](#screenshots)
 - [Items in queue](#items-in-queue)
 - [Contribution 🍰](#contribution-)
@@ -42,11 +48,15 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 
 Visit https://react-form-planner.vercel.app/
 
+## Playground
+
+Visit https://codesandbox.io/s/react-form-planner-smw51
+
 ## Features
 
 - JSON based.
 - Redux based.
-- Responsive
+- Fully Responsive
 - Customizable
 - Quick and easy.
 - Styled component based.
@@ -158,6 +168,17 @@ Allows to add/update form meta information like
 - Background image
 - Background color
   ![image info](./docs/images/fp.PNG)
+
+### Form Parameters
+
+| Name               | Description                                             | Default Value |
+| ------------------ | ------------------------------------------------------- | ------------- |
+| showFormProperties | Show form properties button to update form level values | false         |
+| showPreview        | Integrated button to show form preview                  | false         |
+| allowCustomStyles  | Allow user to set custom css styles                     | false         |
+| allowCustomProps   | Allow user to set custom field properties               | false         |
+| advancedFeatures   | Enable advanced features                                | false         |
+| fields             | List of control types to be shown                       | All           |
 
 ### Preview your form
 

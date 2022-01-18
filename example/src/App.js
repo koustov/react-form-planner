@@ -48,38 +48,65 @@ const App = () => {
             <h1 style={{ fontWeight: 100 }}>React Form Planner</h1>
           </div>
           <div>
-            <Button onClick={handleOpen}>Preview</Button>
-            <ToggleButtonGroup
-              color='primary'
-              value={'web'}
-              exclusive
-              onChange={handleChange}
-            >
-              <ToggleButton
-                value='glass'
+            <div>
+              <Button onClick={handleOpen}>Preview</Button>
+              <ToggleButtonGroup
+                color='primary'
+                value={'web'}
+                exclusive
+                onChange={handleChange}
+              >
+                <ToggleButton
+                  value='glass'
+                  style={{
+                    color: `${themeName === 'glass' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Glass
+                </ToggleButton>
+                <ToggleButton
+                  value='dark'
+                  style={{
+                    color: `${themeName === 'dark' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Dark
+                </ToggleButton>
+                <ToggleButton
+                  value='chalk'
+                  style={{
+                    color: `${themeName === 'chalk' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Chalk
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+            <div>
+              {' '}
+              <a
+                href='https://www.npmjs.com/package/react-form-planner'
+                target='_blank'
                 style={{
-                  color: `${themeName === 'glass' ? 'yellow' : '#ABABAB'}`
+                  textDecoration: 'none',
+                  color: '#FFFFFF',
+                  marginRight: '8px'
                 }}
               >
-                Glass
-              </ToggleButton>
-              <ToggleButton
-                value='dark'
+                🔶 NPM
+              </a>
+              <a
+                href='https://github.com/koustov/react-form-planner'
+                target='_blank'
                 style={{
-                  color: `${themeName === 'dark' ? 'yellow' : '#ABABAB'}`
+                  textDecoration: 'none',
+                  color: '#FFFFFF',
+                  marginRight: '8px'
                 }}
               >
-                Dark
-              </ToggleButton>
-              <ToggleButton
-                value='chalk'
-                style={{
-                  color: `${themeName === 'chalk' ? 'yellow' : '#ABABAB'}`
-                }}
-              >
-                Chalk
-              </ToggleButton>
-            </ToggleButtonGroup>
+                🔘 GIT
+              </a>
+            </div>
           </div>
         </div>
         <div className='form-wrapper'>
@@ -88,7 +115,8 @@ const App = () => {
               showFormProperties: true,
               allowCustomProps: true,
               allowCustomStyles: true,
-              showBasicLabels: true
+              showBasicLabels: true,
+              showPreview: true
             }}
             onFormValueChanged={(val) => {
               setFormState(val)
@@ -108,7 +136,15 @@ const App = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style} style={{ width: '90vw', backgroundColor: '#000' }}>
+        <Box
+          sx={style}
+          style={{
+            width: '90vw',
+            backgroundColor: '#000',
+            height: '90vh',
+            overflow: 'auto'
+          }}
+        >
           <Typography
             id='modal-modal-title'
             variant='h6'
@@ -123,13 +159,15 @@ const App = () => {
               baseTheme={'dark'}
               themeOverride={Themes[themeName]}
               onChange={(k, v, c) => {
-                data[k] = v
-                setData(data)
+                // data[k] = v
+                // setData(data)
                 console.log('Form data changed')
                 console.log(JSON.stringify(data))
               }}
               onControlValueChanged={(k, v, f) => {
                 console.log('Control data changed')
+                data[k] = v
+                setData(data)
                 console.log(
                   `Field: ${k} Value: ${v} Field: ${JSON.stringify(f)}`
                 )

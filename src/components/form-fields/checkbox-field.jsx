@@ -28,9 +28,9 @@ export const FVFormCheckboxField = (
         id={`${field.datafield}`}
         error={touched && error}
         onChange={(e) => {
+          setVal(e.target.checked)
           if (onValueChanged) {
-            setVal(!val)
-            onValueChanged(field.datafield, !val, field)
+            onValueChanged(field.datafield, e.target.checked)
           }
         }}
       />

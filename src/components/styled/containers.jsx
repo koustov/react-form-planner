@@ -65,7 +65,19 @@ export const FPPlannerWrapper = styled(Grid)`
   background: ${(props) =>
     getThemeData(props.theme, 'colors.background')} !important;
 `
+export const FPSideBarWrapper = styled(Grid)`
+  display: block;
+  @media (max-width: 900px) {
+    display: none;
+  }
+`
 
+export const FPSideBarSmall = styled(Grid)`
+  display: none;
+  @media (max-width: 900px) {
+    display: block;
+  }
+`
 export const FPSideBar = styled(FPPaper)`
   height: 100%;
   background-image: linear-gradient(
