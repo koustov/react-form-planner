@@ -48,38 +48,65 @@ const App = () => {
             <h1 style={{ fontWeight: 100 }}>React Form Planner</h1>
           </div>
           <div>
-            <Button onClick={handleOpen}>Preview</Button>
-            <ToggleButtonGroup
-              color='primary'
-              value={'web'}
-              exclusive
-              onChange={handleChange}
-            >
-              <ToggleButton
-                value='glass'
+            <div>
+              <Button onClick={handleOpen}>Preview</Button>
+              <ToggleButtonGroup
+                color='primary'
+                value={'web'}
+                exclusive
+                onChange={handleChange}
+              >
+                <ToggleButton
+                  value='glass'
+                  style={{
+                    color: `${themeName === 'glass' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Glass
+                </ToggleButton>
+                <ToggleButton
+                  value='dark'
+                  style={{
+                    color: `${themeName === 'dark' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Dark
+                </ToggleButton>
+                <ToggleButton
+                  value='chalk'
+                  style={{
+                    color: `${themeName === 'chalk' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Chalk
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+            <div>
+              {' '}
+              <a
+                href='https://www.npmjs.com/package/react-form-planner'
+                target='_blank'
                 style={{
-                  color: `${themeName === 'glass' ? 'yellow' : '#ABABAB'}`
+                  textDecoration: 'none',
+                  color: '#FFFFFF',
+                  marginRight: '8px'
                 }}
               >
-                Glass
-              </ToggleButton>
-              <ToggleButton
-                value='dark'
+                🔶 NPM
+              </a>
+              <a
+                href='https://github.com/koustov/react-form-planner'
+                target='_blank'
                 style={{
-                  color: `${themeName === 'dark' ? 'yellow' : '#ABABAB'}`
+                  textDecoration: 'none',
+                  color: '#FFFFFF',
+                  marginRight: '8px'
                 }}
               >
-                Dark
-              </ToggleButton>
-              <ToggleButton
-                value='chalk'
-                style={{
-                  color: `${themeName === 'chalk' ? 'yellow' : '#ABABAB'}`
-                }}
-              >
-                Chalk
-              </ToggleButton>
-            </ToggleButtonGroup>
+                🔘 GIT
+              </a>
+            </div>
           </div>
         </div>
         <div className='form-wrapper'>
