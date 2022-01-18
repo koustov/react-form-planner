@@ -88,7 +88,8 @@ const App = () => {
               showFormProperties: true,
               allowCustomProps: true,
               allowCustomStyles: true,
-              showBasicLabels: true
+              showBasicLabels: true,
+              showPreview: true
             }}
             onFormValueChanged={(val) => {
               setFormState(val)
@@ -108,7 +109,15 @@ const App = () => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style} style={{ width: '90vw', backgroundColor: '#000' }}>
+        <Box
+          sx={style}
+          style={{
+            width: '90vw',
+            backgroundColor: '#000',
+            height: '90vh',
+            overflow: 'auto'
+          }}
+        >
           <Typography
             id='modal-modal-title'
             variant='h6'
@@ -123,13 +132,15 @@ const App = () => {
               baseTheme={'dark'}
               themeOverride={Themes[themeName]}
               onChange={(k, v, c) => {
-                data[k] = v
-                setData(data)
+                // data[k] = v
+                // setData(data)
                 console.log('Form data changed')
                 console.log(JSON.stringify(data))
               }}
               onControlValueChanged={(k, v, f) => {
                 console.log('Control data changed')
+                data[k] = v
+                setData(data)
                 console.log(
                   `Field: ${k} Value: ${v} Field: ${JSON.stringify(f)}`
                 )

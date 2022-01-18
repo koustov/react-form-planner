@@ -14,6 +14,7 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
+  Menu,
   Radio,
   RadioGroup,
   Select,
@@ -557,8 +558,33 @@ export const FVColorField = styled(TextField)`
     width: 150px !important;
   }
 `
-
-export const FVMenuItem = styled(MenuItem)``
+export const FVMenu = styled(Menu)`
+  background: transparent !important;
+  box-sizing: border-box !important;
+  .MuiMenu-list {
+    background-image: linear-gradient(
+      ${(props) => getThemeData(props.theme, 'colors.card.start')},
+      ${(props) => getThemeData(props.theme, 'colors.card.end')}
+    ) !important;
+  }
+  backdrop-filter: blur(
+    ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
+  );
+`
+export const FVMenuItem = styled(MenuItem)`
+  .MuiMenuItem-root {
+    background: ${(props) =>
+      props.theme.colors[
+        props.elevation ? `background${props.elevation}` : `background1`
+      ]} !important;
+  }
+  .MuiListItemText-root {
+    color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
+  }
+  .MuiListItemIcon-root {
+    color: ${(props) => getThemeData(props.theme, 'colors.primaryButton')};
+  }
+`
 export const FVInputLabel = styled(InputLabel)``
 
 export const FVSelect = styled(Select)`

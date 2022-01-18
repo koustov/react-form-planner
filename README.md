@@ -3,7 +3,9 @@
     <h1>react-form-planner</h1>
   </p>
   <p>
-     <i>Build or view, you beautiful form is just a click away.</i>
+     <i>Build or view, your beautiful form is just a click away.</i>
+     <br/>
+     <i>No technical knowledge is required.</i>
   </p>
 
   <p>
@@ -46,7 +48,7 @@ Visit https://react-form-planner.vercel.app/
 
 - JSON based.
 - Redux based.
-- Responsive
+- Fully Responsive
 - Customizable
 - Quick and easy.
 - Styled component based.

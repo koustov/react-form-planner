@@ -211,13 +211,28 @@ const FieldLevelValidationForm = ({
           <React.Fragment>
             {localFields.map((fldrow, fldrowi) => {
               return (
-                <div style={{ width: '100%', display: 'flex' }} key={fldrowi}>
+                <Grid
+                  container
+                  // spacing={{ xs: 2, md: 3 }}
+                  // columns={{ xs: 4, sm: 8, md: 12 }}
+                >
+                  {/* <div  style={{ width: '100%', display: 'flex' }}> */}
                   {fldrow.map((fld, fldi) => {
                     return (
-                      <div
-                        style={{ width: '100%', padding: '4px' }}
+                      <Grid
+                        item
+                        xs={12}
+                        sm={fldrow.length > 1 ? 6 : 12}
+                        md={
+                          fldrow.length > 1 ? (fldrow.length < 3 ? 6 : 4) : 12
+                        }
+                        lg={fldrow.length > 1 ? 12 / fldrow.length : 12}
                         key={`${fldrowi}-${fldi}`}
                       >
+                        {/* <div
+                        style={{ width: '100%', padding: '4px' }}
+                        key={`${fldrowi}-${fldi}`}
+                      > */}
                         {fld.visible !== false ? (
                           <FPFormRow
                             editable={props.editable}
@@ -331,10 +346,10 @@ const FieldLevelValidationForm = ({
                         ) : (
                           <div></div>
                         )}
-                      </div>
+                      </Grid>
                     )
                   })}
-                </div>
+                </Grid>
               )
             })}
           </React.Fragment>
