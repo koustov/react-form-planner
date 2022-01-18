@@ -6,6 +6,8 @@
      <i>Build or view, your beautiful form is just a click away.</i>
      <br/>
      <i>No technical knowledge is required.</i>
+     <br/>
+     <b>NO BACKEND,Entirely based on frontend.</b>
   </p>
 
   <p>
