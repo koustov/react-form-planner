@@ -217,7 +217,7 @@ export const FPHeaderBar = styled.div`
   }
 `
 export const FPMediumHeaderBar = styled(FPHeaderBar)`
-  height: 40px;
+  height: 45px;
   border-bottom: 1px solid #787878;
 `
 
@@ -274,6 +274,14 @@ export const FPFormRow = styled.div`
     .action-button-wrapper {
       display: ${(props) => (props.editable ? 'flex' : 'none')};
     }
+    .element-wrapper {
+      border-radius: 4px;
+      border: 1px solid
+        ${(props) =>
+          props.editable && !props.bordered
+            ? getThemeData(props.theme, 'colors.primaryText')
+            : 'transparent'};
+    }
     /* .element-wrapper {
       border-radius: 4px;
       border: 1px solid
@@ -287,11 +295,11 @@ export const FPFormRow = styled.div`
 
 export const FPFormColumn = styled.div`
   border: 1px solid transparent;
-  border: 1px solid
-    ${(props) =>
-      props.editable && props.selected
-        ? getThemeData(props.theme, 'colors.primaryText')
-        : 'transparent'};
+  position: relative;
+  ${(props) =>
+    props.editable && props.selected
+      ? getThemeData(props.theme, 'colors.primaryText')
+      : 'transparent'};
   &:hover {
     border-radius: 4px;
     border: 1px solid
@@ -300,12 +308,23 @@ export const FPFormColumn = styled.div`
           ? getThemeData(props.theme, 'colors.primaryText')
           : 'transparent'};
   }
+  > .edit-overlay {
+    display: ${(props) => (props.editable ? 'block' : 'none')};
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    z-index: 9;
+  }
 `
 
 export const FPControlEdit = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  margin-left: 2px;
 `
 
 export const FPControlEditXXXX = styled.div`
