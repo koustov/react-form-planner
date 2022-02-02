@@ -227,7 +227,7 @@ const getEditorFields = (type, customdefinition, config) => {
       res = [[getEditorField('text', 'value', 'Text')]]
       break
     case 'label':
-      res = [[getEditorField('textarea', 'value', 'Text')]]
+      res = [[getEditorField('text', 'value', 'Text')]]
       break
     case 'divider':
       res = [getEditorField('customstyle')]

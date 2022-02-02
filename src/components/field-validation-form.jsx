@@ -246,6 +246,7 @@ const FieldLevelValidationForm = ({
                               }
                               className='element-wrapper'
                             >
+                              <div className='edit-overlay' />
                               {fld.datafield ? (
                                 <Field
                                   name={fld.datafield}

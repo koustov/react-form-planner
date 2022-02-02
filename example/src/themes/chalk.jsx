@@ -16,6 +16,7 @@ export const chalk = {
       color: 'yellow'
     },
     primaryButton: '#0D7452',
+    primaryButtonText: '#ffffff',
     primaryText: '#c4c5c9',
     secondaryText: '#c4c5c9',
     ternaryText: '#c4c5c9',

@@ -26,6 +26,7 @@ export const glass = {
       active: '#01B075'
     },
     primaryButton: '#EEE',
+    primaryButtonText: '#3498DB',
     primaryText: '#e8e8e8',
     secondaryText: '#CDCDCD',
     ternaryText: '#ABABAB',

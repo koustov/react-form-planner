@@ -19,6 +19,7 @@ export const dark = {
       color: 'yellow'
     },
     primaryButton: '#A5A5A5',
+    primaryButtonText: '#121212',
     primaryText: '#a3a9b7',
     secondaryText: '#454545',
     ternaryText: '#7bc5ee',

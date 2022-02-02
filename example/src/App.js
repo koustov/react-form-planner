@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { FormPlanner, FormViewer } from 'react-form-planner'
+import RFP from 'react-form-planner'
 import { ThemeProvider } from 'styled-components'
 import { Themes } from './themes'
 import ToggleButton from '@mui/material/ToggleButton'
@@ -110,7 +110,7 @@ const App = () => {
           </div>
         </div>
         <div className='form-wrapper'>
-          <FormPlanner
+          <RFP.FormPlanner
             config={{
               showFormProperties: true,
               allowCustomProps: true,
@@ -154,7 +154,7 @@ const App = () => {
             Preview Form
           </Typography>
           {open ? (
-            <FormViewer
+            <RFP.FormViewer
               id='example-form'
               baseTheme={'dark'}
               themeOverride={Themes[themeName]}

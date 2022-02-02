@@ -160,27 +160,43 @@ export const FPAccordionDetails = styled(AccordionDetails)`
 `
 
 export const FPToolButton = styled(Button)`
-  border-radius: 0px 0px 0px 0px;
+  border-radius: 0px 0px 0px 0px !important;
+  border: 1px solid
+    ${(props) => getThemeData(props.theme, 'colors.primaryButton')} !important;
+  color: ${(props) =>
+    getThemeData(props.theme, 'colors.primaryButton')} !important;
+  background: transparent !important;
+
+  &:hover {
+    color: ${(props) =>
+      getThemeData(props.theme, 'colors.primaryButtonText')} !important;
+    background: ${(props) =>
+      getThemeData(props.theme, 'colors.primaryButton')} !important;
+  }
   color: ${(props) =>
     getThemeData(props.theme, 'colors.primaryText')} !important;
   width: 10px;
   transition: width 0.5s ease-out;
   &:first-child {
     border-top-left-radius: ${(props) =>
-      props.anchor === 'bottom' ? '8px' : '0px'};
+      props.anchor === 'bottom' ? '8px' : '0px'} !important;
     border-bottom-left-radius: ${(props) =>
-      props.anchor === 'bottom' ? '0px' : '8px'};
+      props.anchor === 'bottom' ? '0px' : '8px'} !important;
   }
 
   &:last-child {
     border-top-right-radius: ${(props) =>
-      props.anchor === 'bottom' ? '8px' : '0px'};
+      props.anchor === 'bottom' ? '8px' : '0px'} !important;
     border-bottom-right-radius: ${(props) =>
-      props.anchor === 'bottom' ? '0px' : '8px'};
+      props.anchor === 'bottom' ? '0px' : '8px'} !important;
   }
 
   &:disabled {
     background: #787878 !important;
+  }
+
+  svg {
+    margin-right: 8px;
   }
 `
 
