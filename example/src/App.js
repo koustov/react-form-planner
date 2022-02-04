@@ -27,7 +27,7 @@ const style = {
 
 const App = () => {
   const [template, setTemplate] = React.useState(DefaultTemplate)
-  const [themeName, setThemeName] = React.useState('glass')
+  const [themeName, setThemeName] = React.useState('dark')
   const [data, setData] = React.useState({
     'F_89186732-19d3-4271-b133-ed92757cb17': true
   })
