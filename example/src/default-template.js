@@ -13,6 +13,20 @@ export const DefaultTemplate = {
     ],
     [
       {
+        type: 'select',
+        label: 'Title',
+        placeholder: 'Title',
+        datafield: 'F_89186732-19d3-4271-b133-ed92727cb7d1',
+        id: 'af9a2335-0555-4f24-b8c8-25dd5deda46f',
+        options: [
+          { name: '', value: '' },
+          { name: 'Master', value: 'mst' },
+          { name: 'Mr.', value: 'mr' },
+          { name: 'Ms.', value: 'ms' },
+          { name: 'Mrs.', value: 'mrs' }
+        ]
+      },
+      {
         type: 'text',
         label: 'First Name',
         placeholder: 'Your first name',
@@ -35,6 +49,13 @@ export const DefaultTemplate = {
       }
     ],
     [
+      {
+        type: 'date',
+        label: 'DOB',
+        placeholder: 'DOB',
+        datafield: 'F_89186732-19d3-4271-b133-ed92727cb76',
+        id: 'af9a2335-0555-4f24-b8c8-25dd5deda46j'
+      },
       {
         type: 'text',
         label: 'Primary Contact Number',

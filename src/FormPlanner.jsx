@@ -226,6 +226,9 @@ export const FormPlanner = ({
   const onPreviewClicked = () => {
     setPreviewOpened(true)
   }
+  const onFormPropertiesClicked = () => {
+    setFormPropertiesOpened(true)
+  }
 
   const onControlPropertyUpdated = (control) => {
     controlListData.fields = control
@@ -271,6 +274,8 @@ export const FormPlanner = ({
         <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
           <FPSideBarSmall>
             <Sidebar
+              onPreviewClicked={onPreviewClicked}
+              onFormPropertiesClicked={onFormPropertiesClicked}
               controls={finalControls}
               onAdd={(c) => onAdd(c)}
               config={localConfig}
@@ -287,6 +292,8 @@ export const FormPlanner = ({
               style={{ overflow: 'hidden' }}
             >
               <Sidebar
+                onPreviewClicked={onPreviewClicked}
+                onFormPropertiesClicked={onFormPropertiesClicked}
                 controls={finalControls}
                 onAdd={(c) => onAdd(c)}
                 config={localConfig}

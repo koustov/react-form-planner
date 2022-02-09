@@ -32,7 +32,14 @@ import {
 
 import { Backdrop, Divider, Grid, List } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-export const Sidebar = ({ controls, onAdd, config, small = false }) => {
+export const Sidebar = ({
+  controls,
+  onAdd,
+  config,
+  onPreviewClicked,
+  onFormPropertiesClicked,
+  small = false
+}) => {
   const [expanded, setExpanded] = React.useState(0)
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [open, setOpen] = React.useState(false)
@@ -217,7 +224,7 @@ export const Sidebar = ({ controls, onAdd, config, small = false }) => {
                   <FPBottomNavigation showLabels>
                     {config.showFormProperties ? (
                       <FPSquareActionButton
-                        onClick={() => setFormPropertiesOpened(true)}
+                        onClick={() => onFormPropertiesClicked()}
                       >
                         <div>
                           <FontAwesomeIcon icon={faEdit} />

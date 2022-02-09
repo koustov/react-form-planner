@@ -198,7 +198,8 @@ const AllControls = [
     display: 'Image Upload',
     group: 'Uploads',
     accept: '.jpg,.jpeg,.png',
-    bordered: true
+    bordered: true,
+    multiline: true
   },
   {
     type: 'imageupload',
@@ -208,7 +209,8 @@ const AllControls = [
     display: 'Multiple Image Upload',
     group: 'Uploads',
     accept: '.jpg,.jpeg,.png',
-    bordered: true
+    bordered: true,
+    multiline: true
   },
   {
     type: 'question',
