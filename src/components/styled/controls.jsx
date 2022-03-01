@@ -3,7 +3,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   BottomNavigation,
-  BottomNavigationAction,
   Button,
   Checkbox,
   FormControl,
@@ -17,9 +16,10 @@ import {
   Menu,
   Radio,
   RadioGroup,
-  Select,
-  TextField
+  TextField,
+  Autocomplete
 } from '@mui/material'
+
 import styled, { css } from 'styled-components'
 import { getThemeData } from '../../services/utils'
 
@@ -244,11 +244,24 @@ export const FPTextField = styled(TextField)`
   }
 `
 
-export const FPSelect = styled(Select)`
-  margin: 8px;
+export const FPSelect = styled(Autocomplete)`
+  width: 100%;
+  .MuiInputBase-fullWidth {
+    padding: 1px !important;
+  }
   .MuiOutlinedInput-notchedOutline {
     border-color: ${({ theme }) =>
       getThemeData(theme, 'colors.input.border')} !important;
+    legend {
+      color: ${({ theme }) =>
+        getThemeData(theme, 'colors.input.border')} !important;
+    }
+  }
+  .MuiPopover-paper {
+    background-image: linear-gradient(
+      ${(props) => getThemeData(props.theme, 'colors.card.start')},
+      ${(props) => getThemeData(props.theme, 'colors.card.end')}}
+    ) !important;
   }
 
   .MuiInput-underline:before {
@@ -262,12 +275,35 @@ export const FPSelect = styled(Select)`
   }
   .MuiInputBase-input {
     color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.placeholder')} !important;
+      getThemeData(theme, 'colors.input.border')} !important;
+    margin: unset !important;
   }
 
   .MuiInputLabel-outlined {
     color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.placeholder')} !important;
+      getThemeData(theme, 'colors.input.border')} !important;
+  }
+
+  .MuiSvgIcon-root {
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.border')} !important;
+  }
+
+  .MuiInputLabel-outlined {
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
+    top: -6px !important;
+  }
+`
+
+export const FPSelectWrapper = styled.div`
+  width: 100%;
+  div[role='presentation'],
+  div[role='presentation'] div {
+    background: ${(props) =>
+      getThemeData(props.theme, 'colors.card.start')} !important;
+    color: ${(props) =>
+      getThemeData(props.theme, 'colors.primaryText')} !important;
   }
 `
 
@@ -302,10 +338,12 @@ export const FPListIcon = styled(ListItemIcon)`
   }
   margin-right: 16px;
   font-size: 12px !important;
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPListItemText = styled(ListItemText)`
   font-size: 12px !important;
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPHoverButton = styled.button`
@@ -416,9 +454,19 @@ export const FVFormControlLabel = styled(FormControlLabel)`
   height: 100%;
   color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
-
-export const FVFormControl = styled(FormControl)`
+export const FVFormControlSimple = styled(FormControl)`
   width: -webkit-fill-available;
+  padding: 0px !important;
+  border: 0px !important;
+  border-color: none !important;
+  padding: 0 !important;
+  .MuiInputLabel-outlined {
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.input.placeholder')} !important;
+  }
+`
+
+export const FVFormControl = styled(FVFormControlSimple)`
   border-radius: 5px;
   padding: 8px !important;
   border: 1px solid !important;
@@ -603,33 +651,6 @@ export const FVMenuItem = styled(MenuItem)`
 `
 export const FVInputLabel = styled(InputLabel)``
 
-export const FVSelect = styled(Select)`
-  margin: 8px;
-  .MuiOutlinedInput-notchedOutline {
-    border-color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.border')} !important;
-  }
-
-  .MuiInput-underline:before {
-    border-color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.border')} !important;
-  }
-
-  .MuiInputLabel-animated {
-    color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.border')} !important;
-  }
-  .MuiInputBase-input {
-    color: ${({ theme }) =>
-      getThemeData(theme, 'colors.input.placeholder')} !important;
-  }
-
-  .MuiInputLabel-outlined {
-    color: ${({ theme }) =>
-      getThemeData(theme, 'colors.ternaryText')} !important;
-  }
-`
-
 export const FVLabelField = styled.div`
   margin: 8px;
   color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
@@ -646,6 +667,7 @@ export const FVHeaderField = styled(FVLabelField)`
   display: flex;
   font-size: 18px;
   font-weight: 700;
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FVListItem = styled(ListItem)`

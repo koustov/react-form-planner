@@ -1,7 +1,7 @@
 export const chalk = {
   meta: {
-    name: 'dark',
-    displayName: 'Dark'
+    name: 'chalk',
+    displayName: 'Chalk'
   },
   colors: {
     background: '#141b2d',

@@ -1,11 +1,14 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import {
-  FVSelect,
   FVMenuItem,
   FVTextField,
   FPSelect,
-  FPInputFiedlSet
+  FPInputFiedlSet,
+  FVInputLabel,
+  FVFormControl,
+  FVFormControlSimple,
+  FPSelectWrapper
 } from '../styled'
 import { MenuItem, FormControl } from '@mui/material'
 import { Fragment } from 'react'
@@ -61,46 +64,42 @@ export const FVFormSelectField = (
         return allvalue[df]
       }
     }
+    return []
   }
 
   const onValChange = (newval) => {
-    const val = newval.target.value
+    const val = newval ? newval.value : undefined
     setLocalvalue(val)
     if (onValueChanged) {
       const retValue = getOptions().filter((o) => {
         return o.value === val
       })
-      if (retValue[0].returnvalue) {
-        onValueChanged(field.datafield, retValue[0].returnvalue, field)
+      if (retValue && retValue.length > 0) {
+        if (retValue[0].returnvalue) {
+          onValueChanged(field.datafield, retValue[0].returnvalue, field)
+        } else {
+          onValueChanged(field.datafield, retValue[0].value, field)
+        }
       } else {
-        onValueChanged(field.datafield, retValue[0].value, field)
+        onValueChanged(field.datafield, undefined, field)
       }
     }
   }
   return (
-    <FPInputFiedlSet>
-      <legend>{field.label}</legend>
+    <FPSelectWrapper>
       <FPSelect
-        labelId={`select-field-${field.datafield}`}
-        id={`select-field-${field.datafield}`}
-        size='small'
-        fullWidth
-        value={localValue}
-        onChange={(e, nv) => {
-          if (!editable) {
-            onValChange(e)
-          }
+        disablePortal
+        freeSolo
+        onChange={(event, newValue) => {
+          onValChange(newValue)
         }}
-        label='Age'
-      >
-        {getOptions().map((o, oi) => {
-          return (
-            <MenuItem name={o.name} value={o.value} key={oi}>
-              {o.name}
-            </MenuItem>
-          )
-        })}
-      </FPSelect>
-    </FPInputFiedlSet>
+        id={`ac-${field.datafield}`}
+        options={getOptions()}
+        getOptionLabel={(option) => option.name}
+        renderInput={(params) => (
+          <FVTextField {...params} label={field.label} />
+        )}
+      />
+    </FPSelectWrapper>
   )
 }

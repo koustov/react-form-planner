@@ -31,19 +31,23 @@ import { ThemeProvider } from 'styled-components'
 
 // import { dark } from './themes/dark'
 
-export const FormViewer = ({
-  template,
-  data,
-  onChange,
-  onControlValueChanged,
-  controlMarker,
-  editable,
-  onButtonClick,
-  onInject,
-  controls = [],
-  baseTheme = 'dark',
-  themeOverride = {}
-}) => {
+export const FormViewer = (
+  {
+    template,
+    data,
+    onChange,
+    onControlValueChanged,
+    controlMarker,
+    editable,
+    onButtonClick,
+    onInject,
+    theme,
+    controls = [],
+    baseTheme = 'dark',
+    themeOverride = {}
+  },
+  ...rest
+) => {
   const [loading, setLoading] = useState(true)
   const [finalData, setFinalData] = useState({})
   const [localTemplate, setLocalTemplate] = useState({})
@@ -56,13 +60,13 @@ export const FormViewer = ({
     if (template) {
       setLocalTemplate(JSON.parse(JSON.stringify(template)))
     }
-    let defaultTheme = Themes[baseTheme]
+    let defaultTheme = theme || Themes[baseTheme] || Themes['dark']
     const oTheme = themeOverride
     defaultTheme = Object.assign(defaultTheme, oTheme)
     setFinalTheme(defaultTheme)
 
     setLoading(false)
-  }, [data, template.fields])
+  }, [data, template.fields, theme])
 
   const controlValueChanged = (k, v, f) => {
     if (onControlValueChanged) {

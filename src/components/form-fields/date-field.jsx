@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
+import DatePickerField from '../date-picker/DatePickerField'
 import { FVTextField } from '../styled'
 
 export const FVFormDateField = (
@@ -17,7 +18,25 @@ export const FVFormDateField = (
   useEffect(() => {}, [touched, error])
   return (
     <div style={{ width: '100%' }}>
-      <FVTextField
+      <DatePickerField
+        type='date'
+        label={field.label}
+        editable={editable}
+        style={{ width: '100%' }}
+        required={field.required}
+        error={touched && error}
+        {...field.props}
+        {...rest}
+        onChange={(v) => {
+          if (!editable) {
+            if (onValueChanged) {
+              console.log(v)
+              onValueChanged(field.datafield, v, field)
+            }
+          }
+        }}
+      ></DatePickerField>
+      {/* <FVTextField
         id={`text-field-${field.datafield}`}
         label={`${field.label}`}
         value={inputvalue}
@@ -42,7 +61,7 @@ export const FVFormDateField = (
         rows={field.multiline ? field.rows || '4' : '0'}
         {...field.props}
         {...rest}
-      />
+      /> */}
       {touched && error && <span>{error}</span>}
     </div>
   )

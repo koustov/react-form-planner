@@ -97,10 +97,10 @@ export const FormPlanner = ({
 
     const lConfig = Object.assign(DefaultConfig, config)
     setLocalConfig(lConfig)
-    let defaultTheme = Themes[baseTheme]
+    let defaultTheme = Themes[baseTheme] || Themes['dark']
     const oTheme = themeOverride
     defaultTheme = Object.assign(defaultTheme, oTheme)
-    setFinalTheme(defaultTheme)
+    setFinalTheme(oTheme)
     const localTemplate = fieldTemplate
     if (!localTemplate.fields) {
       localTemplate.fields = []
@@ -226,6 +226,9 @@ export const FormPlanner = ({
   const onPreviewClicked = () => {
     setPreviewOpened(true)
   }
+  const onFormPropertiesClicked = () => {
+    setFormPropertiesOpened(true)
+  }
 
   const onControlPropertyUpdated = (control) => {
     controlListData.fields = control
@@ -271,6 +274,8 @@ export const FormPlanner = ({
         <FPPlannerWrapper container spacing={1} className='w-auto m-0'>
           <FPSideBarSmall>
             <Sidebar
+              onPreviewClicked={onPreviewClicked}
+              onFormPropertiesClicked={onFormPropertiesClicked}
               controls={finalControls}
               onAdd={(c) => onAdd(c)}
               config={localConfig}
@@ -287,6 +292,8 @@ export const FormPlanner = ({
               style={{ overflow: 'hidden' }}
             >
               <Sidebar
+                onPreviewClicked={onPreviewClicked}
+                onFormPropertiesClicked={onFormPropertiesClicked}
                 controls={finalControls}
                 onAdd={(c) => onAdd(c)}
                 config={localConfig}
@@ -308,6 +315,7 @@ export const FormPlanner = ({
                   editable={true}
                   onButtonClick={onActionButtonClicked}
                   controls={finalControls}
+                  theme={finalTheme}
                   onInject={(item, row) => {
                     onAdd(item, row)
                   }}
@@ -345,7 +353,7 @@ export const FormPlanner = ({
                 </div>
                 <div style={{ flex: 1 }}>
                   <FormViewer
-                    theme='dark'
+                    theme={Themes[baseTheme] ? baseTheme : Themes['dark']}
                     template={controlListData}
                     onButtonClick={onActionButtonClicked}
                   />

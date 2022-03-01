@@ -7,7 +7,7 @@ export const glass = {
     background: 'transparent',
     border: '#ABABAB',
     input: {
-      border: '#3498DB',
+      border: '#ffffff',
       placeholder: '#ffffff',
       color: '#454545',
       disabled: '#454545',
@@ -95,28 +95,7 @@ export const glass = {
       colorActive: '#FFFFFF',
       bgActive: '#01B075'
     },
-    pallette: [
-      '#FF7A27',
-      '#24a110',
-      '#2e58ff',
-      '#f3f029',
-      '#ffbb3d',
-      '#ff2c0f',
-      '#56c2c4',
-      '#bb83d3',
-      '#faf5ff',
-      '#c3b5ff',
-      '#bedb2e',
-      '#ff2e8a',
-      '#debe1d',
-      '#0ddeba',
-      '#f9d9c9',
-      '#ff715b',
-      '#c0cca8',
-      '#c5ff85',
-      '#527a9e',
-      '#d09360'
-    ],
+
     grid: {
       selection: '#f8f8f8'
     }
