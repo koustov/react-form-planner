@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 
 import RFP from 'react-form-planner'
 import { ThemeProvider } from 'styled-components'
@@ -27,13 +27,17 @@ const style = {
 
 const App = () => {
   const [template, setTemplate] = React.useState(DefaultTemplate)
-  const [themeName, setThemeName] = React.useState('dark')
+  const [themeName, setThemeName] = React.useState('blue')
   const [data, setData] = React.useState({
     'F_89186732-19d3-4271-b133-ed92757cb17': true
   })
   const [formState, setFormState] = React.useState(DefaultTemplate)
 
   const [open, setOpen] = React.useState(false)
+
+  useEffect(() => {
+    // setThemeName()
+  }, [themeName])
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
@@ -80,6 +84,14 @@ const App = () => {
                 >
                   Chalk
                 </ToggleButton>
+                <ToggleButton
+                  value='blue'
+                  style={{
+                    color: `${themeName === 'blue' ? 'yellow' : '#ABABAB'}`
+                  }}
+                >
+                  Blue
+                </ToggleButton>
               </ToggleButtonGroup>
             </div>
             <div>
@@ -123,7 +135,7 @@ const App = () => {
               console.log(`Form value: ${JSON.stringify(val)}`)
               setTemplate(val)
             }}
-            baseTheme={'dark'}
+            baseTheme={themeName}
             themeOverride={Themes[themeName]}
             fieldTemplate={template}
           />

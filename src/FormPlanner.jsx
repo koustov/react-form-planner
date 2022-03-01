@@ -97,10 +97,10 @@ export const FormPlanner = ({
 
     const lConfig = Object.assign(DefaultConfig, config)
     setLocalConfig(lConfig)
-    let defaultTheme = Themes[baseTheme]
+    let defaultTheme = Themes[baseTheme] || Themes['dark']
     const oTheme = themeOverride
     defaultTheme = Object.assign(defaultTheme, oTheme)
-    setFinalTheme(defaultTheme)
+    setFinalTheme(oTheme)
     const localTemplate = fieldTemplate
     if (!localTemplate.fields) {
       localTemplate.fields = []
@@ -315,6 +315,7 @@ export const FormPlanner = ({
                   editable={true}
                   onButtonClick={onActionButtonClicked}
                   controls={finalControls}
+                  theme={finalTheme}
                   onInject={(item, row) => {
                     onAdd(item, row)
                   }}
@@ -352,7 +353,7 @@ export const FormPlanner = ({
                 </div>
                 <div style={{ flex: 1 }}>
                   <FormViewer
-                    theme='dark'
+                    theme={Themes[baseTheme] ? baseTheme : Themes['dark']}
                     template={controlListData}
                     onButtonClick={onActionButtonClicked}
                   />

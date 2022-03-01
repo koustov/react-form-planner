@@ -727,12 +727,12 @@ export const FVFormBannerDefault = styled.div`
   padding: 1rem;
   background-repeat: no-repeat;
   background-size: cover;
-  background: ${(props) =>
+  /* background: ${(props) =>
     props.bg
       ? props.bg
       : props.theme.colors[
           props.elevation ? `background${props.elevation}` : `background1`
-        ]} !important;
+        ]} !important; */
 `
 
 export const FVFormBanner = styled(FVFormBannerDefault)`
@@ -760,5 +760,54 @@ export const FPDrawer = styled(Drawer)`
     backdrop-filter: blur(
       ${({ theme }) => getThemeData(theme, 'colors.card.blur') || '0px'}
     );
+  }
+`
+
+export const FloatingLabelContainer = styled.div`
+  position: relative;
+
+  .floating-input {
+    font-size: 14px;
+    padding: 4px 4px;
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #757575;
+  }
+
+  .floating-input:focus {
+    outline: none;
+    /* border-bottom:2px solid #5264AE;  */
+  }
+
+  label {
+    color: ${({ theme }) =>
+      getThemeData(theme, 'colors.ternaryText')} !important;
+    font-size: 0.75em;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    padding: 0px 8px;
+    left: 8px;
+    top: -8px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    background-image: linear-gradient(
+      ${(props) => getThemeData(props.theme, 'colors.card.start')},
+      ${(props) => getThemeData(props.theme, 'colors.card.end')}
+    ) !important;
+  }
+
+  .highlight {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    top: 15%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
   }
 `

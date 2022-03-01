@@ -3,7 +3,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   BottomNavigation,
-  BottomNavigationAction,
   Button,
   Checkbox,
   FormControl,
@@ -17,12 +16,10 @@ import {
   Menu,
   Radio,
   RadioGroup,
-  Select,
   TextField,
   Autocomplete
 } from '@mui/material'
 
-import { DateTimePicker } from '@mui/lab'
 import styled, { css } from 'styled-components'
 import { getThemeData } from '../../services/utils'
 
@@ -341,10 +338,12 @@ export const FPListIcon = styled(ListItemIcon)`
   }
   margin-right: 16px;
   font-size: 12px !important;
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPListItemText = styled(ListItemText)`
   font-size: 12px !important;
+  color: ${(props) => getThemeData(props.theme, 'colors.primaryText')};
 `
 
 export const FPHoverButton = styled.button`
@@ -974,5 +973,3 @@ export const FVImageUpload = styled.fieldset`
     }
   }
 `
-
-export const FPDateTimePicker = styled(DateTimePicker)``

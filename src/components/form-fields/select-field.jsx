@@ -68,16 +68,20 @@ export const FVFormSelectField = (
   }
 
   const onValChange = (newval) => {
-    const val = newval.value
+    const val = newval ? newval.value : undefined
     setLocalvalue(val)
     if (onValueChanged) {
       const retValue = getOptions().filter((o) => {
         return o.value === val
       })
-      if (retValue[0].returnvalue) {
-        onValueChanged(field.datafield, retValue[0].returnvalue, field)
+      if (retValue && retValue.length > 0) {
+        if (retValue[0].returnvalue) {
+          onValueChanged(field.datafield, retValue[0].returnvalue, field)
+        } else {
+          onValueChanged(field.datafield, retValue[0].value, field)
+        }
       } else {
-        onValueChanged(field.datafield, retValue[0].value, field)
+        onValueChanged(field.datafield, undefined, field)
       }
     }
   }

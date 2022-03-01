@@ -161,7 +161,7 @@ const Example = (props) => {
           {open ? (
             <RFP.FormViewer
               id='example-form'
-              baseTheme={'dark'}
+              baseTheme={themeName}
               themeOverride={Themes[themeName]}
               onChange={(k, v, c) => {
                 // data[k] = v
