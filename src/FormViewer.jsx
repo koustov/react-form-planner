@@ -141,7 +141,7 @@ export const FormViewer = (
               />
             ) : (
               <NoContent
-                label='Your components will appear hear'
+                label='Your components will appear here'
                 subtext='Add new component(s) and re-render'
               />
             )}
