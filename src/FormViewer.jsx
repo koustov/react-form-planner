@@ -10,14 +10,6 @@ import {
   FVTitleField
 } from './components/styled'
 import { Fragment, useEffect, useState } from 'react'
-import {
-  faChevronDown,
-  faChevronUp,
-  faClone,
-  faEye,
-  faPenAlt,
-  faTrashAlt
-} from '@fortawesome/free-solid-svg-icons'
 
 import FieldLevelValidationForm from './components/field-validation-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -141,7 +133,7 @@ export const FormViewer = (
               />
             ) : (
               <NoContent
-                label='Your components will appear hear'
+                label='Your components will appear here'
                 subtext='Add new component(s) and re-render'
               />
             )}

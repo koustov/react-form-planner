@@ -1,6 +1,7 @@
 <div align="center">
    <p>
-    <h1>react-form-planner</h1>
+    <h1>rfp-react-form-planner</h1>
+    <h4>Formally knows as react-form-planner</h1>
   </p>
   <p>
      <i>Build or view, your beautiful form is just a click away.</i>
@@ -17,12 +18,13 @@
 
 ---
 
-![GitHub watchers](https://img.shields.io/github/watchers/koustov/react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/react-form-planner?logo=github&label=Stars) ![GitHub watchers](https://img.shields.io/npm/dt/react-form-planner.svg?logo=npm&label=downloads)
+![GitHub watchers](https://img.shields.io/github/watchers/koustov/rfp-react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/rfp-react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/rfp-react-form-planner?logo=github&label=Stars) ![GitHub watchers](https://img.shields.io/npm/dt/rfp-react-form-planner.svg?logo=npm&label=downloads)
 
 This is a **fully customizable** form builder based on [`React`](https://facebook.github.io/react/)
 
 **Table of Contents**
 
+- [Screenshots](#screenshots)
 - [Demo](#demo)
 - [Playground](#playground)
 - [Features](#features)
@@ -39,18 +41,24 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
   - [Form Viewer](#form-viewer)
   - [How to use](#how-to-use-1)
 - [Playground](#playground-1)
-- [Screenshots](#screenshots)
 - [Items in queue](#items-in-queue)
 - [Contribution 🍰](#contribution-)
 - [License](#license)
 
+## Screenshots
+
+|                                          |                                              |
+| ---------------------------------------- | -------------------------------------------- |
+| ![image info](./docs/images/custom1.PNG) | ![image info](./docs/images/editelement.PNG) |
+| ![image info](./docs/images/edit.PNG)    | ![image info](./docs/images/custom2.PNG)     |
+
 ## Demo
 
-Visit https://react-form-planner.vercel.app/
+Visit https://rfp-react-form-planner.vercel.app/
 
 ## Playground
 
-Visit https://codesandbox.io/s/react-form-planner-smw51
+Visit https://codesandbox.io/s/rfp-react-form-planner-smw51
 
 ## Features
 
@@ -84,13 +92,13 @@ Visit https://codesandbox.io/s/react-form-planner-smw51
 ### Install 🐙
 
 ```bash
-npm install react-form-planner
+npm install rfp-react-form-planner
 ```
 
 or
 
 ```bash
-yarn add react-form-planner
+yarn add rfp-react-form-planner
 ```
 
 ## Highlight 🔥
@@ -215,23 +223,6 @@ Just drop it to desired place
 
 Getting built
 
-## Screenshots
-
-Form Planner example
-![image info](./docs/images/ff.PNG)
-
-Edit element on hover
-![image info](./docs/images/edit.PNG)
-
-Edit element
-![image info](./docs/images/editelement.PNG)
-
-Prebuilt Customization
-![image info](./docs/images/custom1.PNG)
-
-Or add your own custmization
-![image info](./docs/images/custom2.PNG)
-
 ## Items in queue
 
 - Localization
@@ -247,4 +238,3 @@ Refer [contributing ](./CONTRIBUTING.md)
 ## License
 
 MIT © [Koustov](https://github.com/koustov)
-

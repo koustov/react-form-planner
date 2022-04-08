@@ -25,11 +25,6 @@ import {
 } from './components/styled'
 import { Sidebar } from './components/sidebar'
 import { Fragment, useEffect, useState } from 'react'
-import {
-  faChevronDown,
-  faEdit,
-  faStickyNote
-} from '@fortawesome/free-solid-svg-icons'
 import { getControlTemplate, getControls, getAllInNameFormat } from './services'
 
 import { Backdrop, Divider, Grid, List } from '@mui/material'
