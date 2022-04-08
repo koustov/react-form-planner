@@ -24,6 +24,7 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
 
 **Table of Contents**
 
+- [Screenshots](#screenshots)
 - [Demo](#demo)
 - [Playground](#playground)
 - [Features](#features)
@@ -40,10 +41,16 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
   - [Form Viewer](#form-viewer)
   - [How to use](#how-to-use-1)
 - [Playground](#playground-1)
-- [Screenshots](#screenshots)
 - [Items in queue](#items-in-queue)
 - [Contribution 🍰](#contribution-)
 - [License](#license)
+
+## Screenshots
+
+|                                          |                                              |
+| ---------------------------------------- | -------------------------------------------- |
+| ![image info](./docs/images/custom1.PNG) | ![image info](./docs/images/editelement.PNG) |
+| ![image info](./docs/images/edit.PNG)    | ![image info](./docs/images/custom2.PNG)     |
 
 ## Demo
 
@@ -215,23 +222,6 @@ Just drop it to desired place
 ## Playground
 
 Getting built
-
-## Screenshots
-
-Form Planner example
-![image info](./docs/images/ff.PNG)
-
-Edit element on hover
-![image info](./docs/images/edit.PNG)
-
-Edit element
-![image info](./docs/images/editelement.PNG)
-
-Prebuilt Customization
-![image info](./docs/images/custom1.PNG)
-
-Or add your own custmization
-![image info](./docs/images/custom2.PNG)
 
 ## Items in queue
 
