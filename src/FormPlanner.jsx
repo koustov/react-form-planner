@@ -28,7 +28,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { getControlTemplate, getControls, getAllInNameFormat } from './services'
 
 import { Backdrop, Divider, Grid, List } from '@mui/material'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormProperties } from './components/properties/form-properties'
 import { FormViewer } from './FormViewer'
 import { PropertyEditor } from './components/properties/property-editor'

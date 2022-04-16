@@ -12,7 +12,6 @@ import {
 import { Fragment, useEffect, useState } from 'react'
 
 import FieldLevelValidationForm from './components/field-validation-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Provider } from 'react-redux'
 import * as Themes from './themes'
 import store from './store/store'
