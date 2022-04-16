@@ -98,7 +98,7 @@ npm install rfp-react-form-planner react-icons react-player styled-components @m
 or
 
 ```bash
-yarn add rfp-react-form-planner react-icons react-player 
+yarn add rfp-react-form-planner react-icons react-player styled-components @mui/material
 ```
 
 ## Highlight 🔥
