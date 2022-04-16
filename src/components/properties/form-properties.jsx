@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import {
   FPSideBar,
   FPDividerField,
@@ -12,7 +10,7 @@ import {
   FPPaperVerticalPadding
 } from '../../components/styled'
 
-import { faTimes, faSave } from '@fortawesome/free-solid-svg-icons'
+import {FaTimes, FaSave } from 'react-icons/fa'
 import { FormViewer } from '../../FormViewer'
 import { Grid } from '@mui/material'
 
@@ -74,7 +72,7 @@ export const FormProperties = ({ data, onChange, onClose }) => {
               anchor={'bottom'}
               style={{ width: '150px' }}
             >
-              <FontAwesomeIcon icon={faSave} />
+              <FaSave/>
               <span>Save</span>
             </FPToolButton>
             <FPToolButton
@@ -85,7 +83,7 @@ export const FormProperties = ({ data, onChange, onClose }) => {
               anchor={'bottom'}
               style={{ width: '150px' }}
             >
-              <FontAwesomeIcon icon={faTimes} />
+              <FaTimes/>
               <span>Cancel</span>
             </FPToolButton>
           </div>

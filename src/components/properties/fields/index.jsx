@@ -10,10 +10,9 @@ import {
   FPNoContentAvailable,
   FPTextField
 } from '../../styled'
-import { faFilePdf, faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
+import { FaImage } from 'react-icons/fa'
 
 import FPRadioControl from './FPRadio'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // import FPPdfViewer from "./FPPdfViewer";
 
@@ -195,7 +194,7 @@ export const getFinalField = (
           ) : (
             <FPNoContentAvailable>
               <div>
-                <FontAwesomeIcon icon={faImage} />
+                <FaImage/>
               </div>
               <div>NO IMAGE SELECTED</div>
             </FPNoContentAvailable>

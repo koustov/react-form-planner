@@ -1,15 +1,13 @@
 import * as React from 'react'
 
 import {
-  faTrashAlt,
-  faUpload,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons'
+  FaUpload,
+  FaTimes
+} from 'react-icons/fa'
 import { useEffect, useState, Fragment } from 'react'
 
 import { Button, Fab } from '@mui/material'
 import { FVFileUpload, FVImageUpload } from '../styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const FVImageloadField = ({
   field,
@@ -97,9 +95,7 @@ export const FVImageloadField = ({
                   <img src={im} />
                 </div>
                 <Fab color='secondary' aria-label='edit'>
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    size='small'
+                  <FaTimes 
                     onClick={() => {
                       if (!editable) {
                         removeImage(imi, field.datafield)
@@ -131,7 +127,7 @@ export const FVImageloadField = ({
                     htmlFor={`modal-image-file-${field.datafield}`}
                     className='action-button'
                   >
-                    <FontAwesomeIcon icon={faUpload} />
+                    <FaUpload/>
                     <p className='file-name'></p>
                   </label>
                 ) : null}
