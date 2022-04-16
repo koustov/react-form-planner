@@ -16,12 +16,11 @@ import {
   SmallHeader
 } from '../styled'
 import {
-  faSave,
-  faTimes,
-  faEye,
-  faEdit
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  FaSave,
+  FaTimes,
+  FaEye,
+  FaEdit
+} from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 
 import { Box } from '@mui/material'
@@ -167,7 +166,7 @@ export const PropertyEditor = ({
               anchor={'bottom'}
               style={{ width: '150px' }}
             >
-              <FontAwesomeIcon icon={faSave} />
+              <FaSave/>
               <span>Save</span>
             </FPToolButton>
             <FPToolButton
@@ -178,7 +177,7 @@ export const PropertyEditor = ({
               anchor={'bottom'}
               style={{ width: '150px' }}
             >
-              <FontAwesomeIcon icon={faTimes} />
+              <FaTimes/>
               <span>Cancel</span>
             </FPToolButton>
           </div>
@@ -188,7 +187,7 @@ export const PropertyEditor = ({
         <div style={{ width: '30%', padding: '8px' }}>
           <FPFiedlSet>
             <legend>
-              <FontAwesomeIcon icon={faEye} /> <span>Preview</span>
+              <FaEye /> <span>Preview</span>
             </legend>
             <div
               style={{
@@ -207,7 +206,7 @@ export const PropertyEditor = ({
         <div style={{ flex: 1, padding: '8px' }}>
           <FPFiedlSet>
             <legend>
-              <FontAwesomeIcon icon={faEdit} /> <span>Properties</span>
+              <FaEdit/> <span>Properties</span>
             </legend>
             <FPTabWrapper>
               <FPTabs

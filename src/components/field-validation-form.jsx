@@ -34,19 +34,17 @@ import {
 import { Field, reduxForm } from 'redux-form'
 import React, { Fragment, useEffect, useState } from 'react'
 import {
-  faChevronRight,
-  faChevronLeft,
-  faChevronDown,
-  faChevronUp,
-  faClone,
-  faPenAlt,
-  faTrashAlt,
-  faPen,
-  faPlus,
-  faEllipsisH
-} from '@fortawesome/free-solid-svg-icons'
+  FaChevronRight,
+  FaChevronLeft,
+  FaChevronDown,
+  FaChevronUp,
+  FaClone,
+  FaPenAlt,
+  FaTrashAlt,
+  FaPen,
+  FaEllipsisH
+} from 'react-icons/fa'
 import { Button, Grid } from '@mui/material'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ValidationMap = {
   required: (value) => (value ? undefined : 'Required'),
@@ -299,7 +297,7 @@ const FieldLevelValidationForm = ({
                                         )
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faPenAlt} />
+                                      <FaPenAlt/>
                                     </FPToolButton>
                                     <FPToolButton
                                       variant='contained'
@@ -319,7 +317,7 @@ const FieldLevelValidationForm = ({
                                         )
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faTrashAlt} />
+                                      <FaTrashAlt/>
                                     </FPToolButton>
                                     <FPToolButton
                                       variant='contained'
@@ -338,7 +336,7 @@ const FieldLevelValidationForm = ({
                                         )
                                       }
                                     >
-                                      <FontAwesomeIcon icon={faEllipsisH} />
+                                      <FaEllipsisH/>
                                     </FPToolButton>
                                   </Fragment>
                                 ) : null}
@@ -379,7 +377,7 @@ const FieldLevelValidationForm = ({
                 }
               >
                 <div>
-                  <FontAwesomeIcon icon={faPen} />
+                  <FaPen/>
                 </div>
                 <div>Edit</div>
               </FPSquareActionButton>
@@ -395,7 +393,7 @@ const FieldLevelValidationForm = ({
                 }
               >
                 <div>
-                  <FontAwesomeIcon icon={faClone} />
+                  <FaClone/>
                 </div>
                 <div>Clone</div>
               </FPSquareActionButton>
@@ -418,7 +416,7 @@ const FieldLevelValidationForm = ({
                 }}
               >
                 <div>
-                  <FontAwesomeIcon icon={faChevronUp} />
+                  <FaChevronUp/>
                 </div>
                 <div>Move Up Row</div>
               </FPSquareActionButton>
@@ -441,7 +439,7 @@ const FieldLevelValidationForm = ({
                 }}
               >
                 <div>
-                  <FontAwesomeIcon icon={faChevronDown} />
+                  <FaChevronDown/>
                 </div>
                 <div>Move Down Row</div>
               </FPSquareActionButton>
@@ -462,7 +460,7 @@ const FieldLevelValidationForm = ({
                 }}
               >
                 <div>
-                  <FontAwesomeIcon icon={faChevronLeft} />
+                  <FaChevronLeft/>
                 </div>
                 <div>Move Left Column</div>
               </FPSquareActionButton>
@@ -486,7 +484,7 @@ const FieldLevelValidationForm = ({
                 }}
               >
                 <div>
-                  <FontAwesomeIcon icon={faChevronRight} />
+                  <FaChevronRight/>
                 </div>
                 <div>Move Right Column</div>
               </FPSquareActionButton>
@@ -515,7 +513,7 @@ const FieldLevelValidationForm = ({
                           }}
                         >
                           <div>
-                            <FontAwesomeIcon icon={c.icon} />
+                            <c.icon/>
                           </div>
                           <div>{c.display}</div>
                         </FPSquareActionButton>

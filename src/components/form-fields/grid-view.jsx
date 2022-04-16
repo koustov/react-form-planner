@@ -11,10 +11,9 @@ import {
   SmallHeader
 } from '../styled'
 import { Fragement, useEffect, useState } from 'react'
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FaPlus, FaTrash } from 'react-icons/fa'
 
 import { Button } from '@mui/material'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { v4 as uuidv4 } from 'uuid'
 
 export const FPDataGridView = (
@@ -129,7 +128,7 @@ export const FPDataGridView = (
                           }
                         }}
                       >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <FaTrash/>
                       </Button>
                     ) : null}
                   </FPGridActionCell>
@@ -178,7 +177,7 @@ export const FPDataGridView = (
                     }
                   }}
                 >
-                  <FontAwesomeIcon icon={faPlus} />
+                  <FaPlus/>
                   <span>Add</span>
                 </FPToolButton>
               </div>

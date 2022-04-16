@@ -11,8 +11,7 @@ import {
 } from '../styled'
 import { FVVideoField } from './video-field'
 import { FVPDFViewer } from './pdf-field'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage, faVideo } from '@fortawesome/free-solid-svg-icons'
+import { FaImage } from 'react-icons/fa'
 
 export const FVFormNonField = (props) => {
   const renderSwitch = () => {
@@ -28,7 +27,7 @@ export const FVFormNonField = (props) => {
             ) : (
               <FPNoContentAvailable>
                 <div>
-                  <FontAwesomeIcon icon={faImage} />
+                  <FaImage/>
                 </div>
                 <div>NO IMAGE SELECTED</div>
               </FPNoContentAvailable>

@@ -1,11 +1,9 @@
 import * as React from 'react'
 
-import { faTrashAlt, faUpload } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react'
+import { FaTrashAlt, FaUpload } from 'react-icons/fa'
 
 import { Button } from '@mui/material'
 import { FVFileUpload } from '../styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const FVFileUploadField = ({
   field,
@@ -26,17 +24,9 @@ export const FVFileUploadField = ({
         if (onValueChanged) {
           onValueChanged(field.datafield, data, field)
         }
-        // setBase64(data);
-        // setImageSize(data);
-        // document.getElementById('layout-save').hidden = false;
       }
       reader.readAsDataURL(file)
     } else {
-      // addToast(`File size too big!`, {
-      //     appearance: 'warning',
-      //     autoDismiss: true
-      // })
-      // try { document.getElementById('layout-file').value = '' } catch (error) { }
     }
   }
 
@@ -59,7 +49,7 @@ export const FVFileUploadField = ({
           <div className='action'>
             <div>
               <label htmlFor='modal-image-file' className='action-button'>
-                <FontAwesomeIcon icon={faUpload} />
+                <FaUpload/>
                 <p className='file-name'></p>
               </label>
             </div>
@@ -72,7 +62,7 @@ export const FVFileUploadField = ({
                 }}
                 className='action-button'
               >
-                <FontAwesomeIcon icon={faTrashAlt} />
+                <FaTrashAlt/>
               </Button>
             </div>
           </div>

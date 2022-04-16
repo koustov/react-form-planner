@@ -24,14 +24,13 @@ import {
 } from './styled'
 import { Fragment, useEffect, useState } from 'react'
 import {
-  faChevronDown,
-  faEdit,
-  faPlus,
-  faStickyNote
-} from '@fortawesome/free-solid-svg-icons'
+  FaChevronDown,
+  FaEdit,
+  FaPlus,
+  FaStickyNote
+} from 'react-icons/fa'
 
 import { Backdrop, Divider, Grid, List } from '@mui/material'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const Sidebar = ({
   controls,
   onAdd,
@@ -85,7 +84,7 @@ export const Sidebar = ({
       {small ? (
         <FPListItem dense button onClick={(e) => handleClickListItem(e)}>
           <FPListIcon>
-            <FontAwesomeIcon icon={faPlus} />
+            <FaPlus/>
           </FPListIcon>
           <FPListItemText primary='Add Control' />
           <FVMenu
@@ -106,7 +105,7 @@ export const Sidebar = ({
                   disabled={c.isheader}
                 >
                   <FPListIcon>
-                    {c.icon ? <FontAwesomeIcon icon={c.icon} /> : null}
+                    {c.icon ? <c.icon/> : null}
                   </FPListIcon>
                   <FPListItemText primary={`${c.display}`} />
                 </FVMenuItem>
@@ -153,7 +152,7 @@ export const Sidebar = ({
                                   onClick={() => onAdd(con)}
                                 >
                                   <FPListIcon>
-                                    <FontAwesomeIcon icon={con.icon} />
+                                    <con.icon/>
                                   </FPListIcon>
                                   <FPListItemText primary={`${con.display}`} />
                                 </FPListItem>
@@ -176,7 +175,7 @@ export const Sidebar = ({
                         >
                           <FPAccordionSummary
                             expandIcon={
-                              <FontAwesomeIcon icon={faChevronDown} />
+                              <FaChevronDown/>
                             }
                             aria-controls='panel1a-content'
                             id='panel1a-header'
@@ -198,7 +197,7 @@ export const Sidebar = ({
                                       onClick={() => onAdd(con)}
                                     >
                                       <FPListIcon>
-                                        <FontAwesomeIcon icon={con.icon} />
+                                        <con.icon />
                                       </FPListIcon>
                                       <FPListItemText
                                         primary={`${con.display}`}
@@ -227,7 +226,7 @@ export const Sidebar = ({
                         onClick={() => onFormPropertiesClicked()}
                       >
                         <div>
-                          <FontAwesomeIcon icon={faEdit} />
+                          <FaEdit/>
                         </div>
                         <div>Properties</div>
                       </FPSquareActionButton>
@@ -235,7 +234,7 @@ export const Sidebar = ({
                     {config.showPreview ? (
                       <FPSquareActionButton onClick={() => onPreviewClicked()}>
                         <div>
-                          <FontAwesomeIcon icon={faStickyNote} />
+                          <FaStickyNote/>
                         </div>
                         <div>Preview</div>
                       </FPSquareActionButton>

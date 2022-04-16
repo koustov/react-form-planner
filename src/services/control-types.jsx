@@ -1,31 +1,31 @@
 import * as React from 'react'
 
 import {
-  faBold,
-  faCaretSquareDown,
-  faFilePdf,
-  faFont,
-  faGripLines,
-  faHeading,
-  faICursor,
-  faImage,
-  faQuestionCircle,
-  faTextHeight,
-  faTextWidth,
-  faCalendar,
-  faTh,
-  faUpload,
-  faVideo,
-  faPallet,
-  faCheckSquare,
-  faCircle
-} from '@fortawesome/free-solid-svg-icons'
+  FaBold,
+  FaCaretSquareDown,
+  FaFilePdf,
+  FaFont,
+  FaGripLines,
+  FaHeading,
+  FaICursor,
+  FaImage,
+  FaQuestionCircle,
+  FaTextHeight,
+  FaTextWidth,
+  FaCalendar,
+  FaTh,
+  FaUpload,
+  FaVideo,
+  FaPallet,
+  FaCheckSquare,
+  FaCircle
+} from 'react-icons/fa'
 
 const AllControls = [
   {
     type: 'header',
     name: 'header',
-    icon: faHeading,
+    icon: FaHeading,
     display: 'Large',
     group: 'Basic',
     style: { fontSize: '40px' },
@@ -33,7 +33,7 @@ const AllControls = [
   },
   {
     type: 'header',
-    icon: faHeading,
+    icon: FaHeading,
     name: 'mediumheader',
     display: 'Medium',
     group: 'Basic',
@@ -42,7 +42,7 @@ const AllControls = [
   },
   {
     type: 'header',
-    icon: faHeading,
+    icon: FaHeading,
     name: 'smallheader',
     display: 'Small',
     group: 'Basic',
@@ -51,7 +51,7 @@ const AllControls = [
   },
   {
     type: 'label',
-    icon: faFont,
+    icon: FaFont,
     name: 'label',
     display: 'Label',
     group: 'Basic',
@@ -59,7 +59,7 @@ const AllControls = [
   },
   {
     type: 'text',
-    icon: faICursor,
+    icon: FaICursor,
     name: 'textbox',
     display: 'Text Box',
     group: 'Control',
@@ -68,7 +68,7 @@ const AllControls = [
   },
   {
     type: 'text',
-    icon: faTextWidth,
+    icon: FaTextWidth,
     name: 'number',
     display: 'Number',
     group: 'Control',
@@ -79,7 +79,7 @@ const AllControls = [
   },
   {
     type: 'date',
-    icon: faCalendar,
+    icon: FaCalendar,
     name: 'date',
     display: 'Calendar',
     group: 'Control',
@@ -90,7 +90,7 @@ const AllControls = [
   },
   {
     type: 'datetime',
-    icon: faCalendar,
+    icon: FaCalendar,
     name: 'datetime',
     display: 'Date Time',
     group: 'Control',
@@ -101,7 +101,7 @@ const AllControls = [
   },
   {
     type: 'text',
-    icon: faTextHeight,
+    icon: FaTextHeight,
     name: 'multiline',
     display: 'Multiline',
     group: 'Control',
@@ -113,28 +113,28 @@ const AllControls = [
   },
   {
     type: 'richeditor',
-    icon: faBold,
+    icon: FaBold,
     name: 'richtextbox',
     display: 'Rich Text',
     group: 'Advanced'
   },
   {
     type: 'grid',
-    icon: faTh,
+    icon: FaTh,
     name: 'grid',
     display: 'Grid',
     group: 'Advanced'
   },
   {
     type: 'checkbox',
-    icon: faCheckSquare,
+    icon: FaCheckSquare,
     name: 'checkbox',
     display: 'Checkbox',
     group: 'Control'
   },
   {
     type: 'select',
-    icon: faCaretSquareDown,
+    icon: FaCaretSquareDown,
     name: 'select',
     display: 'Select',
     group: 'Control',
@@ -142,7 +142,7 @@ const AllControls = [
   },
   {
     type: 'radio',
-    icon: faCircle,
+    icon: FaCircle,
     name: 'radio',
     display: 'Radio',
     group: 'Control',
@@ -151,7 +151,7 @@ const AllControls = [
   },
   {
     type: 'color',
-    icon: faPallet,
+    icon: FaPallet,
     name: 'color',
     display: 'Color',
     label: 'Color Picker',
@@ -160,7 +160,7 @@ const AllControls = [
   },
   {
     type: 'divider',
-    icon: faGripLines,
+    icon: FaGripLines,
     name: 'divider',
     display: 'Divider',
     group: 'Miscellaneous',
@@ -168,7 +168,7 @@ const AllControls = [
   },
   {
     type: 'image',
-    icon: faImage,
+    icon: FaImage,
     name: 'image',
     display: 'Image',
     group: 'Media',
@@ -177,14 +177,14 @@ const AllControls = [
   },
   {
     type: 'pdf',
-    icon: faFilePdf,
+    icon: FaFilePdf,
     name: 'pdf',
     display: 'PDF',
     group: 'Media'
   },
   {
     type: 'video',
-    icon: faVideo,
+    icon: FaVideo,
     name: 'video',
     display: 'Video',
     group: 'Media',
@@ -192,7 +192,7 @@ const AllControls = [
   },
   {
     type: 'imageupload',
-    icon: faUpload,
+    icon: FaUpload,
     multiple: false,
     name: 'imageupload',
     display: 'Image',
@@ -203,7 +203,7 @@ const AllControls = [
   },
   {
     type: 'imageupload',
-    icon: faUpload,
+    icon: FaUpload,
     multiple: true,
     name: 'imagesupload',
     display: 'Images',
@@ -214,7 +214,7 @@ const AllControls = [
   },
   {
     type: 'question',
-    icon: faQuestionCircle,
+    icon: FaQuestionCircle,
     name: 'question',
     variant: 'open',
     display: 'Question',
