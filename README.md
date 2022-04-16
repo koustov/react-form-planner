@@ -1,6 +1,6 @@
 <div align="center">
    <p>
-    <h1>rfp-react-form-planner</h1>
+    <h1>rfp-react-form-builder</h1>
     <h4>Formally knows as react-form-planner</h1>
   </p>
   <p>
@@ -18,7 +18,7 @@
 
 ---
 
-![GitHub watchers](https://img.shields.io/github/watchers/koustov/rfp-react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/rfp-react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/rfp-react-form-planner?logo=github&label=Stars) ![GitHub watchers](https://img.shields.io/npm/dt/rfp-react-form-planner.svg?logo=npm&label=downloads)
+![GitHub watchers](https://img.shields.io/github/watchers/koustov/react-form-planner.svg?logo=github&label=Watch) ![GitHub watchers](https://img.shields.io/github/issues/koustov/react-form-planner?logo=github&label=Issues) ![GitHub watchers](https://img.shields.io/github/stars/koustov/react-form-planner?logo=github&label=Stars) ![GitHub watchers](https://img.shields.io/npm/dt/rfp-react-form-builder.svg?logo=npm&label=downloads)
 
 This is a **fully customizable** form builder based on [`React`](https://facebook.github.io/react/)
 

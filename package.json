@@ -1,6 +1,6 @@
 {
   "name": "rfp-react-form-builder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A form builder/planner for react. Formally known as react-form-planner",
   "author": "Koustov <koustov@live.com> (https://tweeter.com/koustov)",
   "license": "MIT",
@@ -32,7 +32,10 @@
     "styled-components": "^5.3.3",
     "@mui/material": "^5.4.2",
     "react-player": "^2.9.0",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
