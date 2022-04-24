@@ -92,13 +92,13 @@ Visit https://codesandbox.io/s/rfp-react-form-planner-smw51
 ### Install 🐙
 
 ```bash
-npm install rfp-react-form-planner react-icons react-player styled-components @mui/material
+npm install rfp-react-form-builder react-icons react-player styled-components @mui/material
 ``` 
 
 or
 
 ```bash
-yarn add rfp-react-form-planner react-icons react-player styled-components @mui/material
+yarn add rfp-react-form-builder react-icons react-player styled-components @mui/material
 ```
 
 ## Highlight 🔥

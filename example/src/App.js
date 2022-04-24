@@ -97,7 +97,7 @@ const App = () => {
             <div>
               {' '}
               <a
-                href='https://www.npmjs.com/package/react-form-planner'
+                href='https://www.npmjs.com/package/rfp-react-form-builder'
                 target='_blank'
                 style={{
                   textDecoration: 'none',
