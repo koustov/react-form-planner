@@ -230,7 +230,7 @@ const getEditorFields = (type, customdefinition, config) => {
       res = [[getEditorField('text', 'value', 'Text')]]
       break
     case 'divider':
-      res = [getEditorField('customstyle')]
+      res = [[getEditorField('customstyle')]]
       break
     case 'imageupload':
       res = [
