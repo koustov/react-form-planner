@@ -25,9 +25,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
-    "lint": "eslint . --max-warnings=0",
-    "microbundle-crl": "^0.13.10",
-    "react-scripts": "^5.0.0"
+    "lint": "eslint . --max-warnings=0"
   },
   "peerDependencies": {
     "react": "^16.12.0",
@@ -60,7 +58,9 @@
     "react-ui-css-builder": "^0.0.20",
     "redux": "^4.1.2",
     "redux-form": "^8.3.8",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "microbundle-crl": "^0.13.10",
+    "react-scripts": "^5.0.0"
   },
   "bugs": {
     "url": "https://github.com/koustov/react-form-planner/issues",
