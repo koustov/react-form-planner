@@ -25,7 +25,9 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build",
-    "lint": "eslint . --max-warnings=0"
+    "lint": "eslint . --max-warnings=0",
+    "microbundle-crl": "^0.13.10",
+    "react-scripts": "^5.0.0"
   },
   "peerDependencies": {
     "react": "^16.12.0",
@@ -38,11 +40,9 @@
     "@fortawesome/react-fontawesome": "^0.1.14"
   },
   "devDependencies": {
-    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
+    "react-dom": "^17.0.2"
   },
   "files": [
     "dist"
