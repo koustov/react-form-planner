@@ -10,7 +10,7 @@
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
-    "@emotion/react": "^11.7.0",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.6.0",
     "chokidar": "^3.5.1",
     "react": "link:../node_modules/react",
