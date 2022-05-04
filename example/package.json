@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
-    "chokidar": "^3.5.1",
+    "chokidar": "^3.5.3",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-form-planner": "link:..",
