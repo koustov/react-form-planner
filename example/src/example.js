@@ -32,7 +32,8 @@ const Example = (props) => {
       : 'dark'
   )
   const [data, setData] = React.useState({
-    'F_89186732-19d3-4271-b133-ed92757cb17': true
+    'F_89186732-19d3-4271-b133-ed92757cb17': true,
+    'F_89186732-19d3-4271-b133-ed92727cb7d1': 'mr'
   })
   const [formState, setFormState] = React.useState(DefaultTemplate)
 
