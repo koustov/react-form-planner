@@ -40,7 +40,6 @@ This is a **fully customizable** form builder based on [`React`](https://faceboo
   - [Preview your form](#preview-your-form)
   - [Form Viewer](#form-viewer)
   - [How to use](#how-to-use-1)
-- [Playground](#playground-1)
 - [Items in queue](#items-in-queue)
 - [Contribution 🍰](#contribution-)
 - [License](#license)
@@ -58,7 +57,8 @@ Visit https://rfp-react-form-planner.vercel.app/
 
 ## Playground
 
-Visit https://codesandbox.io/s/rfp-react-form-planner-smw51
+[Codesandbox Project](https://codesandbox.io/s/react-form-builder-rfp-react-form-builder-smw51)
+
 
 ## Features
 
@@ -218,10 +218,6 @@ Just drop it to desired place
   template={<template_data>}
 />
 ```
-
-## Playground
-
-Getting built
 
 ## Items in queue
 

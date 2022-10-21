@@ -44,7 +44,7 @@ export const FVFormSelectField = (
           })
           if (selectedOptionsValue.length) {
             setLocalvalue('')
-            setLocalvalue(selectedOptionsValue[0].value)
+            setLocalvalue(selectedOptionsValue[0])
             return
           }
         }
@@ -90,6 +90,7 @@ export const FVFormSelectField = (
       <FPSelect
         disablePortal
         freeSolo
+        value={localValue}
         onChange={(event, newValue) => {
           onValChange(newValue)
         }}
