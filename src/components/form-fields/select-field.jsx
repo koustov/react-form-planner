@@ -69,7 +69,7 @@ export const FVFormSelectField = (
 
   const onValChange = (newval) => {
     const val = newval ? newval.value : undefined
-    setLocalvalue(val)
+    setLocalvalue(newval)
     if (onValueChanged) {
       const retValue = getOptions().filter((o) => {
         return o.value === val
