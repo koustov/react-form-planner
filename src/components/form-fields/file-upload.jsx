@@ -17,17 +17,17 @@ export const FVFileUploadField = ({
     const files = e.target.files
     const file = files[0]
     console.log(file.size)
-    if (file.size < 2097152) {
-      const reader = new FileReader()
-      reader.onload = function (e) {
-        const data = e.target.result
-        if (onValueChanged) {
-          onValueChanged(field.datafield, data, field)
-        }
+    // if (file.size < 2097152) {
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      const data = e.target.result
+      if (onValueChanged) {
+        onValueChanged(field.datafield, data, field)
       }
-      reader.readAsDataURL(file)
-    } else {
     }
+    reader.readAsDataURL(file)
+    // } else {
+    // }
   }
 
   const onImageClear = () => {
