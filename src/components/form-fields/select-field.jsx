@@ -90,7 +90,7 @@ export const FVFormSelectField = (
       <FPSelect
         disablePortal
         freeSolo
-        value={localValue}
+        value={!localValue || localValue === 'undefined' ? undefined : localValue}
         onChange={(event, newValue) => {
           onValChange(newValue)
         }}
@@ -98,7 +98,7 @@ export const FVFormSelectField = (
         options={getOptions()}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => (
-          <FVTextField {...params} label={field.label} />
+          <FVTextField {...params} label={field.label} placeholder={field.placeholder}/>
         )}
       />
     </FPSelectWrapper>

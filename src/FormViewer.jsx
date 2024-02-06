@@ -7,7 +7,8 @@ import {
   FVFormBannerDefault,
   FVFormContainer,
   FVFormWrapper,
-  FVTitleField
+  FVTitleField,
+  FVDescriptionField
 } from './components/styled'
 import { Fragment, useEffect, useState } from 'react'
 
@@ -86,12 +87,32 @@ export const FormViewer = (
             {localTemplate.banner ? (
               <div>
                 {localTemplate.banner ? (
-                  <FVBannerImage background={localTemplate.banner}>
+                  <FVBannerImage background={localTemplate.banner}
+                    style={{ 
+                      display: "flex", 
+                      flexDirection: "column", 
+                      alignItems: 'flex-start',
+                      justifyContent: 'center' 
+                    }}
+                  >
                     <FVTitleField>{localTemplate.title}</FVTitleField>
+                    {localTemplate.description && 
+                      <FVDescriptionField>{localTemplate.description}</FVDescriptionField>
+                    }
                   </FVBannerImage>
                 ) : (
-                  <FVFormBanner>
+                  <FVFormBanner
+                    style={{ 
+                      display: "flex", 
+                      flexDirection: "column", 
+                      alignItems: 'flex-start',
+                      justifyContent: 'center' 
+                    }}
+                  >
                     <FVTitleField>{localTemplate.title}</FVTitleField>
+                    {localTemplate.description && 
+                      <FVDescriptionField>{localTemplate.description}</FVDescriptionField>
+                    }
                   </FVFormBanner>
                 )}
               </div>
@@ -101,8 +122,17 @@ export const FormViewer = (
                   <FVFormBannerDefault
                     elevation={3}
                     bg={localTemplate.bannercolor}
+                    style={{ 
+                      display: "flex", 
+                      flexDirection: "column", 
+                      alignItems: 'flex-start',
+                      justifyContent: 'center' 
+                    }}
                   >
                     <FVTitleField>{localTemplate.title}</FVTitleField>
+                    {localTemplate.description && 
+                      <FVDescriptionField>{localTemplate.description}</FVDescriptionField>
+                    }
                   </FVFormBannerDefault>
                 ) : null}
               </React.Fragment>
@@ -110,10 +140,7 @@ export const FormViewer = (
           </div>
           <FVFormContainer
             background={localTemplate.background}
-            style={{
-              background: `${localTemplate.backgroundcolor}`,
-              height: '100%'
-            }}
+            backgroundColor={localTemplate.backgroundcolor}
           >
             {localTemplate &&
             localTemplate.fields &&

@@ -28,6 +28,7 @@ export const FVFileUploadField = ({
     reader.readAsDataURL(file)
     // } else {
     // }
+    e.target.value = null;
   }
 
   const onImageClear = () => {

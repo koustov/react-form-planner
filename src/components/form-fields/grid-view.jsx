@@ -104,6 +104,17 @@ export const FPDataGridView = (
   const onRemove = (index) => {
     gridRows.splice(index, 1)
     setGridRows(JSON.parse(JSON.stringify(gridRows)))
+    if (onValueChanged) {
+      if (field.asobject) {
+        const resObj = {}
+        gridRows.forEach((r) => {
+          resObj[r.name] = r.value
+        })
+        onValueChanged(field.datafield, resObj, field)
+      } else {
+        onValueChanged(field.datafield, gridRows, field)
+      }
+    }
   }
   return (
     <div>

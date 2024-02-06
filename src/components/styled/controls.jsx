@@ -663,6 +663,13 @@ export const FVTitleField = styled(FVLabelField)`
   mix-blend-mode: exclusion;
 `
 
+export const FVDescriptionField = styled(FVLabelField)`
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  mix-blend-mode: exclusion;
+`
+
 export const FVHeaderField = styled(FVLabelField)`
   display: flex;
   font-size: 18px;
