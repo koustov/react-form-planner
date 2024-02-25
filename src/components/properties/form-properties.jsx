@@ -51,8 +51,7 @@ export const FormProperties = ({ data, onChange, onClose }) => {
   }
 
   const onFormValueChanged = (key, value, field) => {
-    formProperties[key] = value
-    setFormProperties({ ...formProperties })
+    setFormProperties({ ...key })
   }
 
   // Rendering

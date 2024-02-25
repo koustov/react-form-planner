@@ -19,8 +19,10 @@ export const FVPDFViewer = ({ field }, ...rest) => {
     if (field.value) {
       const url = b64toBlob(field.value, 'application/pdf')
       setPdfUrl(url)
+    } else {
+      setPdfUrl();
     }
-  }, [field.value])
+  }, [field])
 
   const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
     const byteCharacters = atob(

@@ -685,10 +685,18 @@ export const FVDividerField = styled.hr`
 `
 export const FVFormContainer = styled.div`
   padding: 1rem;
+  height: 100%;
+  overflow: auto;
+  ${(props) =>
+    props.background
+      ? `background-image: url(${props.background});
+         background-repeat: no-repeat;
+         background-size: cover;`
+      : `background: ${props.backgroundColor};`}
 `
 export const FVFormWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: ${(props) => getThemeData(props.theme, 'colors.background')};
   background-image: url(${(props) => props.background});
   background-repeat: no-repeat;
@@ -720,13 +728,14 @@ export const FVNoContentAvailable = styled.div`
 `
 
 export const FVFormBannerDefault = styled.div`
-  height: 60px;
+  height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   background-repeat: no-repeat;
   background-size: cover;
+  background: ${(props) => props.bg};
   /* background: ${(props) =>
     props.bg
       ? props.bg
